@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pdfigo  Politique de confidentialité</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blue: #2563EB;
+      --blue-dark: #1E40AF;
+      --blue-light: #EFF6FF;
+      --green: #10B981;
+      --ink: #1E293B;
+      --muted: #64748B;
+      --border: #E2E8F0;
+      --paper: #F8FAFC;
+      --white: #FFFFFF;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+      padding: 60px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -40px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .logo-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .logo-icon {
+      width: 52px; height: 52px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .logo-icon svg { width: 28px; height: 28px; fill: white; }
+
+    .logo-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-name span { color: rgba(255,255,255,0.6); }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 5vw, 36px);
+      font-weight: 600;
+      color: white;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      color: rgba(255,255,255,0.75);
+      font-size: 15px;
+      font-weight: 300;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-top: 20px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.85);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── NAV TABS ── */
+    .nav-tabs {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+    }
+
+    .nav-tabs-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav-tabs-inner::-webkit-scrollbar { display: none; }
+
+    .tab-btn {
+      flex-shrink: 0;
+      padding: 16px 20px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover { color: var(--blue); }
+    .tab-btn.active { color: var(--blue); border-bottom-color: var(--blue); }
+
+    /* ── MAIN ── */
+    .main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      display: none;
+    }
+    .section.active { display: block; }
+
+    .section-intro {
+      background: var(--blue-light);
+      border-left: 4px solid var(--blue);
+      border-radius: 0 12px 12px 0;
+      padding: 20px 24px;
+      margin-bottom: 40px;
+      font-size: 14px;
+      color: var(--blue-dark);
+      line-height: 1.6;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: white;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      margin-bottom: 20px;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+
+    .card:hover { box-shadow: 0 4px 20px rgba(37,99,235,0.08); }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      background: var(--paper);
+    }
+
+    .card-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: var(--blue-light);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .card-icon svg { width: 20px; height: 20px; stroke: var(--blue); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .card-body {
+      padding: 20px 24px;
+    }
+
+    .card-body p {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .card-body p:last-child { margin-bottom: 0; }
+
+    .card-body strong { color: var(--ink); font-weight: 600; }
+
+    /* ── LIST ── */
+    .check-list {
+      list-style: none;
+      margin: 12px 0;
+    }
+
+    .check-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--muted);
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .check-list li:last-child { border-bottom: none; }
+
+    .check-list li::before {
+      content: '';
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: #ECFDF5;
+      flex-shrink: 0;
+      margin-top: 1px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2310B981' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+      background-size: 12px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    /* ── TABLE ── */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin: 12px 0;
+    }
+
+    .data-table th {
+      background: var(--paper);
+      color: var(--muted);
+      font-weight: 600;
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 2px solid var(--border);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .data-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--ink);
+      vertical-align: top;
+    }
+
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: var(--paper); }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .tag-red { background: #FEF2F2; color: #EF4444; }
+    .tag-green { background: #ECFDF5; color: #10B981; }
+    .tag-blue { background: var(--blue-light); color: var(--blue); }
+
+    /* ── HIGHLIGHT BOX ── */
+    .highlight {
+      background: linear-gradient(135deg, var(--blue-light), #EFF6FF);
+      border: 1px solid #BFDBFE;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 16px 0;
+    }
+
+    .highlight p {
+      font-size: 14px;
+      color: var(--blue-dark);
+      margin: 0;
+    }
+
+    /* ── CONTACT ── */
+    .contact-card {
+      background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .contact-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: white;
+      margin-bottom: 8px;
+    }
+
+    .contact-card p {
+      color: rgba(255,255,255,0.75);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      color: var(--blue);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 12px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+
+    .contact-btn:hover { transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    footer p {
+      color: rgba(255,255,255,0.4);
+      font-size: 13px;
+    }
+
+    footer strong { color: rgba(255,255,255,0.7); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .hero { padding: 40px 20px 60px; }
+      .main { padding: 32px 16px 60px; }
+      .card-body { padding: 16px; }
+      .card-header { padding: 16px; }
+      .data-table { font-size: 12px; }
+      .data-table th, .data-table td { padding: 8px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="logo-wrap">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
+        <polyline points="14 2 14 8 20 8" fill="none" stroke="white" stroke-width="1.5"/>
+        <line x1="16" y1="13" x2="8" y2="13" fill="none" stroke="white" stroke-width="1.5"/>
+        <line x1="16" y1="17" x2="8" y2="17" fill="none" stroke="white" stroke-width="1.5"/>
+        <polyline points="10 9 9 9 8 9" fill="none" stroke="white" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <span class="logo-name">Pdf<span>igo</span></span>
+  </div>
+  <h1>Documents légaux</h1>
+  <p>Politique de confidentialité · Conditions d'utilisation · Cookies</p>
+  <div class="badge">Dernière mise à jour : Avril 2026</div>
+</div>
+
+<!-- NAV TABS -->
+<nav class="nav-tabs">
+  <div class="nav-tabs-inner">
+    <button class="tab-btn active" onclick="showTab('privacy', this)"> Confidentialité</button>
+    <button class="tab-btn" onclick="showTab('terms', this)"> Conditions d'utilisation</button>
+    <button class="tab-btn" onclick="showTab('cookies', this)"> Cookies</button>
+  </div>
+</nav>
+
+<main class="main">
+
+  <!-- ══════════════════════════════════════════
+       SECTION 1 : CONFIDENTIALITÉ
+  ══════════════════════════════════════════ -->
+  <div class="section active" id="privacy">
+
+    <div class="section-intro">
+      Chez Pdfigo, votre vie privée est notre priorité. Cette politique explique de manière transparente quelles données nous collectons, pourquoi, et comment nous les protégeons. Pdfigo fonctionne principalement <strong>hors ligne</strong>, vos fichiers restent sur votre appareil.
+    </div>
+
+    <!-- Données collectées -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="card-title">Données collectées</div>
+      </div>
+      <div class="card-body">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Type de donnée</th>
+              <th>Finalité</th>
+              <th>Stockage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Fichiers PDF</strong></td>
+              <td>Traitement local uniquement</td>
+              <td><span class="tag tag-green">Sur l'appareil</span></td>
+            </tr>
+            <tr>
+              <td><strong>Texte extrait (IA)</strong></td>
+              <td>Résumé, traduction, chat PDF</td>
+              <td><span class="tag tag-blue">Supabase temporaire</span></td>
+            </tr>
+            <tr>
+              <td><strong>Photos (scanner)</strong></td>
+              <td>Conversion en PDF</td>
+              <td><span class="tag tag-green">Sur l'appareil</span></td>
+            </tr>
+            <tr>
+              <td><strong>Données d'achat</strong></td>
+              <td>Gestion des abonnements</td>
+              <td><span class="tag tag-blue">Google Play / RevenueCat</span></td>
+            </tr>
+            <tr>
+              <td><strong>Identifiant anonyme</strong></td>
+              <td>Statistiques d'utilisation</td>
+              <td><span class="tag tag-blue">RevenueCat</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Caméra -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        </div>
+        <div class="card-title">Utilisation de la caméra</div>
+      </div>
+      <div class="card-body">
+        <p>Pdfigo utilise la caméra de votre appareil <strong>uniquement</strong> pour la fonctionnalité de scanner de documents.</p>
+        <ul class="check-list">
+          <li>Les photos sont traitées localement sur votre appareil</li>
+          <li>Aucune image n'est envoyée à des serveurs tiers</li>
+          <li>Aucune image n'est stockée en dehors de votre appareil sans votre accord</li>
+          <li>Vous pouvez refuser l'accès à la caméra dans les paramètres Android</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Intelligence Artificielle -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        </div>
+        <div class="card-title">Fonctionnalités IA (Résumé, Traduction, Chat PDF)</div>
+      </div>
+      <div class="card-body">
+        <p>Lorsque vous utilisez les fonctionnalités d'intelligence artificielle, le <strong>texte extrait</strong> de votre document est envoyé de manière sécurisée (HTTPS) à nos serveurs pour traitement.</p>
+        <div class="highlight">
+          <p>⚡ Le texte est transmis à <strong>Google Gemini</strong> ou <strong>Mistral AI</strong> via notre infrastructure sécurisée (Supabase). Aucun contenu n'est stocké après traitement. Vos fichiers PDF originaux ne quittent jamais votre appareil.</p>
+        </div>
+        <p>En utilisant ces fonctionnalités, vous acceptez les politiques de confidentialité de <a href="https://policies.google.com/privacy" style="color:var(--blue)">Google</a> et <a href="https://mistral.ai/privacy" style="color:var(--blue)">Mistral AI</a>.</p>
+      </div>
+    </div>
+
+    <!-- Abonnements -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        </div>
+        <div class="card-title">Abonnements et paiements</div>
+      </div>
+      <div class="card-body">
+        <p>Les paiements sont <strong>entièrement gérés par Google Play</strong>. Pdfigo n'a jamais accès à vos informations bancaires ou de carte de crédit.</p>
+        <p>Nous utilisons <strong>RevenueCat</strong> pour gérer les statuts d'abonnement. RevenueCat stocke un identifiant anonyme lié à votre compte Google Play. Consultez la <a href="https://www.revenuecat.com/privacy" style="color:var(--blue)">politique de confidentialité de RevenueCat</a>.</p>
+        <ul class="check-list">
+          <li>Essai gratuit de 14 jours pour les nouveaux utilisateurs</li>
+          <li>Renouvellement automatique, annulable à tout moment</li>
+          <li>Remboursement selon la politique Google Play</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Droits -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="card-title">Vos droits (RGPD)</div>
+      </div>
+      <div class="card-body">
+        <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez des droits suivants :</p>
+        <ul class="check-list">
+          <li><strong>Droit d'accès</strong> : obtenir une copie de vos données</li>
+          <li><strong>Droit de rectification</strong> : corriger des données inexactes</li>
+          <li><strong>Droit à l'effacement</strong> : demander la suppression de vos données</li>
+          <li><strong>Droit à la portabilité</strong> : recevoir vos données dans un format lisible</li>
+          <li><strong>Droit d'opposition</strong> : vous opposer au traitement de vos données</li>
+        </ul>
+        <p style="margin-top:12px">Pour exercer ces droits, contactez-nous à <strong>devbp.contact@gmail.com</strong></p>
+      </div>
+    </div>
+
+    <!-- Sécurité -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div class="card-title">Sécurité des données</div>
+      </div>
+      <div class="card-body">
+        <ul class="check-list">
+          <li>Toutes les communications réseau utilisent le protocole <strong>HTTPS/TLS</strong></li>
+          <li>Les fichiers PDF protégés utilisent le chiffrement <strong>AES-256</strong></li>
+          <li>Les données sensibles (PIN) sont stockées dans le <strong>Android Keystore</strong></li>
+          <li>Aucune donnée personnelle identifiable n'est collectée</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <h3>Une question sur vos données ?</h3>
+      <p>Notre équipe répond sous 48h ouvrables.</p>
+      <a href="mailto:devbp.contact@gmail.com" class="contact-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        devbp.contact@gmail.com
+      </a>
+    </div>
+
+  </div><!-- /privacy -->
+
+
+  <!-- ══════════════════════════════════════════
+       SECTION 2 : CONDITIONS D'UTILISATION
+  ══════════════════════════════════════════ -->
+  <div class="section" id="terms">
+
+    <div class="section-intro">
+      En téléchargeant et utilisant Pdfigo, vous acceptez les présentes conditions d'utilisation. Veuillez les lire attentivement.
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="card-title">Description du service</div>
+      </div>
+      <div class="card-body">
+        <p>Pdfigo est une application mobile de gestion de documents PDF proposant des fonctionnalités d'édition, de signature, de compression, de protection, d'OCR et d'intelligence artificielle.</p>
+        <p>L'application est disponible en version <strong>gratuite</strong> (fonctionnalités limitées) et en version <strong>Premium</strong> (accès illimité via abonnement).</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div class="card-title">Utilisation acceptable</div>
+      </div>
+      <div class="card-body">
+        <p>Vous vous engagez à utiliser Pdfigo uniquement pour des usages légaux. Il est <strong>strictement interdit</strong> de :</p>
+        <ul class="check-list">
+          <li>Traiter des documents contenant des contenus illégaux ou portant atteinte aux droits de tiers</li>
+          <li>Tenter de contourner les mesures de sécurité ou de reverse-engineering l'application</li>
+          <li>Utiliser l'application à des fins commerciales non autorisées</li>
+          <li>Violer les droits d'auteur ou la propriété intellectuelle d'autrui</li>
+          <li>Utiliser les fonctionnalités IA pour générer des contenus trompeurs ou malveillants</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="card-title">Abonnements et remboursements</div>
+      </div>
+      <div class="card-body">
+        <table class="data-table">
+          <thead>
+            <tr><th>Plan</th><th>Prix</th><th>Essai</th><th>Résiliation</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Premium Mensuel</strong></td>
+              <td>3,99€ / mois</td>
+              <td><span class="tag tag-green">14 jours offerts</span></td>
+              <td>À tout moment</td>
+            </tr>
+            <tr>
+              <td><strong>Premium Annuel</strong></td>
+              <td>28,99€ / an</td>
+              <td><span class="tag tag-green">14 jours offerts</span></td>
+              <td>À tout moment</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="highlight" style="margin-top:16px">
+          <p>L'abonnement se renouvelle automatiquement sauf annulation au moins 24h avant la date de renouvellement. Les remboursements sont soumis à la <a href="https://support.google.com/googleplay/answer/2479637" style="color:var(--blue)">politique de remboursement Google Play</a>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div class="card-title">Limitation de responsabilité</div>
+      </div>
+      <div class="card-body">
+        <p>Pdfigo est fourni <strong>"tel quel"</strong>. Nous déclinons toute responsabilité pour :</p>
+        <ul class="check-list">
+          <li>La perte ou corruption de fichiers suite à une utilisation de l'application</li>
+          <li>Les résultats produits par les fonctionnalités d'intelligence artificielle</li>
+          <li>L'indisponibilité temporaire du service</li>
+          <li>Tout dommage indirect résultant de l'utilisation de l'application</li>
+        </ul>
+        <p style="margin-top:12px">Nous vous recommandons de conserver des copies de sauvegarde de vos documents importants.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="card-title">Modifications et résiliation</div>
+      </div>
+      <div class="card-body">
+        <p>Ces conditions peuvent être modifiées à tout moment. Les changements importants seront notifiés via l'application.</p>
+        <p>En cas de violation grave des présentes conditions, l'accès à l'application pourra être bloqué sans préavis.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="card-title">Droit applicable</div>
+      </div>
+      <div class="card-body">
+        <p>Les présentes conditions sont régies par le <strong>droit français</strong>. En cas de litige, les tribunaux français seront compétents.</p>
+        <p>Pour toute réclamation, contactez-nous à <strong>devbp2025@gmail.com</strong> avant toute procédure judiciaire.</p>
+      </div>
+    </div>
+
+  </div><!-- /terms -->
+
+
+  <!-- ══════════════════════════════════════════
+       SECTION 3 : COOKIES
+  ══════════════════════════════════════════ -->
+  <div class="section" id="cookies">
+
+    <div class="section-intro">
+      Pdfigo est une application mobile Android. Contrairement aux sites web, les applications mobiles n'utilisent <strong>pas de cookies</strong> au sens traditionnel du terme. Cette page explique les technologies similaires que nous utilisons.
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        </div>
+        <div class="card-title">Stockage local (équivalent cookies)</div>
+      </div>
+      <div class="card-body">
+        <table class="data-table">
+          <thead>
+            <tr><th>Technologie</th><th>Données stockées</th><th>Durée</th><th>Suppression</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>SharedPreferences</strong></td>
+              <td>Préférences, favoris, compteur scans</td>
+              <td>Indéfinie</td>
+              <td>Désinstallation</td>
+            </tr>
+            <tr>
+              <td><strong>FlutterSecureStorage</strong></td>
+              <td>Code PIN chiffré</td>
+              <td>Indéfinie</td>
+              <td>Désinstallation</td>
+            </tr>
+            <tr>
+              <td><strong>Fichiers locaux</strong></td>
+              <td>Documents PDF traités</td>
+              <td>Jusqu'à suppression manuelle</td>
+              <td>Via "Mes Fichiers"</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="card-title">SDK tiers et identifiants</div>
+      </div>
+      <div class="card-body">
+        <table class="data-table">
+          <thead>
+            <tr><th>Service</th><th>Finalité</th><th>Données</th><th>Opt-out</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>RevenueCat</strong></td>
+              <td>Gestion abonnements</td>
+              <td>ID anonyme, statut achat</td>
+              <td><span class="tag tag-red">Non</span></td>
+            </tr>
+            <tr>
+              <td><strong>Google Play</strong></td>
+              <td>Distribution, paiements</td>
+              <td>Compte Google</td>
+              <td><span class="tag tag-red">Non</span></td>
+            </tr>
+            <tr>
+              <td><strong>Google MLKit</strong></td>
+              <td>OCR (traitement local)</td>
+              <td>Aucune donnée envoyée</td>
+              <td><span class="tag tag-green">N/A</span></td>
+            </tr>
+            <tr>
+              <td><strong>Supabase</strong></td>
+              <td>Traitement IA</td>
+              <td>Texte temporaire (non stocké)</td>
+              <td><span class="tag tag-blue">Opt-in</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="card-title">Contrôle de vos données</div>
+      </div>
+      <div class="card-body">
+        <p>Vous pouvez contrôler et supprimer les données stockées localement :</p>
+        <ul class="check-list">
+          <li><strong>Préférences app</strong> : Paramètres Android → Applications → Pdfigo → Effacer les données</li>
+          <li><strong>Fichiers PDF</strong> : Depuis l'écran "Mes Fichiers" dans l'application</li>
+          <li><strong>Code PIN</strong> : Depuis les Paramètres de sécurité dans l'application</li>
+          <li><strong>Abonnement</strong> : Google Play → Abonnements → Pdfigo → Annuler</li>
+          <li><strong>Données RevenueCat</strong> : Contactez-nous à devbp2025@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <h3>Questions sur nos pratiques ?</h3>
+      <p>Nous sommes transparents sur l'utilisation de vos données.</p>
+      <a href="mailto:devbp2025@gmail.com" class="contact-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        devbp2025@gmail.com
+      </a>
+    </div>
+
+  </div><!-- /cookies -->
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Pdfigo</strong> · France</p>
+  <p style="margin-top:6px">© 2026 Devbp. Tous droits réservés. · <a href="mailto:devbp2025@gmail.com" style="color:rgba(255,255,255,0.5)">devbp.contact@gmail.com</a></p>
+</footer>
+
+<script>
+  function showTab(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>

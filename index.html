@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pdfigo : Éditeur PDF & IA</title>
+  <meta name="description" content="Pdfigo est votre assistant PDF complet. Résumé IA, Chat PDF, Scanner, Signature, OCR et bien plus." />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blue: #2563EB;
+      --blue-dark: #1E40AF;
+      --blue-light: #EFF6FF;
+      --green: #10B981;
+      --ink: #1E293B;
+      --muted: #64748B;
+      --border: #E2E8F0;
+      --paper: #F8FAFC;
+      --white: #FFFFFF;
+      --card-bg: #FFFFFF;
+      --hero-text: #FFFFFF;
+    }
+
+    [data-theme="dark"] {
+      --ink: #F1F5F9;
+      --muted: #94A3B8;
+      --border: #334155;
+      --paper: #0F172A;
+      --white: #1E293B;
+      --card-bg: #1E293B;
+      --blue-light: #1E3A5F;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.7;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+
+    [data-theme="dark"] nav {
+      background: rgba(15,23,42,0.85);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 36px; height: 36px;
+      background: var(--blue);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .nav-logo-icon svg { width: 20px; height: 20px; }
+
+    .nav-logo-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .nav-logo-name span { color: var(--blue); }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .lang-select {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      color: var(--ink);
+      cursor: pointer;
+      outline: none;
+    }
+
+    .theme-btn {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--paper);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      transition: background 0.2s;
+    }
+
+    .cta-nav {
+      background: var(--blue);
+      color: white;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .cta-nav:hover { opacity: 0.9; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--blue) 0%, #1E40AF 60%, #1E3A8A 100%);
+      padding: 140px 24px 100px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-blob {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .hero-blob-1 { width: 400px; height: 400px; top: -100px; right: -100px; }
+    .hero-blob-2 { width: 300px; height: 300px; bottom: -80px; left: -60px; }
+    .hero-blob-3 { width: 200px; height: 200px; top: 50%; left: 20%; }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.9);
+      font-weight: 500;
+      margin-bottom: 28px;
+      backdrop-filter: blur(4px);
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 700;
+      color: white;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, #60A5FA, #34D399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: clamp(16px, 2vw, 20px);
+      color: rgba(255,255,255,0.8);
+      max-width: 600px;
+      margin: 0 auto 40px;
+      font-weight: 300;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 16px;
+      padding: 16px 32px;
+      border-radius: 14px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 16px 32px;
+      border-radius: 14px;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.3);
+      backdrop-filter: blur(4px);
+      transition: background 0.2s;
+    }
+
+    .btn-secondary:hover { background: rgba(255,255,255,0.25); }
+
+    /* ── SCREENSHOTS ── */
+    .screenshots {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 60px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .phone-mockup {
+      width: 200px;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+      border: 3px solid rgba(255,255,255,0.2);
+      transition: transform 0.3s;
+    }
+
+    .phone-mockup:hover { transform: translateY(-8px) scale(1.02); }
+    .phone-mockup.center { transform: scale(1.08); }
+    .phone-mockup.center:hover { transform: scale(1.1) translateY(-8px); }
+
+    .phone-mockup img {
+      width: 100%;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .phone-mockup.side { display: none; }
+      .phone-mockup { width: 160px; }
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: 80px 24px; }
+
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-tag {
+      display: inline-block;
+      background: var(--blue-light);
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .section-sub {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 600px;
+      margin-bottom: 48px;
+      font-weight: 300;
+    }
+
+    /* ── FEATURES GRID ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 28px;
+      border: 1px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(37,99,235,0.1);
+    }
+
+    .feature-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .feature-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── SPLIT SECTION ── */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .split { grid-template-columns: 1fr; gap: 40px; }
+      .split-reverse { direction: ltr; }
+    }
+
+    .split-phone {
+      display: flex;
+      justify-content: center;
+    }
+
+    .split-phone img {
+      width: 260px;
+      border-radius: 28px;
+      box-shadow: 0 20px 60px rgba(37,99,235,0.2);
+      border: 2px solid var(--border);
+    }
+
+    .split-content .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .check-dot {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--green);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .check-dot svg { width: 12px; height: 12px; stroke: white; fill: none; stroke-width: 3; }
+
+    .split-content .check-item p {
+      font-size: 15px;
+      color: var(--muted);
+    }
+
+    .split-content .check-item strong { color: var(--ink); }
+
+    /* ── PRICING ── */
+    .pricing-section { background: var(--white); }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 32px;
+      border: 2px solid var(--border);
+      text-align: center;
+      position: relative;
+      transition: transform 0.2s;
+    }
+
+    .pricing-card:hover { transform: translateY(-4px); }
+
+    .pricing-card.popular {
+      border-color: var(--blue);
+      background: var(--blue-light);
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--green);
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 16px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .pricing-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .pricing-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 52px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    .pricing-price span {
+      font-size: 20px;
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .pricing-trial {
+      display: inline-block;
+      margin: 12px 0 20px;
+      background: var(--blue-light);
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 6px;
+    }
+
+    .pricing-card.popular .pricing-trial {
+      background: rgba(37,99,235,0.15);
+    }
+
+    .pricing-btn {
+      display: block;
+      background: var(--blue);
+      color: white;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .pricing-btn:hover { opacity: 0.9; }
+
+    /* ── TOOLS GRID ── */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+    }
+
+    .tool-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 12px;
+      text-align: center;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .tool-item:hover {
+      border-color: var(--blue);
+      transform: translateY(-2px);
+    }
+
+    .tool-item .tool-emoji { font-size: 24px; margin-bottom: 8px; }
+
+    .tool-item p {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .testimonial-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 28px;
+      border: 1px solid var(--border);
+    }
+
+    .stars { color: #F59E0B; font-size: 18px; margin-bottom: 14px; }
+
+    .testimonial-text {
+      font-size: 15px;
+      color: var(--muted);
+      font-style: italic;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .testimonial-author {
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 14px;
+    }
+
+    /* ── CTA FINAL ── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+      text-align: center;
+      padding: 80px 24px;
+    }
+
+    .cta-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 42px);
+      color: white;
+      margin-bottom: 16px;
+    }
+
+    .cta-section p {
+      color: rgba(255,255,255,0.8);
+      font-size: 17px;
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      padding: 48px 24px 32px;
+    }
+
+    [data-theme="dark"] footer { background: #020617; }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+
+    .footer-logo-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .footer-logo-name span { color: #60A5FA; }
+
+    .footer-desc {
+      color: rgba(255,255,255,0.4);
+      font-size: 14px;
+      margin-top: 8px;
+      max-width: 240px;
+    }
+
+    .footer-links h4 {
+      color: rgba(255,255,255,0.7);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+    }
+
+    .footer-links a {
+      display: block;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 8px;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: rgba(255,255,255,0.8); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-bottom p {
+      color: rgba(255,255,255,0.3);
+      font-size: 13px;
+    }
+
+    /* ── UTILS ── */
+    .text-center { text-align: center; }
+    .mt-4 { margin-top: 16px; }
+
+    /* ── PLAY BADGE ── */
+    .play-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #000;
+      border-radius: 12px;
+      padding: 12px 20px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .play-badge:hover { opacity: 0.85; }
+
+    .play-badge svg { width: 28px; height: 28px; }
+
+    .play-badge-text { text-align: left; }
+    .play-badge-text .small { font-size: 10px; color: rgba(255,255,255,0.6); }
+    .play-badge-text .big { font-size: 16px; font-weight: 700; color: white; }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      section { padding: 60px 20px; }
+      .hero { padding: 110px 20px 80px; }
+      .footer-top { flex-direction: column; }
+    }
+  </style>
+</head>
+<body data-theme="light">
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" fill="white"/>
+          <polyline points="14 2 14 8 20 8" stroke="#2563EB" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+      <span class="nav-logo-name">Pdf<span>igo</span></span>
+    </a>
+    <div class="nav-actions">
+      <select class="lang-select" onchange="setLang(this.value)">
+        <option value="fr">🇫🇷 FR</option>
+        <option value="en">🇬🇧 EN</option>
+        <option value="es">🇪🇸 ES</option>
+        <option value="pt">🇧🇷 PT</option>
+        <option value="ar">🇸🇦 AR</option>
+      </select>
+      <button class="theme-btn" onclick="toggleTheme()" id="theme-btn">🌙</button>
+      <a href="#pricing" class="cta-nav" data-i18n="nav_cta">Essai gratuit</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+  <div class="hero-blob hero-blob-3"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">
+      ✨ <span data-i18n="hero_badge">Intelligence Artificielle intégrée</span>
+    </div>
+    <h1 data-i18n="hero_title">L'assistant PDF qui <span>comprend</span> vos documents</h1>
+    <p data-i18n="hero_sub">Résumez, signez, scannez, protégez et chattez avec vos PDF. Tout-en-un, sur Android.</p>
+    <div class="hero-btns">
+      <a href="#" class="btn-primary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.37.21.8.24 1.19.09L15.31 12 4.37.15C4 0 3.57.03 3.18.24 2.4.65 2 1.35 2 2.06v19.88c0 .71.4 1.41 1.18 1.82z"/><path d="M19.5 10.69l-2.78-1.6-3.35 2.91 3.35 2.91 2.78-1.6c.8-.45.8-1.17 0-1.62z" opacity=".4"/></svg>
+        <span data-i18n="hero_cta1">Télécharger sur Google Play</span>
+      </a>
+      <a href="#features" class="btn-secondary">
+        <span data-i18n="hero_cta2">Découvrir les fonctionnalités</span> →
+      </a>
+    </div>
+
+    <!-- SCREENSHOTS -->
+    <div class="screenshots">
+      <div class="phone-mockup side">
+        <img src="screen_tools.webp" alt="Outils Pdfigo" />
+      </div>
+      <div class="phone-mockup center">
+        <img src="screen_home.webp" alt="Accueil Pdfigo" />
+      </div>
+      <div class="phone-mockup side">
+        <img src="screen_chat.webp" alt="Chat PDF" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" style="background: var(--paper)">
+  <div class="section-inner">
+    <div class="text-center">
+      <div class="section-tag" data-i18n="feat_tag">Fonctionnalités</div>
+      <h2 class="section-title" data-i18n="feat_title">Tout ce dont vous avez besoin</h2>
+      <p class="section-sub" style="margin: 0 auto 48px" data-i18n="feat_sub">Un seul abonnement débloque l'intégralité des outils.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#EFF6FF">✨</div>
+        <h3 data-i18n="f1_title">IA : Résumé & Traduction</h3>
+        <p data-i18n="f1_desc">Résumez automatiquement n'importe quel document en quelques secondes. Traduisez en 9 langues instantanément.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#ECFDF5">💬</div>
+        <h3 data-i18n="f2_title">Chat avec vos PDF</h3>
+        <p data-i18n="f2_desc">Posez des questions directement à votre document. L'IA répond avec précision depuis le contenu de vos fichiers.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#FEF3C7">📷</div>
+        <h3 data-i18n="f3_title">Scanner intelligent</h3>
+        <p data-i18n="f3_desc">Scannez vos documents avec votre caméra. Recadrage automatique et conversion en PDF haute qualité.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#FDF2F8">✍️</div>
+        <h3 data-i18n="f4_title">Signature électronique</h3>
+        <p data-i18n="f4_desc">Signez vos PDF directement depuis votre téléphone. Placement libre et personnalisé.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#F0FDF4">🔍</div>
+        <h3 data-i18n="f5_title">OCR : Extraction de texte</h3>
+        <p data-i18n="f5_desc">Extrayez le texte de vos PDF scannés grâce à la reconnaissance optique de caractères.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#FFF7ED">🔒</div>
+        <h3 data-i18n="f6_title">Sécurité avancée</h3>
+        <p data-i18n="f6_desc">Protection AES-256, PIN et empreinte digitale. Vos documents restent sur votre appareil.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPLIT : IA -->
+<section style="background: var(--white)">
+  <div class="section-inner">
+    <div class="split">
+      <div class="split-phone">
+        <img src="screen_chat.webp" alt="Chat PDF IA" />
+      </div>
+      <div class="split-content">
+        <div class="section-tag">✨ IA</div>
+        <h2 class="section-title" data-i18n="ia_title">Votre document vous parle</h2>
+        <p class="section-sub" data-i18n="ia_sub">Fini de lire 50 pages pour trouver une information. Posez simplement votre question.</p>
+        <div class="check-item">
+          <div class="check-dot"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <p><strong data-i18n="ia_c1">Résumé en 5 points clés</strong> : <span data-i18n="ia_c1s">comprendre un document en 10 secondes</span></p>
+        </div>
+        <div class="check-item">
+          <div class="check-dot"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <p><strong data-i18n="ia_c2">Chat interactif</strong> : <span data-i18n="ia_c2s">posez des questions précises sur le contenu</span></p>
+        </div>
+        <div class="check-item">
+          <div class="check-dot"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <p><strong data-i18n="ia_c3">Traduction en 9 langues</strong> : <span data-i18n="ia_c3s">FR, EN, ES, PT, AR, DE, IT, ZH, JA</span></p>
+        </div>
+        <div class="check-item">
+          <div class="check-dot"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <p><strong data-i18n="ia_c4">Powered by Gemini</strong> : <span data-i18n="ia_c4s">la technologie IA la plus avancée de Google</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPLIT : OUTILS -->
+<section style="background: var(--paper)">
+  <div class="section-inner">
+    <div class="split" style="direction: rtl">
+      <div class="split-phone" style="direction: ltr">
+        <img src="screen_tools.webp" alt="Outils PDF" />
+      </div>
+      <div class="split-content" style="direction: ltr">
+        <div class="section-tag" data-i18n="tools_tag">Édition</div>
+        <h2 class="section-title" data-i18n="tools_title">Tous les outils PDF en un seul endroit</h2>
+        <p class="section-sub" data-i18n="tools_sub">Plus besoin de jongler entre plusieurs applications.</p>
+        <div class="check-item">
+          <div class="check-dot"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <p data-i18n="tools_c1">Fusionner, compresser, pivoter, extraire des pages</p>
+        </div>
+        <div class="check-item">
+          <div class="check-dot"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <p data-i18n="tools_c2">Annoter, ajouter un filigrane, numéroter les pages</p>
+        </div>
+        <div class="check-item">
+          <div class="check-dot"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <p data-i18n="tools_c3">Convertir images et documents en PDF</p>
+        </div>
+        <div class="check-item">
+          <div class="check-dot"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <p data-i18n="tools_c4">En-tête, pied de page, protection par mot de passe</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ALL TOOLS -->
+<section style="background: var(--white)">
+  <div class="section-inner text-center">
+    <div class="section-tag" data-i18n="alltool_tag">Boîte à outils complète</div>
+    <h2 class="section-title" data-i18n="alltool_title">15+ outils inclus dans Premium</h2>
+    <p class="section-sub" style="margin: 0 auto 40px" data-i18n="alltool_sub">Un abonnement unique pour tout débloquer.</p>
+    <div class="tools-grid">
+      <div class="tool-item"><div class="tool-emoji">✨</div><p data-i18n="t1">Résumé IA</p></div>
+      <div class="tool-item"><div class="tool-emoji">💬</div><p data-i18n="t2">Chat PDF</p></div>
+      <div class="tool-item"><div class="tool-emoji">🔍</div><p data-i18n="t3">OCR</p></div>
+      <div class="tool-item"><div class="tool-emoji">🌍</div><p data-i18n="t4">Traduction</p></div>
+      <div class="tool-item"><div class="tool-emoji">🖼️</div><p data-i18n="t5">PDF → Image</p></div>
+      <div class="tool-item"><div class="tool-emoji">✍️</div><p data-i18n="t6">Signature</p></div>
+      <div class="tool-item"><div class="tool-emoji">📝</div><p data-i18n="t7">Annotation</p></div>
+      <div class="tool-item"><div class="tool-emoji">🔗</div><p data-i18n="t8">Fusionner</p></div>
+      <div class="tool-item"><div class="tool-emoji">✂️</div><p data-i18n="t9">Extraire</p></div>
+      <div class="tool-item"><div class="tool-emoji">🗜️</div><p data-i18n="t10">Compresser</p></div>
+      <div class="tool-item"><div class="tool-emoji">🔒</div><p data-i18n="t11">Protéger</p></div>
+      <div class="tool-item"><div class="tool-emoji">💧</div><p data-i18n="t12">Filigrane</p></div>
+      <div class="tool-item"><div class="tool-emoji">🔄</div><p data-i18n="t13">Pivoter</p></div>
+      <div class="tool-item"><div class="tool-emoji">🔢</div><p data-i18n="t14">Numéroter</p></div>
+      <div class="tool-item"><div class="tool-emoji">📷</div><p data-i18n="t15">Scanner</p></div>
+      <div class="tool-item"><div class="tool-emoji">🔄</div><p data-i18n="t16">Convertir</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="pricing-section">
+  <div class="section-inner text-center">
+    <div class="section-tag" data-i18n="price_tag">Tarifs</div>
+    <h2 class="section-title" data-i18n="price_title">Simple et transparent</h2>
+    <p class="section-sub" style="margin: 0 auto 48px" data-i18n="price_sub">14 jours gratuits, aucune carte requise pour commencer.</p>
+    <div class="pricing-grid">
+      <!-- MENSUEL -->
+      <div class="pricing-card">
+        <div class="pricing-name" data-i18n="plan_monthly">Mensuel</div>
+        <div class="pricing-price">3,99€<span data-i18n="per_month">/mois</span></div>
+        <div class="pricing-trial" data-i18n="trial">✓ 14 jours gratuits</div>
+        <a href="#" class="pricing-btn" data-i18n="subscribe">Commencer</a>
+      </div>
+      <!-- ANNUEL -->
+      <div class="pricing-card popular">
+        <div class="popular-badge" data-i18n="saving">Économisez 44%</div>
+        <div class="pricing-name" data-i18n="plan_yearly">Annuel</div>
+        <div class="pricing-price">28,99€<span data-i18n="per_year">/an</span></div>
+        <div class="pricing-trial" data-i18n="trial">✓ 14 jours gratuits</div>
+        <a href="#" class="pricing-btn" data-i18n="subscribe">Commencer</a>
+      </div>
+    </div>
+    <p class="mt-4" style="font-size:13px; color:var(--muted)" data-i18n="price_note">Annulation à tout moment depuis Google Play. Renouvellement automatique.</p>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-section">
+  <h2 data-i18n="cta_title">Prêt à transformer votre façon de gérer vos PDF ?</h2>
+  <p data-i18n="cta_sub">Rejoignez des milliers d'utilisateurs qui font confiance à Pdfigo.</p>
+  <a href="#" class="play-badge">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3.18 23.76c.37.21.8.24 1.19.09L15.31 12 4.37.15C4 0 3.57.03 3.18.24 2.4.65 2 1.35 2 2.06v19.88c0 .71.4 1.41 1.18 1.82z" fill="#fff"/>
+      <path d="M19.5 10.69l-2.78-1.6-3.35 2.91 3.35 2.91 2.78-1.6c.8-.45.8-1.17 0-1.62z" fill="#fff" opacity=".6"/>
+    </svg>
+    <div class="play-badge-text">
+      <div class="small" data-i18n="available">Disponible sur</div>
+      <div class="big">Google Play</div>
+    </div>
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo-name">Pdf<span>igo</span></div>
+        <p class="footer-desc" data-i18n="footer_desc">Votre assistant PDF complet pour Android.</p>
+      </div>
+      <div class="footer-links">
+        <h4 data-i18n="footer_app">Application</h4>
+        <a href="#features" data-i18n="footer_features">Fonctionnalités</a>
+        <a href="#pricing" data-i18n="footer_pricing">Tarifs</a>
+        <a href="#" data-i18n="footer_download">Télécharger</a>
+      </div>
+      <div class="footer-links">
+        <h4 data-i18n="footer_legal">Légal</h4>
+        <a href="/privacy" data-i18n="footer_privacy">Politique de confidentialité</a>
+        <a href="/privacy" data-i18n="footer_terms">Conditions d'utilisation</a>
+        <a href="/privacy" data-i18n="footer_cookies">Cookies</a>
+      </div>
+      <div class="footer-links">
+        <h4>Contact</h4>
+        <a href="mailto:devbp.contact@gmail.com">devbp.contact@gmail.com</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Devbp. <span data-i18n="footer_rights">Tous droits réservés.</span></p>
+      <p data-i18n="footer_made">Fait avec ❤️ en France</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── THEME ──
+  const themeBtn = document.getElementById('theme-btn');
+  function toggleTheme() {
+    const current = document.body.getAttribute('data-theme');
+    const next = current === 'light' ? 'dark' : 'light';
+    document.body.setAttribute('data-theme', next);
+    themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
+    localStorage.setItem('theme', next);
+  }
+
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  document.body.setAttribute('data-theme', savedTheme);
+  themeBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+  // ── TRANSLATIONS ──
+  const translations = {
+    fr: {
+      nav_cta: 'Essai gratuit',
+      hero_badge: 'Intelligence Artificielle intégrée',
+      hero_title: "L'assistant PDF qui <span>comprend</span> vos documents",
+      hero_sub: 'Résumez, signez, scannez, protégez et chattez avec vos PDF. Tout-en-un, sur Android.',
+      hero_cta1: 'Télécharger sur Google Play',
+      hero_cta2: 'Découvrir les fonctionnalités',
+      feat_tag: 'Fonctionnalités',
+      feat_title: 'Tout ce dont vous avez besoin',
+      feat_sub: 'Un seul abonnement débloque l\'intégralité des outils.',
+      f1_title: 'IA : Résumé & Traduction',
+      f1_desc: 'Résumez automatiquement n\'importe quel document en quelques secondes. Traduisez en 9 langues instantanément.',
+      f2_title: 'Chat avec vos PDF',
+      f2_desc: 'Posez des questions directement à votre document. L\'IA répond avec précision depuis le contenu de vos fichiers.',
+      f3_title: 'Scanner intelligent',
+      f3_desc: 'Scannez vos documents avec votre caméra. Recadrage et conversion en PDF haute qualité.',
+      f4_title: 'Signature électronique',
+      f4_desc: 'Signez vos PDF directement depuis votre téléphone. Placement libre et personnalisé.',
+      f5_title: 'OCR : Extraction de texte',
+      f5_desc: 'Extrayez le texte de vos PDF scannés grâce à la reconnaissance optique de caractères.',
+      f6_title: 'Sécurité avancée',
+      f6_desc: 'Protection AES-256, PIN et empreinte digitale. Vos documents restent sur votre appareil.',
+      ia_title: 'Votre document vous parle',
+      ia_sub: 'Fini de lire 50 pages pour trouver une information. Posez simplement votre question.',
+      ia_c1: 'Résumé en 5 points clés', ia_c1s: 'comprendre un document en 10 secondes',
+      ia_c2: 'Chat interactif', ia_c2s: 'posez des questions précises sur le contenu',
+      ia_c3: 'Traduction en 9 langues', ia_c3s: 'FR, EN, ES, PT, AR, DE, IT, ZH, JA',
+      ia_c4: 'Powered by Gemini', ia_c4s: 'la technologie IA la plus avancée de Google',
+      tools_tag: 'Édition',
+      tools_title: 'Tous les outils PDF en un seul endroit',
+      tools_sub: 'Plus besoin de jongler entre plusieurs applications.',
+      tools_c1: 'Fusionner, compresser, pivoter, extraire des pages',
+      tools_c2: 'Annoter, ajouter un filigrane, numéroter les pages',
+      tools_c3: 'Convertir images et documents en PDF',
+      tools_c4: 'En-tête, pied de page, protection par mot de passe',
+      alltool_tag: 'Boîte à outils complète',
+      alltool_title: '15+ outils inclus dans Premium',
+      alltool_sub: 'Un abonnement unique pour tout débloquer.',
+      t1:'Résumé IA',t2:'Chat PDF',t3:'OCR',t4:'Traduction',t5:'PDF → Image',
+      t6:'Signature',t7:'Annotation',t8:'Fusionner',t9:'Extraire',t10:'Compresser',
+      t11:'Protéger',t12:'Filigrane',t13:'Pivoter',t14:'Numéroter',t15:'Scanner',t16:'Convertir',
+      price_tag: 'Tarifs',
+      price_title: 'Simple et transparent',
+      price_sub: '14 jours gratuits, aucune carte requise pour commencer.',
+      plan_monthly: 'Mensuel', per_month: '/mois',
+      plan_yearly: 'Annuel', per_year: '/an',
+      trial: '✓ 14 jours gratuits',
+      saving: 'Économisez 44%',
+      subscribe: 'Commencer',
+      price_note: 'Annulation à tout moment depuis Google Play. Renouvellement automatique.',
+      cta_title: 'Prêt à transformer votre façon de gérer vos PDF ?',
+      cta_sub: 'Rejoignez des milliers d\'utilisateurs qui font confiance à Pdfigo.',
+      available: 'Disponible sur',
+      footer_desc: 'Votre assistant PDF complet pour Android.',
+      footer_app: 'Application', footer_features: 'Fonctionnalités',
+      footer_pricing: 'Tarifs', footer_download: 'Télécharger',
+      footer_legal: 'Légal', footer_privacy: 'Confidentialité',
+      footer_terms: 'Conditions', footer_cookies: 'Cookies',
+      footer_rights: 'Tous droits réservés.', footer_made: 'Fait avec ❤️ en France',
+    },
+    en: {
+      nav_cta: 'Free trial',
+      hero_badge: 'Built-in Artificial Intelligence',
+      hero_title: "The PDF assistant that <span>understands</span> your documents",
+      hero_sub: 'Summarize, sign, scan, protect and chat with your PDFs. All-in-one, on Android.',
+      hero_cta1: 'Download on Google Play',
+      hero_cta2: 'Discover features',
+      feat_tag: 'Features',
+      feat_title: 'Everything you need',
+      feat_sub: 'One subscription unlocks all tools.',
+      f1_title: 'AI : Summary & Translation',
+      f1_desc: 'Automatically summarize any document in seconds. Translate into 9 languages instantly.',
+      f2_title: 'Chat with your PDFs',
+      f2_desc: 'Ask questions directly to your document. AI answers precisely from your file content.',
+      f3_title: 'Smart Scanner',
+      f3_desc: 'Scan documents with your camera. Auto crop and high quality PDF conversion.',
+      f4_title: 'Electronic Signature',
+      f4_desc: 'Sign your PDFs directly from your phone. Free and personalized placement.',
+      f5_title: 'OCR : Text Extraction',
+      f5_desc: 'Extract text from scanned PDFs using optical character recognition.',
+      f6_title: 'Advanced Security',
+      f6_desc: 'AES-256 protection, PIN and fingerprint. Your documents stay on your device.',
+      ia_title: 'Your document talks to you',
+      ia_sub: 'No more reading 50 pages to find information. Just ask your question.',
+      ia_c1: '5-key-point summary', ia_c1s: 'understand a document in 10 seconds',
+      ia_c2: 'Interactive chat', ia_c2s: 'ask precise questions about the content',
+      ia_c3: 'Translation in 9 languages', ia_c3s: 'FR, EN, ES, PT, AR, DE, IT, ZH, JA',
+      ia_c4: 'Powered by Gemini', ia_c4s: 'Google\'s most advanced AI technology',
+      tools_tag: 'Editing',
+      tools_title: 'All PDF tools in one place',
+      tools_sub: 'No more juggling between multiple apps.',
+      tools_c1: 'Merge, compress, rotate, extract pages',
+      tools_c2: 'Annotate, add watermark, number pages',
+      tools_c3: 'Convert images and documents to PDF',
+      tools_c4: 'Header, footer, password protection',
+      alltool_tag: 'Complete toolbox',
+      alltool_title: '15+ tools included in Premium',
+      alltool_sub: 'One subscription to unlock everything.',
+      t1:'AI Summary',t2:'Chat PDF',t3:'OCR',t4:'Translation',t5:'PDF → Image',
+      t6:'Signature',t7:'Annotation',t8:'Merge',t9:'Extract',t10:'Compress',
+      t11:'Protect',t12:'Watermark',t13:'Rotate',t14:'Number',t15:'Scanner',t16:'Convert',
+      price_tag: 'Pricing',
+      price_title: 'Simple and transparent',
+      price_sub: '14 days free, no card required to start.',
+      plan_monthly: 'Monthly', per_month: '/month',
+      plan_yearly: 'Yearly', per_year: '/year',
+      trial: '✓ 14 days free',
+      saving: 'Save 44%',
+      subscribe: 'Get started',
+      price_note: 'Cancel anytime from Google Play. Auto-renewal.',
+      cta_title: 'Ready to transform the way you manage your PDFs?',
+      cta_sub: 'Join thousands of users who trust Pdfigo.',
+      available: 'Available on',
+      footer_desc: 'Your complete PDF assistant for Android.',
+      footer_app: 'App', footer_features: 'Features',
+      footer_pricing: 'Pricing', footer_download: 'Download',
+      footer_legal: 'Legal', footer_privacy: 'Privacy Policy',
+      footer_terms: 'Terms', footer_cookies: 'Cookies',
+      footer_rights: 'All rights reserved.', footer_made: 'Made with ❤️ in France',
+    },
+    es: {
+      nav_cta: 'Prueba gratis',
+      hero_badge: 'Inteligencia Artificial integrada',
+      hero_title: "El asistente PDF que <span>comprende</span> tus documentos",
+      hero_sub: 'Resume, firma, escanea, protege y chatea con tus PDFs. Todo en uno, en Android.',
+      hero_cta1: 'Descargar en Google Play',
+      hero_cta2: 'Descubrir funciones',
+      feat_tag: 'Funciones',
+      feat_title: 'Todo lo que necesitas',
+      feat_sub: 'Una sola suscripción desbloquea todas las herramientas.',
+      f1_title: 'IA : Resumen y Traducción',
+      f1_desc: 'Resume automáticamente cualquier documento en segundos. Traduce a 9 idiomas al instante.',
+      f2_title: 'Chat con tus PDFs',
+      f2_desc: 'Haz preguntas directamente a tu documento. La IA responde con precisión.',
+      f3_title: 'Escáner inteligente',
+      f3_desc: 'Escanea documentos con tu cámara. Recorte automático y conversión a PDF.',
+      f4_title: 'Firma electrónica',
+      f4_desc: 'Firma tus PDFs directamente desde tu teléfono.',
+      f5_title: 'OCR : Extracción de texto',
+      f5_desc: 'Extrae texto de PDFs escaneados con reconocimiento óptico de caracteres.',
+      f6_title: 'Seguridad avanzada',
+      f6_desc: 'Protección AES-256, PIN y huella dactilar.',
+      ia_title: 'Tu documento te habla',
+      ia_sub: 'Sin más leer 50 páginas para encontrar información. Solo pregunta.',
+      ia_c1: 'Resumen en 5 puntos', ia_c1s: 'entiende un documento en 10 segundos',
+      ia_c2: 'Chat interactivo', ia_c2s: 'haz preguntas precisas sobre el contenido',
+      ia_c3: 'Traducción en 9 idiomas', ia_c3s: 'FR, EN, ES, PT, AR, DE, IT, ZH, JA',
+      ia_c4: 'Powered by Gemini', ia_c4s: 'la tecnología IA más avanzada de Google',
+      tools_tag: 'Edición',
+      tools_title: 'Todas las herramientas PDF en un solo lugar',
+      tools_sub: 'Sin más cambiar entre aplicaciones.',
+      tools_c1: 'Fusionar, comprimir, rotar, extraer páginas',
+      tools_c2: 'Anotar, añadir marca de agua, numerar páginas',
+      tools_c3: 'Convertir imágenes y documentos a PDF',
+      tools_c4: 'Encabezado, pie de página, protección con contraseña',
+      alltool_tag: 'Caja de herramientas completa',
+      alltool_title: '15+ herramientas incluidas en Premium',
+      alltool_sub: 'Una suscripción para desbloquear todo.',
+      t1:'Resumen IA',t2:'Chat PDF',t3:'OCR',t4:'Traducción',t5:'PDF → Imagen',
+      t6:'Firma',t7:'Anotación',t8:'Fusionar',t9:'Extraer',t10:'Comprimir',
+      t11:'Proteger',t12:'Marca de agua',t13:'Rotar',t14:'Numerar',t15:'Escáner',t16:'Convertir',
+      price_tag: 'Precios',
+      price_title: 'Simple y transparente',
+      price_sub: '14 días gratis, sin tarjeta para empezar.',
+      plan_monthly: 'Mensual', per_month: '/mes',
+      plan_yearly: 'Anual', per_year: '/año',
+      trial: '✓ 14 días gratis',
+      saving: 'Ahorra 44%',
+      subscribe: 'Empezar',
+      price_note: 'Cancela cuando quieras desde Google Play.',
+      cta_title: '¿Listo para transformar la gestión de tus PDFs?',
+      cta_sub: 'Únete a miles de usuarios que confían en Pdfigo.',
+      available: 'Disponible en',
+      footer_desc: 'Tu asistente PDF completo para Android.',
+      footer_app: 'App', footer_features: 'Funciones',
+      footer_pricing: 'Precios', footer_download: 'Descargar',
+      footer_legal: 'Legal', footer_privacy: 'Privacidad',
+      footer_terms: 'Términos', footer_cookies: 'Cookies',
+      footer_rights: 'Todos los derechos reservados.', footer_made: 'Hecho con ❤️ en Francia',
+    },
+    pt: {
+      nav_cta: 'Teste grátis',
+      hero_badge: 'Inteligência Artificial integrada',
+      hero_title: "O assistente PDF que <span>compreende</span> seus documentos",
+      hero_sub: 'Resuma, assine, digitalize, proteja e converse com seus PDFs. Tudo-em-um, no Android.',
+      hero_cta1: 'Baixar no Google Play',
+      hero_cta2: 'Descobrir recursos',
+      feat_tag: 'Recursos',
+      feat_title: 'Tudo que você precisa',
+      feat_sub: 'Uma assinatura desbloqueia todas as ferramentas.',
+      f1_title: 'IA : Resumo e Tradução',
+      f1_desc: 'Resuma automaticamente qualquer documento em segundos. Traduza para 9 idiomas.',
+      f2_title: 'Chat com seus PDFs',
+      f2_desc: 'Faça perguntas diretamente ao seu documento. A IA responde com precisão.',
+      f3_title: 'Scanner inteligente',
+      f3_desc: 'Digitalize documentos com sua câmera. Corte automático e conversão para PDF.',
+      f4_title: 'Assinatura eletrônica',
+      f4_desc: 'Assine seus PDFs diretamente do seu telefone.',
+      f5_title: 'OCR : Extração de texto',
+      f5_desc: 'Extraia texto de PDFs digitalizados com reconhecimento óptico de caracteres.',
+      f6_title: 'Segurança avançada',
+      f6_desc: 'Proteção AES-256, PIN e impressão digital.',
+      ia_title: 'Seu documento fala com você',
+      ia_sub: 'Sem mais ler 50 páginas para encontrar informação. Só pergunte.',
+      ia_c1: 'Resumo em 5 pontos', ia_c1s: 'entenda um documento em 10 segundos',
+      ia_c2: 'Chat interativo', ia_c2s: 'faça perguntas precisas sobre o conteúdo',
+      ia_c3: 'Tradução em 9 idiomas', ia_c3s: 'FR, EN, ES, PT, AR, DE, IT, ZH, JA',
+      ia_c4: 'Powered by Gemini', ia_c4s: 'a tecnologia IA mais avançada do Google',
+      tools_tag: 'Edição',
+      tools_title: 'Todas as ferramentas PDF em um só lugar',
+      tools_sub: 'Sem mais alternar entre aplicativos.',
+      tools_c1: 'Mesclar, comprimir, girar, extrair páginas',
+      tools_c2: 'Anotar, marca d\'água, numerar páginas',
+      tools_c3: 'Converter imagens e documentos para PDF',
+      tools_c4: 'Cabeçalho, rodapé, proteção por senha',
+      alltool_tag: 'Caixa de ferramentas completa',
+      alltool_title: '15+ ferramentas incluídas no Premium',
+      alltool_sub: 'Uma assinatura para desbloquear tudo.',
+      t1:'Resumo IA',t2:'Chat PDF',t3:'OCR',t4:'Tradução',t5:'PDF → Imagem',
+      t6:'Assinatura',t7:'Anotação',t8:'Mesclar',t9:'Extrair',t10:'Comprimir',
+      t11:'Proteger',t12:'Marca d\'água',t13:'Girar',t14:'Numerar',t15:'Scanner',t16:'Converter',
+      price_tag: 'Preços',
+      price_title: 'Simples e transparente',
+      price_sub: '14 dias grátis, sem cartão para começar.',
+      plan_monthly: 'Mensal', per_month: '/mês',
+      plan_yearly: 'Anual', per_year: '/ano',
+      trial: '✓ 14 dias grátis',
+      saving: 'Economize 44%',
+      subscribe: 'Começar',
+      price_note: 'Cancele quando quiser pelo Google Play.',
+      cta_title: 'Pronto para transformar sua gestão de PDFs?',
+      cta_sub: 'Junte-se a milhares de usuários que confiam no Pdfigo.',
+      available: 'Disponível no',
+      footer_desc: 'Seu assistente PDF completo para Android.',
+      footer_app: 'App', footer_features: 'Recursos',
+      footer_pricing: 'Preços', footer_download: 'Baixar',
+      footer_legal: 'Legal', footer_privacy: 'Privacidade',
+      footer_terms: 'Termos', footer_cookies: 'Cookies',
+      footer_rights: 'Todos os direitos reservados.', footer_made: 'Feito com ❤️ na França',
+    },
+    ar: {
+      nav_cta: 'تجربة مجانية',
+      hero_badge: 'ذكاء اصطناعي مدمج',
+      hero_title: "مساعد PDF الذي <span>يفهم</span> مستنداتك",
+      hero_sub: 'لخّص، وقّع، امسح، احمِ وتحدث مع ملفات PDF. كل شيء في واحد، على Android.',
+      hero_cta1: 'تحميل من Google Play',
+      hero_cta2: 'اكتشف الميزات',
+      feat_tag: 'الميزات',
+      feat_title: 'كل ما تحتاجه',
+      feat_sub: 'اشتراك واحد يفتح جميع الأدوات.',
+      f1_title: 'ذكاء اصطناعي , تلخيص وترجمة',
+      f1_desc: 'لخّص أي مستند تلقائيًا في ثوانٍ. ترجم إلى 9 لغات فورًا.',
+      f2_title: 'دردشة مع ملفات PDF',
+      f2_desc: 'اطرح أسئلة مباشرة على مستندك. يجيب الذكاء الاصطناعي بدقة.',
+      f3_title: 'ماسح ذكي',
+      f3_desc: 'امسح المستندات بكاميرتك. اقتصاص تلقائي وتحويل عالي الجودة.',
+      f4_title: 'التوقيع الإلكتروني',
+      f4_desc: 'وقّع على ملفات PDF مباشرة من هاتفك.',
+      f5_title: 'OCR : استخراج النص',
+      f5_desc: 'استخرج النص من ملفات PDF الممسوحة.',
+      f6_title: 'أمان متقدم',
+      f6_desc: 'حماية AES-256 ورمز PIN وبصمة الإصبع.',
+      ia_title: 'مستندك يتحدث إليك',
+      ia_sub: 'لا تحتاج لقراءة 50 صفحة للعثور على معلومة. فقط اسأل.',
+      ia_c1: 'ملخص في 5 نقاط', ia_c1s: 'افهم مستندًا في 10 ثوانٍ',
+      ia_c2: 'دردشة تفاعلية', ia_c2s: 'اطرح أسئلة دقيقة حول المحتوى',
+      ia_c3: 'ترجمة إلى 9 لغات', ia_c3s: 'FR, EN, ES, PT, AR, DE, IT, ZH, JA',
+      ia_c4: 'مدعوم بـ Gemini', ia_c4s: 'أكثر تقنيات الذكاء الاصطناعي تقدمًا من Google',
+      tools_tag: 'التحرير',
+      tools_title: 'جميع أدوات PDF في مكان واحد',
+      tools_sub: 'لا حاجة للتنقل بين تطبيقات متعددة.',
+      tools_c1: 'دمج، ضغط، تدوير، استخراج الصفحات',
+      tools_c2: 'التعليق، إضافة علامة مائية، ترقيم الصفحات',
+      tools_c3: 'تحويل الصور والمستندات إلى PDF',
+      tools_c4: 'رأس، تذييل، حماية بكلمة مرور',
+      alltool_tag: 'صندوق أدوات كامل',
+      alltool_title: '15+ أداة مضمنة في Premium',
+      alltool_sub: 'اشتراك واحد لفتح كل شيء.',
+      t1:'ملخص ذكي',t2:'دردشة PDF',t3:'OCR',t4:'ترجمة',t5:'PDF → صورة',
+      t6:'توقيع',t7:'تعليق',t8:'دمج',t9:'استخراج',t10:'ضغط',
+      t11:'حماية',t12:'علامة مائية',t13:'تدوير',t14:'ترقيم',t15:'مسح',t16:'تحويل',
+      price_tag: 'الأسعار',
+      price_title: 'بسيط وشفاف',
+      price_sub: '14 يومًا مجانًا : لا بطاقة مطلوبة للبدء.',
+      plan_monthly: 'شهري', per_month: '/شهر',
+      plan_yearly: 'سنوي', per_year: '/سنة',
+      trial: '✓ 14 يومًا مجانًا',
+      saving: 'وفّر 44%',
+      subscribe: 'ابدأ الآن',
+      price_note: 'إلغاء في أي وقت من Google Play.',
+      cta_title: 'هل أنت مستعد لتحويل طريقة إدارة ملفات PDF؟',
+      cta_sub: 'انضم إلى آلاف المستخدمين الذين يثقون بـ Pdfigo.',
+      available: 'متاح على',
+      footer_desc: 'مساعد PDF الكامل لنظام Android.',
+      footer_app: 'التطبيق', footer_features: 'الميزات',
+      footer_pricing: 'الأسعار', footer_download: 'تحميل',
+      footer_legal: 'قانوني', footer_privacy: 'الخصوصية',
+      footer_terms: 'الشروط', footer_cookies: 'الكوكيز',
+      footer_rights: 'جميع الحقوق محفوظة.', footer_made: 'صنع بـ ❤️ في فرنسا',
+    }
+  };
+
+  let currentLang = localStorage.getItem('lang') || 'fr';
+
+  function setLang(lang) {
+    currentLang = lang;
+    localStorage.setItem('lang', lang);
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    applyTranslations();
+    document.querySelector('.lang-select').value = lang;
+  }
+
+  function applyTranslations() {
+    const t = translations[currentLang] || translations.fr;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (t[key] !== undefined) el.innerHTML = t[key];
+    });
+  }
+
+  // Init
+  document.querySelector('.lang-select').value = currentLang;
+  setLang(currentLang);
+</script>
+
+</body>
+</html>
