@@ -240,10 +240,80 @@
     </div>
 
     <div class="contact-card">
-      <h3 data-i18n="contact_title">Une question sur vos données ?</h3>
-      <p data-i18n="contact_sub">Notre équipe répond sous 48h ouvrables.</p>
-      <a href="mailto:devbp2025@gmail.com" class="contact-btn">✉️ devbp2025@gmail.com</a>
+  <h3 data-i18n="rgpd_form_title">Exercer vos droits RGPD</h3>
+  <p data-i18n="rgpd_form_sub">Remplissez ce formulaire, nous répondons sous 48h ouvrables.</p>
+  
+  <div id="form-success" style="display:none; background:rgba(255,255,255,0.2); border-radius:12px; padding:20px; margin-top:16px;">
+    <p style="color:white; font-weight:600; font-size:15px;">✅ <span data-i18n="form_sent">Demande envoyée ! Nous vous répondons sous 48h.</span></p>
+  </div>
+
+  <form id="rgpd-form" action="https://formspree.io/f/xqewgznb" method="POST"
+    style="background:rgba(255,255,255,0.1); border-radius:12px; padding:24px; margin-top:16px; text-align:left;">
+    
+    <div style="margin-bottom:14px">
+      <label style="display:block; color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:6px" data-i18n="form_name">Nom complet</label>
+      <input type="text" name="name" required
+        style="width:100%; padding:10px 14px; border-radius:8px; border:none; font-family:'DM Sans',sans-serif; font-size:14px;" />
     </div>
+
+    <div style="margin-bottom:14px">
+      <label style="display:block; color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:6px" data-i18n="form_email">Email</label>
+      <input type="email" name="email" required
+        style="width:100%; padding:10px 14px; border-radius:8px; border:none; font-family:'DM Sans',sans-serif; font-size:14px;" />
+    </div>
+
+    <div style="margin-bottom:14px">
+      <label style="display:block; color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:6px" data-i18n="form_right">Droit à exercer</label>
+      <select name="right" required
+        style="width:100%; padding:10px 14px; border-radius:8px; border:none; font-family:'DM Sans',sans-serif; font-size:14px;">
+        <option value="acces" data-i18n="r1">Droit d'accès</option>
+        <option value="rectification" data-i18n="r2">Droit de rectification</option>
+        <option value="effacement" data-i18n="r3">Droit à l'effacement</option>
+        <option value="portabilite" data-i18n="r4">Droit à la portabilité</option>
+        <option value="opposition" data-i18n="r5">Droit d'opposition</option>
+      </select>
+    </div>
+
+    <div style="margin-bottom:20px">
+      <label style="display:block; color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:6px" data-i18n="form_message">Message (optionnel)</label>
+      <textarea name="message" rows="3"
+        style="width:100%; padding:10px 14px; border-radius:8px; border:none; font-family:'DM Sans',sans-serif; font-size:14px; resize:vertical;"></textarea>
+    </div>
+
+    <input type="hidden" name="_subject" value="Demande RGPD — Pdfigo" />
+    <input type="hidden" name="_replyto" value="devbp2025@gmail.com" />
+
+    <button type="submit" id="form-btn"
+      style="width:100%; background:white; color:#2563EB; font-family:'DM Sans',sans-serif; font-weight:700; font-size:15px; padding:14px; border-radius:10px; border:none; cursor:pointer;"
+      data-i18n="form_submit">Envoyer ma demande</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById('rgpd-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('form-btn');
+    btn.textContent = '⏳ Envoi...';
+    btn.disabled = true;
+    try {
+      const response = await fetch('https://formspree.io/f/xqewgznb', {
+        method: 'POST',
+        body: new FormData(this),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (response.ok) {
+        document.getElementById('rgpd-form').style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      } else {
+        btn.textContent = '❌ Erreur — réessayez';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = '❌ Erreur — réessayez';
+      btn.disabled = false;
+    }
+  });
+</script>
   </div>
 
   <!-- TERMS -->
@@ -484,6 +554,14 @@ const T = {
     ck_c5k:"Données RevenueCat", ck_c5:"Contactez-nous à devbp2025@gmail.com",
     contact_title2:"Questions sur nos pratiques ?", contact_sub2:"Nous sommes transparents sur l'utilisation de vos données.",
     footer_rights:"Tous droits réservés.",
+    rgpd_form_title:"Exercer vos droits RGPD", 
+    rgpd_form_sub:"Remplissez ce formulaire, nous répondons sous 48h.", 
+    form_name:"Nom complet", 
+    form_email:"Email", 
+    form_right:"Droit à exercer", 
+    form_message:"Message (optionnel)", 
+    form_submit:"Envoyer ma demande", 
+    form_sent:"Demande envoyée ! Nous vous répondons sous 48h.",
   },
   en: {
     hero_title:"Legal Documents", hero_sub:"Privacy Policy · Terms of Use · Cookies", updated:"Last updated: April 2026",
@@ -564,6 +642,14 @@ const T = {
     ck_c5k:"RevenueCat data", ck_c5:"Contact us at devbp2025@gmail.com",
     contact_title2:"Questions about our practices?", contact_sub2:"We are transparent about how we use your data.",
     footer_rights:"All rights reserved.",
+    rgpd_form_title:"Exercise your GDPR rights", 
+    rgpd_form_sub:"Fill in this form, we respond within 48h.", 
+    form_name:"Full name", 
+    form_email:"Email", 
+    form_right:"Right to exercise", 
+    form_message:"Message (optional)", 
+    form_submit:"Send my request", 
+    form_sent:"Request sent! We'll respond within 48h.",
   },
   es: {
     hero_title:"Documentos legales", hero_sub:"Política de privacidad · Términos de uso · Cookies", updated:"Última actualización: Abril 2026",
@@ -644,6 +730,14 @@ const T = {
     ck_c5k:"Datos RevenueCat", ck_c5:"Contáctenos en devbp2025@gmail.com",
     contact_title2:"¿Preguntas sobre nuestras prácticas?", contact_sub2:"Somos transparentes sobre el uso de sus datos.",
     footer_rights:"Todos los derechos reservados.",
+    rgpd_form_title:"Ejercer sus derechos RGPD", 
+    rgpd_form_sub:"Complete este formulario, respondemos en 48h.", 
+    form_name:"Nombre completo", 
+    form_email:"Correo", 
+    form_right:"Derecho a ejercer", 
+    form_message:"Mensaje (opcional)", 
+    form_submit:"Enviar solicitud", 
+    form_sent:"¡Solicitud enviada! Respondemos en 48h.",
   },
   pt: {
     hero_title:"Documentos legais", hero_sub:"Política de privacidade · Termos de uso · Cookies", updated:"Última atualização: Abril 2026",
@@ -724,6 +818,14 @@ const T = {
     ck_c5k:"Dados RevenueCat", ck_c5:"Entre em contato: devbp2025@gmail.com",
     contact_title2:"Dúvidas sobre nossas práticas?", contact_sub2:"Somos transparentes sobre o uso dos seus dados.",
     footer_rights:"Todos os direitos reservados.",
+    rgpd_form_title:"Exercer seus direitos RGPD", 
+    rgpd_form_sub:"Preencha este formulário, respondemos em 48h.", 
+    form_name:"Nome completo", 
+    form_email:"Email", 
+    form_right:"Direito a exercer", 
+    form_message:"Mensagem (opcional)", 
+    form_submit:"Enviar solicitação", 
+    form_sent:"Solicitação enviada! Respondemos em 48h.",
   },
   ar: {
     hero_title:"الوثائق القانونية", hero_sub:"سياسة الخصوصية · شروط الاستخدام · ملفات تعريف الارتباط", updated:"آخر تحديث: أبريل 2026",
@@ -804,6 +906,14 @@ const T = {
     ck_c5k:"بيانات RevenueCat", ck_c5:"تواصل معنا: devbp2025@gmail.com",
     contact_title2:"أسئلة حول ممارساتنا؟", contact_sub2:"نحن شفافون بشأن استخدام بياناتك.",
     footer_rights:"جميع الحقوق محفوظة.",
+    rgpd_form_title:"ممارسة حقوقك RGPD", 
+    rgpd_form_sub:"املأ هذا النموذج  نرد خلال 48 ساعة.", 
+    form_name:"الاسم الكامل", 
+    form_email:"البريد الإلكتروني", 
+    form_right:"الحق المطلوب", 
+    form_message:"رسالة (اختياري)", 
+    form_submit:"إرسال طلبي", 
+    form_sent:"تم إرسال الطلب! سنرد خلال 48 ساعة.",
   }
 };
 
