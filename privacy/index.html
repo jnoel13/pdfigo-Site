@@ -17,17 +17,9 @@
       --paper: #F8FAFC;
       --white: #FFFFFF;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.7; }
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--paper);
-      color: var(--ink);
-      line-height: 1.7;
-    }
-
-    /* ── HERO ── */
     .hero {
       background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
       padding: 60px 24px 80px;
@@ -35,707 +27,329 @@
       position: relative;
       overflow: hidden;
     }
+    .hero::before { content:''; position:absolute; top:-60px; right:-60px; width:240px; height:240px; border-radius:50%; background:rgba(255,255,255,0.06); }
+    .hero::after { content:''; position:absolute; bottom:-80px; left:-40px; width:300px; height:300px; border-radius:50%; background:rgba(255,255,255,0.04); }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -60px; right: -60px;
-      width: 240px; height: 240px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.06);
-    }
+    .logo-wrap { display:inline-flex; align-items:center; gap:12px; margin-bottom:28px; }
+    .logo-icon { width:52px; height:52px; background:rgba(255,255,255,0.15); border-radius:14px; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.2); overflow:hidden; }
+    .logo-icon img { width:52px; height:52px; object-fit:cover; border-radius:14px; }
+    .logo-name { font-family:'Playfair Display',serif; font-size:28px; font-weight:700; color:white; letter-spacing:-0.5px; }
+    .logo-name span { color:rgba(255,255,255,0.6); }
+    .hero h1 { font-family:'Playfair Display',serif; font-size:clamp(24px,5vw,36px); font-weight:600; color:white; margin-bottom:12px; }
+    .hero p { color:rgba(255,255,255,0.75); font-size:15px; font-weight:300; }
+    .badge { display:inline-block; margin-top:20px; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.25); border-radius:20px; padding:6px 16px; font-size:12px; color:rgba(255,255,255,0.85); font-weight:500; letter-spacing:0.5px; }
 
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -80px; left: -40px;
-      width: 300px; height: 300px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.04);
-    }
+    .nav-tabs { background:white; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; box-shadow:0 1px 8px rgba(0,0,0,0.06); }
+    .nav-tabs-inner { max-width:860px; margin:0 auto; display:flex; overflow-x:auto; scrollbar-width:none; justify-content:space-between; align-items:center; padding:0 16px; }
+    .nav-tabs-inner::-webkit-scrollbar { display:none; }
+    .tabs-left { display:flex; overflow-x:auto; }
+    .tab-btn { flex-shrink:0; padding:16px 16px; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500; color:var(--muted); background:none; border:none; border-bottom:2px solid transparent; cursor:pointer; transition:all 0.2s; white-space:nowrap; }
+    .tab-btn:hover { color:var(--blue); }
+    .tab-btn.active { color:var(--blue); border-bottom-color:var(--blue); }
 
-    .logo-wrap {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 28px;
-    }
+    .lang-select { background:var(--paper); border:1px solid var(--border); border-radius:8px; padding:6px 10px; font-family:'DM Sans',sans-serif; font-size:13px; color:var(--ink); cursor:pointer; outline:none; flex-shrink:0; }
 
-    .logo-icon {
-      width: 52px; height: 52px;
-      background: rgba(255,255,255,0.15);
-      border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.2);
-    }
+    .main { max-width:860px; margin:0 auto; padding:48px 24px 80px; }
+    .section { display:none; }
+    .section.active { display:block; }
 
-    .logo-icon svg { width: 28px; height: 28px; fill: white; }
+    .section-intro { background:var(--blue-light); border-left:4px solid var(--blue); border-radius:0 12px 12px 0; padding:20px 24px; margin-bottom:40px; font-size:14px; color:var(--blue-dark); line-height:1.6; }
 
-    .logo-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 28px;
-      font-weight: 700;
-      color: white;
-      letter-spacing: -0.5px;
-    }
+    .card { background:white; border-radius:16px; border:1px solid var(--border); margin-bottom:20px; overflow:hidden; transition:box-shadow 0.2s; }
+    .card:hover { box-shadow:0 4px 20px rgba(37,99,235,0.08); }
+    .card-header { display:flex; align-items:center; gap:14px; padding:20px 24px; border-bottom:1px solid var(--border); background:var(--paper); }
+    .card-icon { width:40px; height:40px; border-radius:10px; background:var(--blue-light); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .card-icon svg { width:20px; height:20px; stroke:var(--blue); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+    .card-title { font-family:'Playfair Display',serif; font-size:17px; font-weight:600; color:var(--ink); }
+    .card-body { padding:20px 24px; }
+    .card-body p { font-size:14px; color:var(--muted); margin-bottom:12px; }
+    .card-body p:last-child { margin-bottom:0; }
+    .card-body strong { color:var(--ink); font-weight:600; }
+    .card-body a { color:var(--blue); }
 
-    .logo-name span { color: rgba(255,255,255,0.6); }
+    .check-list { list-style:none; margin:12px 0; }
+    .check-list li { display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--muted); padding:6px 0; border-bottom:1px solid var(--border); }
+    .check-list li:last-child { border-bottom:none; }
+    .check-list li::before { content:''; width:18px; height:18px; border-radius:50%; flex-shrink:0; margin-top:1px; background:#ECFDF5 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2310B981' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/12px no-repeat; }
 
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(24px, 5vw, 36px);
-      font-weight: 600;
-      color: white;
-      margin-bottom: 12px;
-    }
+    .data-table { width:100%; border-collapse:collapse; font-size:13px; margin:12px 0; }
+    .data-table th { background:var(--paper); color:var(--muted); font-weight:600; text-align:left; padding:10px 14px; border-bottom:2px solid var(--border); font-size:12px; text-transform:uppercase; letter-spacing:0.5px; }
+    .data-table td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--ink); vertical-align:top; }
+    .data-table tr:last-child td { border-bottom:none; }
+    .data-table tr:hover td { background:var(--paper); }
 
-    .hero p {
-      color: rgba(255,255,255,0.75);
-      font-size: 15px;
-      font-weight: 300;
-    }
+    .tag { display:inline-block; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:600; }
+    .tag-red { background:#FEF2F2; color:#EF4444; }
+    .tag-green { background:#ECFDF5; color:#10B981; }
+    .tag-blue { background:var(--blue-light); color:var(--blue); }
 
-    .badge {
-      display: inline-block;
-      margin-top: 20px;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.25);
-      border-radius: 20px;
-      padding: 6px 16px;
-      font-size: 12px;
-      color: rgba(255,255,255,0.85);
-      font-weight: 500;
-      letter-spacing: 0.5px;
-    }
+    .highlight { background:linear-gradient(135deg,var(--blue-light),#EFF6FF); border:1px solid #BFDBFE; border-radius:12px; padding:20px 24px; margin:16px 0; }
+    .highlight p { font-size:14px; color:var(--blue-dark); margin:0; }
 
-    /* ── NAV TABS ── */
-    .nav-tabs {
-      background: white;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 1px 8px rgba(0,0,0,0.06);
-    }
+    .contact-card { background:linear-gradient(135deg,var(--blue),var(--blue-dark)); border-radius:16px; padding:32px; text-align:center; margin-top:40px; }
+    .contact-card h3 { font-family:'Playfair Display',serif; font-size:22px; color:white; margin-bottom:8px; }
+    .contact-card p { color:rgba(255,255,255,0.75); font-size:14px; margin-bottom:20px; }
+    .contact-btn { display:inline-flex; align-items:center; gap:8px; background:white; color:var(--blue); font-family:'DM Sans',sans-serif; font-weight:600; font-size:14px; padding:12px 24px; border-radius:10px; text-decoration:none; transition:transform 0.2s; }
+    .contact-btn:hover { transform:translateY(-2px); }
 
-    .nav-tabs-inner {
-      max-width: 860px;
-      margin: 0 auto;
-      display: flex;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
+    footer { background:var(--ink); padding:32px 24px; text-align:center; }
+    footer p { color:rgba(255,255,255,0.4); font-size:13px; }
+    footer strong { color:rgba(255,255,255,0.7); }
+    footer a { color:rgba(255,255,255,0.5); }
 
-    .nav-tabs-inner::-webkit-scrollbar { display: none; }
-
-    .tab-btn {
-      flex-shrink: 0;
-      padding: 16px 20px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--muted);
-      background: none;
-      border: none;
-      border-bottom: 2px solid transparent;
-      cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
-    }
-
-    .tab-btn:hover { color: var(--blue); }
-    .tab-btn.active { color: var(--blue); border-bottom-color: var(--blue); }
-
-    /* ── MAIN ── */
-    .main {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 48px 24px 80px;
-    }
-
-    /* ── SECTION ── */
-    .section {
-      display: none;
-    }
-    .section.active { display: block; }
-
-    .section-intro {
-      background: var(--blue-light);
-      border-left: 4px solid var(--blue);
-      border-radius: 0 12px 12px 0;
-      padding: 20px 24px;
-      margin-bottom: 40px;
-      font-size: 14px;
-      color: var(--blue-dark);
-      line-height: 1.6;
-    }
-
-    /* ── CARD ── */
-    .card {
-      background: white;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      margin-bottom: 20px;
-      overflow: hidden;
-      transition: box-shadow 0.2s;
-    }
-
-    .card:hover { box-shadow: 0 4px 20px rgba(37,99,235,0.08); }
-
-    .card-header {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 20px 24px;
-      border-bottom: 1px solid var(--border);
-      background: var(--paper);
-    }
-
-    .card-icon {
-      width: 40px; height: 40px;
-      border-radius: 10px;
-      background: var(--blue-light);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .card-icon svg { width: 20px; height: 20px; stroke: var(--blue); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-
-    .card-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--ink);
-    }
-
-    .card-body {
-      padding: 20px 24px;
-    }
-
-    .card-body p {
-      font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 12px;
-    }
-
-    .card-body p:last-child { margin-bottom: 0; }
-
-    .card-body strong { color: var(--ink); font-weight: 600; }
-
-    /* ── LIST ── */
-    .check-list {
-      list-style: none;
-      margin: 12px 0;
-    }
-
-    .check-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 14px;
-      color: var(--muted);
-      padding: 6px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .check-list li:last-child { border-bottom: none; }
-
-    .check-list li::before {
-      content: '';
-      width: 18px; height: 18px;
-      border-radius: 50%;
-      background: #ECFDF5;
-      flex-shrink: 0;
-      margin-top: 1px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2310B981' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
-      background-size: 12px;
-      background-repeat: no-repeat;
-      background-position: center;
-    }
-
-    /* ── TABLE ── */
-    .data-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-      margin: 12px 0;
-    }
-
-    .data-table th {
-      background: var(--paper);
-      color: var(--muted);
-      font-weight: 600;
-      text-align: left;
-      padding: 10px 14px;
-      border-bottom: 2px solid var(--border);
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .data-table td {
-      padding: 10px 14px;
-      border-bottom: 1px solid var(--border);
-      color: var(--ink);
-      vertical-align: top;
-    }
-
-    .data-table tr:last-child td { border-bottom: none; }
-    .data-table tr:hover td { background: var(--paper); }
-
-    .tag {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 600;
-    }
-
-    .tag-red { background: #FEF2F2; color: #EF4444; }
-    .tag-green { background: #ECFDF5; color: #10B981; }
-    .tag-blue { background: var(--blue-light); color: var(--blue); }
-
-    /* ── HIGHLIGHT BOX ── */
-    .highlight {
-      background: linear-gradient(135deg, var(--blue-light), #EFF6FF);
-      border: 1px solid #BFDBFE;
-      border-radius: 12px;
-      padding: 20px 24px;
-      margin: 16px 0;
-    }
-
-    .highlight p {
-      font-size: 14px;
-      color: var(--blue-dark);
-      margin: 0;
-    }
-
-    /* ── CONTACT ── */
-    .contact-card {
-      background: linear-gradient(135deg, var(--blue), var(--blue-dark));
-      border-radius: 16px;
-      padding: 32px;
-      text-align: center;
-      margin-top: 40px;
-    }
-
-    .contact-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      color: white;
-      margin-bottom: 8px;
-    }
-
-    .contact-card p {
-      color: rgba(255,255,255,0.75);
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
-
-    .contact-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: white;
-      color: var(--blue);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 600;
-      font-size: 14px;
-      padding: 12px 24px;
-      border-radius: 10px;
-      text-decoration: none;
-      transition: transform 0.2s;
-    }
-
-    .contact-btn:hover { transform: translateY(-2px); }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--ink);
-      padding: 32px 24px;
-      text-align: center;
-    }
-
-    footer p {
-      color: rgba(255,255,255,0.4);
-      font-size: 13px;
-    }
-
-    footer strong { color: rgba(255,255,255,0.7); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 600px) {
-      .hero { padding: 40px 20px 60px; }
-      .main { padding: 32px 16px 60px; }
-      .card-body { padding: 16px; }
-      .card-header { padding: 16px; }
-      .data-table { font-size: 12px; }
-      .data-table th, .data-table td { padding: 8px 10px; }
+    @media (max-width:600px) {
+      .hero { padding:40px 20px 60px; }
+      .main { padding:32px 16px 60px; }
+      .card-body,.card-header { padding:16px; }
+      .data-table { font-size:12px; }
+      .data-table th,.data-table td { padding:8px 10px; }
     }
   </style>
 </head>
 <body>
 
-<!-- HERO -->
 <div class="hero">
   <div class="logo-wrap">
-    <div class="logo-icon" style="background:none; padding:0; overflow:hidden;">
-      <img src="../assets/pdfigo.png" alt="Pdfigo" style="width:52px; height:52px; object-fit:cover; border-radius:14px;" />
-    </div>
-    <span class="logo-name">Pdf<span style="color:rgba(255,255,255,0.6)">igo</span></span>
-  </div>
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
-        <polyline points="14 2 14 8 20 8" fill="none" stroke="white" stroke-width="1.5"/>
-        <line x1="16" y1="13" x2="8" y2="13" fill="none" stroke="white" stroke-width="1.5"/>
-        <line x1="16" y1="17" x2="8" y2="17" fill="none" stroke="white" stroke-width="1.5"/>
-        <polyline points="10 9 9 9 8 9" fill="none" stroke="white" stroke-width="1.5"/>
-      </svg>
+    <div class="logo-icon">
+      <img src="../assets/pdfigo.png" alt="Pdfigo" />
     </div>
     <span class="logo-name">Pdf<span>igo</span></span>
   </div>
-  <h1>Documents légaux</h1>
-  <p>Politique de confidentialité · Conditions d'utilisation · Cookies</p>
-  <div class="badge">Dernière mise à jour : Avril 2026</div>
+  <h1 data-i18n="hero_title">Documents légaux</h1>
+  <p data-i18n="hero_sub">Politique de confidentialité · Conditions d'utilisation · Cookies</p>
+  <div class="badge" data-i18n="updated">Dernière mise à jour : Avril 2026</div>
 </div>
 
-<!-- NAV TABS -->
 <nav class="nav-tabs">
   <div class="nav-tabs-inner">
-    <button class="tab-btn active" onclick="showTab('privacy', this)"> Confidentialité</button>
-    <button class="tab-btn" onclick="showTab('terms', this)"> Conditions d'utilisation</button>
-    <button class="tab-btn" onclick="showTab('cookies', this)"> Cookies</button>
+    <div class="tabs-left">
+      <button class="tab-btn active" onclick="showTab('privacy',this)" data-i18n="tab_privacy">🔒 Confidentialité</button>
+      <button class="tab-btn" onclick="showTab('terms',this)" data-i18n="tab_terms">📋 Conditions</button>
+      <button class="tab-btn" onclick="showTab('cookies',this)" data-i18n="tab_cookies">🍪 Cookies</button>
+    </div>
+    <select class="lang-select" onchange="setLang(this.value)">
+      <option value="fr">🇫🇷 FR</option>
+      <option value="en">🇬🇧 EN</option>
+      <option value="es">🇪🇸 ES</option>
+      <option value="pt">🇧🇷 PT</option>
+      <option value="ar">🇸🇦 AR</option>
+    </select>
   </div>
 </nav>
 
 <main class="main">
 
-  <!-- ══════════════════════════════════════════
-       SECTION 1 : CONFIDENTIALITÉ
-  ══════════════════════════════════════════ -->
+  <!-- PRIVACY -->
   <div class="section active" id="privacy">
+    <div class="section-intro" data-i18n="priv_intro">Chez Pdfigo, votre vie privée est notre priorité. Pdfigo fonctionne principalement <strong>hors ligne</strong> — vos fichiers restent sur votre appareil.</div>
 
-    <div class="section-intro">
-      Chez Pdfigo, votre vie privée est notre priorité. Cette politique explique de manière transparente quelles données nous collectons, pourquoi, et comment nous les protégeons. Pdfigo fonctionne principalement <strong>hors ligne</strong>, vos fichiers restent sur votre appareil.
-    </div>
-
-    <!-- Données collectées -->
     <div class="card">
       <div class="card-header">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <div class="card-title">Données collectées</div>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="card-title" data-i18n="priv_data_title">Données collectées</div>
       </div>
       <div class="card-body">
         <table class="data-table">
-          <thead>
-            <tr>
-              <th>Type de donnée</th>
-              <th>Finalité</th>
-              <th>Stockage</th>
-            </tr>
-          </thead>
+          <thead><tr><th data-i18n="th_type">Type</th><th data-i18n="th_purpose">Finalité</th><th data-i18n="th_storage">Stockage</th></tr></thead>
           <tbody>
-            <tr>
-              <td><strong>Fichiers PDF</strong></td>
-              <td>Traitement local uniquement</td>
-              <td><span class="tag tag-green">Sur l'appareil</span></td>
-            </tr>
-            <tr>
-              <td><strong>Texte extrait (IA)</strong></td>
-              <td>Résumé, traduction, chat PDF</td>
-              <td><span class="tag tag-blue">Supabase temporaire</span></td>
-            </tr>
-            <tr>
-              <td><strong>Photos (scanner)</strong></td>
-              <td>Conversion en PDF</td>
-              <td><span class="tag tag-green">Sur l'appareil</span></td>
-            </tr>
-            <tr>
-              <td><strong>Données d'achat</strong></td>
-              <td>Gestion des abonnements</td>
-              <td><span class="tag tag-blue">Google Play / RevenueCat</span></td>
-            </tr>
-            <tr>
-              <td><strong>Identifiant anonyme</strong></td>
-              <td>Statistiques d'utilisation</td>
-              <td><span class="tag tag-blue">RevenueCat</span></td>
-            </tr>
+            <tr><td><strong data-i18n="d1">Fichiers PDF</strong></td><td data-i18n="d1p">Traitement local uniquement</td><td><span class="tag tag-green" data-i18n="d1s">Sur l'appareil</span></td></tr>
+            <tr><td><strong data-i18n="d2">Texte extrait (IA)</strong></td><td data-i18n="d2p">Résumé, traduction, chat</td><td><span class="tag tag-blue" data-i18n="d2s">Supabase temporaire</span></td></tr>
+            <tr><td><strong data-i18n="d3">Photos (scanner)</strong></td><td data-i18n="d3p">Conversion en PDF</td><td><span class="tag tag-green" data-i18n="d3s">Sur l'appareil</span></td></tr>
+            <tr><td><strong data-i18n="d4">Données d'achat</strong></td><td data-i18n="d4p">Gestion des abonnements</td><td><span class="tag tag-blue" data-i18n="d4s">Google Play / RevenueCat</span></td></tr>
+            <tr><td><strong data-i18n="d5">Identifiant anonyme</strong></td><td data-i18n="d5p">Statistiques d'utilisation</td><td><span class="tag tag-blue" data-i18n="d5s">RevenueCat</span></td></tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    <!-- Caméra -->
     <div class="card">
       <div class="card-header">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-        </div>
-        <div class="card-title">Utilisation de la caméra</div>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+        <div class="card-title" data-i18n="cam_title">Utilisation de la caméra</div>
       </div>
       <div class="card-body">
-        <p>Pdfigo utilise la caméra de votre appareil <strong>uniquement</strong> pour la fonctionnalité de scanner de documents.</p>
+        <p data-i18n="cam_desc">Pdfigo utilise la caméra <strong>uniquement</strong> pour la fonctionnalité de scanner de documents.</p>
         <ul class="check-list">
-          <li>Les photos sont traitées localement sur votre appareil</li>
-          <li>Aucune image n'est envoyée à des serveurs tiers</li>
-          <li>Aucune image n'est stockée en dehors de votre appareil sans votre accord</li>
-          <li>Vous pouvez refuser l'accès à la caméra dans les paramètres Android</li>
+          <li data-i18n="cam_c1">Les photos sont traitées localement sur votre appareil</li>
+          <li data-i18n="cam_c2">Aucune image n'est envoyée à des serveurs tiers</li>
+          <li data-i18n="cam_c3">Aucune image n'est stockée sans votre accord</li>
+          <li data-i18n="cam_c4">Vous pouvez refuser l'accès dans les paramètres Android</li>
         </ul>
       </div>
     </div>
 
-    <!-- Intelligence Artificielle -->
     <div class="card">
       <div class="card-header">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-        </div>
-        <div class="card-title">Fonctionnalités IA (Résumé, Traduction, Chat PDF)</div>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+        <div class="card-title" data-i18n="ai_title">Fonctionnalités IA</div>
       </div>
       <div class="card-body">
-        <p>Lorsque vous utilisez les fonctionnalités d'intelligence artificielle, le <strong>texte extrait</strong> de votre document est envoyé de manière sécurisée (HTTPS) à nos serveurs pour traitement.</p>
-        <div class="highlight">
-          <p>⚡ Le texte est transmis à <strong>Google Gemini</strong> ou <strong>Mistral AI</strong> via notre infrastructure sécurisée (Supabase). Aucun contenu n'est stocké après traitement. Vos fichiers PDF originaux ne quittent jamais votre appareil.</p>
-        </div>
-        <p>En utilisant ces fonctionnalités, vous acceptez les politiques de confidentialité de <a href="https://policies.google.com/privacy" style="color:var(--blue)">Google</a> et <a href="https://mistral.ai/privacy" style="color:var(--blue)">Mistral AI</a>.</p>
+        <p data-i18n="ai_desc">Lorsque vous utilisez les fonctionnalités IA, le texte extrait est envoyé de manière sécurisée (HTTPS) à nos serveurs.</p>
+        <div class="highlight"><p data-i18n="ai_note">⚡ Le texte est transmis à <strong>Google Gemini</strong> ou <strong>Mistral AI</strong> via Supabase. Aucun contenu n'est stocké après traitement. Vos fichiers PDF originaux ne quittent jamais votre appareil.</p></div>
+        <p><span data-i18n="ai_links">En utilisant ces fonctionnalités, vous acceptez les politiques de </span><a href="https://policies.google.com/privacy">Google</a> <span data-i18n="and">et</span> <a href="https://mistral.ai/privacy">Mistral AI</a>.</p>
       </div>
     </div>
 
-    <!-- Abonnements -->
     <div class="card">
       <div class="card-header">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-        </div>
-        <div class="card-title">Abonnements et paiements</div>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+        <div class="card-title" data-i18n="pay_title">Abonnements et paiements</div>
       </div>
       <div class="card-body">
-        <p>Les paiements sont <strong>entièrement gérés par Google Play</strong>. Pdfigo n'a jamais accès à vos informations bancaires ou de carte de crédit.</p>
-        <p>Nous utilisons <strong>RevenueCat</strong> pour gérer les statuts d'abonnement. RevenueCat stocke un identifiant anonyme lié à votre compte Google Play. Consultez la <a href="https://www.revenuecat.com/privacy" style="color:var(--blue)">politique de confidentialité de RevenueCat</a>.</p>
+        <p data-i18n="pay_desc">Les paiements sont <strong>entièrement gérés par Google Play</strong>. Pdfigo n'a jamais accès à vos informations bancaires.</p>
+        <p><span data-i18n="pay_rc">Nous utilisons </span><strong>RevenueCat</strong><span data-i18n="pay_rc2"> pour gérer les statuts d'abonnement. Consultez la </span><a href="https://www.revenuecat.com/privacy" data-i18n="pay_rc3">politique de RevenueCat</a>.</p>
         <ul class="check-list">
-          <li>Essai gratuit de 14 jours pour les nouveaux utilisateurs</li>
-          <li>Renouvellement automatique, annulable à tout moment</li>
-          <li>Remboursement selon la politique Google Play</li>
+          <li data-i18n="pay_c1">Essai gratuit de 15 jours pour les nouveaux utilisateurs</li>
+          <li data-i18n="pay_c2">Renouvellement automatique — annulable à tout moment</li>
+          <li data-i18n="pay_c3">Remboursement selon la politique Google Play</li>
         </ul>
       </div>
     </div>
 
-    <!-- Droits -->
     <div class="card">
       <div class="card-header">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        </div>
-        <div class="card-title">Vos droits (RGPD)</div>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <div class="card-title" data-i18n="rgpd_title">Vos droits (RGPD)</div>
       </div>
       <div class="card-body">
-        <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez des droits suivants :</p>
+        <p data-i18n="rgpd_desc">Conformément au RGPD, vous disposez des droits suivants :</p>
         <ul class="check-list">
-          <li><strong>Droit d'accès</strong> : obtenir une copie de vos données</li>
-          <li><strong>Droit de rectification</strong> : corriger des données inexactes</li>
-          <li><strong>Droit à l'effacement</strong> : demander la suppression de vos données</li>
-          <li><strong>Droit à la portabilité</strong> : recevoir vos données dans un format lisible</li>
-          <li><strong>Droit d'opposition</strong> : vous opposer au traitement de vos données</li>
+          <li><strong data-i18n="r1">Droit d'accès</strong> — <span data-i18n="r1d">obtenir une copie de vos données</span></li>
+          <li><strong data-i18n="r2">Droit de rectification</strong> — <span data-i18n="r2d">corriger des données inexactes</span></li>
+          <li><strong data-i18n="r3">Droit à l'effacement</strong> — <span data-i18n="r3d">demander la suppression de vos données</span></li>
+          <li><strong data-i18n="r4">Droit à la portabilité</strong> — <span data-i18n="r4d">recevoir vos données dans un format lisible</span></li>
+          <li><strong data-i18n="r5">Droit d'opposition</strong> — <span data-i18n="r5d">vous opposer au traitement de vos données</span></li>
         </ul>
-        <p style="margin-top:12px">Pour exercer ces droits, contactez-nous à <strong>devbp2025@gmail.com</strong></p>
+        <p style="margin-top:12px" data-i18n="rgpd_contact">Pour exercer ces droits, contactez-nous à <strong>devbp2025@gmail.com</strong></p>
       </div>
     </div>
 
-    <!-- Sécurité -->
     <div class="card">
       <div class="card-header">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        </div>
-        <div class="card-title">Sécurité des données</div>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="card-title" data-i18n="sec_title">Sécurité des données</div>
       </div>
       <div class="card-body">
         <ul class="check-list">
-          <li>Toutes les communications réseau utilisent le protocole <strong>HTTPS/TLS</strong></li>
-          <li>Les fichiers PDF protégés utilisent le chiffrement <strong>AES-256</strong></li>
-          <li>Les données sensibles (PIN) sont stockées dans le <strong>Android Keystore</strong></li>
-          <li>Aucune donnée personnelle identifiable n'est collectée</li>
+          <li data-i18n="sec_c1">Toutes les communications réseau utilisent le protocole HTTPS/TLS</li>
+          <li data-i18n="sec_c2">Les fichiers PDF protégés utilisent le chiffrement AES-256</li>
+          <li data-i18n="sec_c3">Les données sensibles (PIN) sont stockées dans le Android Keystore</li>
+          <li data-i18n="sec_c4">Aucune donnée personnelle identifiable n'est collectée</li>
         </ul>
       </div>
     </div>
 
     <div class="contact-card">
-      <h3>Une question sur vos données ?</h3>
-      <p>Notre équipe répond sous 48h ouvrables.</p>
-      <a href="mailto:devbp2025@gmail.com" class="contact-btn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
-        devbp2025@gmail.com
-      </a>
+      <h3 data-i18n="contact_title">Une question sur vos données ?</h3>
+      <p data-i18n="contact_sub">Notre équipe répond sous 48h ouvrables.</p>
+      <a href="mailto:devbp2025@gmail.com" class="contact-btn">✉️ devbp2025@gmail.com</a>
     </div>
+  </div>
 
-  </div><!-- /privacy -->
-
-
-  <!-- ══════════════════════════════════════════
-       SECTION 2 : CONDITIONS D'UTILISATION
-  ══════════════════════════════════════════ -->
+  <!-- TERMS -->
   <div class="section" id="terms">
-
-    <div class="section-intro">
-      En téléchargeant et utilisant Pdfigo, vous acceptez les présentes conditions d'utilisation. Veuillez les lire attentivement.
-    </div>
+    <div class="section-intro" data-i18n="terms_intro">En téléchargeant et utilisant Pdfigo, vous acceptez les présentes conditions d'utilisation.</div>
 
     <div class="card">
       <div class="card-header">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        </div>
-        <div class="card-title">Description du service</div>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div class="card-title" data-i18n="t_service_title">Description du service</div>
       </div>
       <div class="card-body">
-        <p>Pdfigo est une application mobile de gestion de documents PDF proposant des fonctionnalités d'édition, de signature, de compression, de protection, d'OCR et d'intelligence artificielle.</p>
-        <p>L'application est disponible en version <strong>gratuite</strong> (fonctionnalités limitées) et en version <strong>Premium</strong> (accès illimité via abonnement).</p>
+        <p data-i18n="t_service_desc">Pdfigo est une application mobile de gestion de documents PDF proposant des fonctionnalités d'édition, signature, compression, protection, OCR et intelligence artificielle.</p>
+        <p data-i18n="t_service_plans">L'application est disponible en version <strong>gratuite</strong> (fonctionnalités limitées) et <strong>Premium</strong> (accès illimité via abonnement).</p>
       </div>
     </div>
 
     <div class="card">
       <div class="card-header">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        </div>
-        <div class="card-title">Utilisation acceptable</div>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <div class="card-title" data-i18n="t_use_title">Utilisation acceptable</div>
       </div>
       <div class="card-body">
-        <p>Vous vous engagez à utiliser Pdfigo uniquement pour des usages légaux. Il est <strong>strictement interdit</strong> de :</p>
+        <p data-i18n="t_use_desc">Vous vous engagez à utiliser Pdfigo uniquement pour des usages légaux. Il est strictement interdit de :</p>
         <ul class="check-list">
-          <li>Traiter des documents contenant des contenus illégaux ou portant atteinte aux droits de tiers</li>
-          <li>Tenter de contourner les mesures de sécurité ou de reverse-engineering l'application</li>
-          <li>Utiliser l'application à des fins commerciales non autorisées</li>
-          <li>Violer les droits d'auteur ou la propriété intellectuelle d'autrui</li>
-          <li>Utiliser les fonctionnalités IA pour générer des contenus trompeurs ou malveillants</li>
+          <li data-i18n="t_u1">Traiter des documents contenant des contenus illégaux</li>
+          <li data-i18n="t_u2">Tenter de contourner les mesures de sécurité</li>
+          <li data-i18n="t_u3">Utiliser l'application à des fins commerciales non autorisées</li>
+          <li data-i18n="t_u4">Violer les droits d'auteur ou la propriété intellectuelle</li>
+          <li data-i18n="t_u5">Utiliser les fonctionnalités IA pour générer des contenus malveillants</li>
         </ul>
       </div>
     </div>
 
     <div class="card">
       <div class="card-header">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        </div>
-        <div class="card-title">Abonnements et remboursements</div>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="card-title" data-i18n="t_price_title">Abonnements et remboursements</div>
       </div>
       <div class="card-body">
         <table class="data-table">
-          <thead>
-            <tr><th>Plan</th><th>Prix</th><th>Essai</th><th>Résiliation</th></tr>
-          </thead>
+          <thead><tr><th data-i18n="th_plan">Plan</th><th data-i18n="th_price">Prix</th><th data-i18n="th_trial">Essai</th><th data-i18n="th_cancel">Résiliation</th></tr></thead>
           <tbody>
-            <tr>
-              <td><strong>Premium Mensuel</strong></td>
-              <td>3,99€ / mois</td>
-              <td><span class="tag tag-green">14 jours offerts</span></td>
-              <td>À tout moment</td>
-            </tr>
-            <tr>
-              <td><strong>Premium Annuel</strong></td>
-              <td>28,99€ / an</td>
-              <td><span class="tag tag-green">14 jours offerts</span></td>
-              <td>À tout moment</td>
-            </tr>
+            <tr><td><strong data-i18n="plan_m">Premium Mensuel</strong></td><td>3,99€ / <span data-i18n="month">mois</span></td><td><span class="tag tag-green" data-i18n="trial_14">14 jours offerts</span></td><td data-i18n="anytime">À tout moment</td></tr>
+            <tr><td><strong data-i18n="plan_y">Premium Annuel</strong></td><td>28,99€ / <span data-i18n="year">an</span></td><td><span class="tag tag-green" data-i18n="trial_14">14 jours offerts</span></td><td data-i18n="anytime">À tout moment</td></tr>
           </tbody>
         </table>
-        <div class="highlight" style="margin-top:16px">
-          <p>L'abonnement se renouvelle automatiquement sauf annulation au moins 24h avant la date de renouvellement. Les remboursements sont soumis à la <a href="https://support.google.com/googleplay/answer/2479637" style="color:var(--blue)">politique de remboursement Google Play</a>.</p>
-        </div>
+        <div class="highlight" style="margin-top:16px"><p data-i18n="t_renew">L'abonnement se renouvelle automatiquement sauf annulation au moins 24h avant la date de renouvellement.</p></div>
       </div>
     </div>
 
     <div class="card">
       <div class="card-header">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        </div>
-        <div class="card-title">Limitation de responsabilité</div>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div class="card-title" data-i18n="t_limit_title">Limitation de responsabilité</div>
       </div>
       <div class="card-body">
-        <p>Pdfigo est fourni <strong>"tel quel"</strong>. Nous déclinons toute responsabilité pour :</p>
+        <p data-i18n="t_limit_desc">Pdfigo est fourni "tel quel". Nous déclinons toute responsabilité pour :</p>
         <ul class="check-list">
-          <li>La perte ou corruption de fichiers suite à une utilisation de l'application</li>
-          <li>Les résultats produits par les fonctionnalités d'intelligence artificielle</li>
-          <li>L'indisponibilité temporaire du service</li>
-          <li>Tout dommage indirect résultant de l'utilisation de l'application</li>
+          <li data-i18n="t_l1">La perte ou corruption de fichiers suite à une utilisation de l'application</li>
+          <li data-i18n="t_l2">Les résultats produits par les fonctionnalités d'intelligence artificielle</li>
+          <li data-i18n="t_l3">L'indisponibilité temporaire du service</li>
+          <li data-i18n="t_l4">Tout dommage indirect résultant de l'utilisation de l'application</li>
         </ul>
-        <p style="margin-top:12px">Nous vous recommandons de conserver des copies de sauvegarde de vos documents importants.</p>
       </div>
     </div>
 
     <div class="card">
       <div class="card-header">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
-        <div class="card-title">Modifications et résiliation</div>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="card-title" data-i18n="t_modif_title">Modifications</div>
       </div>
       <div class="card-body">
-        <p>Ces conditions peuvent être modifiées à tout moment. Les changements importants seront notifiés via l'application.</p>
-        <p>En cas de violation grave des présentes conditions, l'accès à l'application pourra être bloqué sans préavis.</p>
+        <p data-i18n="t_modif_desc">Ces conditions peuvent être modifiées à tout moment. Les changements importants seront notifiés via l'application.</p>
+        <p data-i18n="t_modif_block">En cas de violation grave des présentes conditions, l'accès à l'application pourra être bloqué sans préavis.</p>
       </div>
     </div>
 
     <div class="card">
       <div class="card-header">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        </div>
-        <div class="card-title">Droit applicable</div>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+        <div class="card-title" data-i18n="t_law_title">Droit applicable</div>
       </div>
       <div class="card-body">
-        <p>Les présentes conditions sont régies par le <strong>droit français</strong>. En cas de litige, les tribunaux français seront compétents.</p>
-        <p>Pour toute réclamation, contactez-nous à <strong>devbp2025@gmail.com</strong> avant toute procédure judiciaire.</p>
+        <p data-i18n="t_law_desc">Les présentes conditions sont régies par le <strong>droit français</strong>. En cas de litige, les tribunaux français seront compétents.</p>
+        <p data-i18n="t_law_contact">Pour toute réclamation, contactez-nous à <strong>devbp2025@gmail.com</strong></p>
       </div>
     </div>
+  </div>
 
-  </div><!-- /terms -->
-
-
-  <!-- ══════════════════════════════════════════
-       SECTION 3 : COOKIES
-  ══════════════════════════════════════════ -->
+  <!-- COOKIES -->
   <div class="section" id="cookies">
-
-    <div class="section-intro">
-      Pdfigo est une application mobile Android. Contrairement aux sites web, les applications mobiles n'utilisent <strong>pas de cookies</strong> au sens traditionnel du terme. Cette page explique les technologies similaires que nous utilisons.
-    </div>
+    <div class="section-intro" data-i18n="ck_intro">Pdfigo est une application mobile Android. Contrairement aux sites web, les applications mobiles n'utilisent <strong>pas de cookies</strong>. Cette page explique les technologies similaires que nous utilisons.</div>
 
     <div class="card">
       <div class="card-header">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-        </div>
-        <div class="card-title">Stockage local (équivalent cookies)</div>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+        <div class="card-title" data-i18n="ck_local_title">Stockage local</div>
       </div>
       <div class="card-body">
         <table class="data-table">
-          <thead>
-            <tr><th>Technologie</th><th>Données stockées</th><th>Durée</th><th>Suppression</th></tr>
-          </thead>
+          <thead><tr><th data-i18n="ck_tech">Technologie</th><th data-i18n="ck_data">Données</th><th data-i18n="ck_dur">Durée</th><th data-i18n="ck_del">Suppression</th></tr></thead>
           <tbody>
-            <tr>
-              <td><strong>SharedPreferences</strong></td>
-              <td>Préférences, favoris, compteur scans</td>
-              <td>Indéfinie</td>
-              <td>Désinstallation</td>
-            </tr>
-            <tr>
-              <td><strong>FlutterSecureStorage</strong></td>
-              <td>Code PIN chiffré</td>
-              <td>Indéfinie</td>
-              <td>Désinstallation</td>
-            </tr>
-            <tr>
-              <td><strong>Fichiers locaux</strong></td>
-              <td>Documents PDF traités</td>
-              <td>Jusqu'à suppression manuelle</td>
-              <td>Via "Mes Fichiers"</td>
-            </tr>
+            <tr><td><strong>SharedPreferences</strong></td><td data-i18n="ck_sp">Préférences, favoris</td><td data-i18n="ck_indef">Indéfinie</td><td data-i18n="ck_uninstall">Désinstallation</td></tr>
+            <tr><td><strong>FlutterSecureStorage</strong></td><td data-i18n="ck_fss">Code PIN chiffré</td><td data-i18n="ck_indef">Indéfinie</td><td data-i18n="ck_uninstall">Désinstallation</td></tr>
+            <tr><td><strong data-i18n="ck_files">Fichiers locaux</strong></td><td data-i18n="ck_pdf">Documents PDF</td><td data-i18n="ck_manual">Jusqu'à suppression manuelle</td><td data-i18n="ck_myfiles">Via Mes Fichiers</td></tr>
           </tbody>
         </table>
       </div>
@@ -743,41 +357,17 @@
 
     <div class="card">
       <div class="card-header">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        </div>
-        <div class="card-title">SDK tiers et identifiants</div>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="card-title" data-i18n="ck_sdk_title">SDK tiers</div>
       </div>
       <div class="card-body">
         <table class="data-table">
-          <thead>
-            <tr><th>Service</th><th>Finalité</th><th>Données</th><th>Opt-out</th></tr>
-          </thead>
+          <thead><tr><th data-i18n="ck_service">Service</th><th data-i18n="ck_purpose">Finalité</th><th data-i18n="ck_data2">Données</th><th>Opt-out</th></tr></thead>
           <tbody>
-            <tr>
-              <td><strong>RevenueCat</strong></td>
-              <td>Gestion abonnements</td>
-              <td>ID anonyme, statut achat</td>
-              <td><span class="tag tag-red">Non</span></td>
-            </tr>
-            <tr>
-              <td><strong>Google Play</strong></td>
-              <td>Distribution, paiements</td>
-              <td>Compte Google</td>
-              <td><span class="tag tag-red">Non</span></td>
-            </tr>
-            <tr>
-              <td><strong>Google MLKit</strong></td>
-              <td>OCR (traitement local)</td>
-              <td>Aucune donnée envoyée</td>
-              <td><span class="tag tag-green">N/A</span></td>
-            </tr>
-            <tr>
-              <td><strong>Supabase</strong></td>
-              <td>Traitement IA</td>
-              <td>Texte temporaire (non stocké)</td>
-              <td><span class="tag tag-blue">Opt-in</span></td>
-            </tr>
+            <tr><td><strong>RevenueCat</strong></td><td data-i18n="ck_rc">Abonnements</td><td data-i18n="ck_rc_d">ID anonyme</td><td><span class="tag tag-red">Non</span></td></tr>
+            <tr><td><strong>Google Play</strong></td><td data-i18n="ck_gp">Distribution</td><td data-i18n="ck_gp_d">Compte Google</td><td><span class="tag tag-red">Non</span></td></tr>
+            <tr><td><strong>Google MLKit</strong></td><td data-i18n="ck_ml">OCR local</td><td data-i18n="ck_ml_d">Aucune donnée</td><td><span class="tag tag-green">N/A</span></td></tr>
+            <tr><td><strong>Supabase</strong></td><td data-i18n="ck_sb">Traitement IA</td><td data-i18n="ck_sb_d">Texte temporaire</td><td><span class="tag tag-blue">Opt-in</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -785,51 +375,463 @@
 
     <div class="card">
       <div class="card-header">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <div class="card-title">Contrôle de vos données</div>
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="card-title" data-i18n="ck_ctrl_title">Contrôle de vos données</div>
       </div>
       <div class="card-body">
-        <p>Vous pouvez contrôler et supprimer les données stockées localement :</p>
         <ul class="check-list">
-          <li><strong>Préférences app</strong> : Paramètres Android → Applications → Pdfigo → Effacer les données</li>
-          <li><strong>Fichiers PDF</strong> : Depuis l'écran "Mes Fichiers" dans l'application</li>
-          <li><strong>Code PIN</strong> : Depuis les Paramètres de sécurité dans l'application</li>
-          <li><strong>Abonnement</strong> : Google Play → Abonnements → Pdfigo → Annuler</li>
-          <li><strong>Données RevenueCat</strong> : Contactez-nous à devbp2025@gmail.com</li>
+          <li><strong data-i18n="ck_c1k">Préférences</strong> — <span data-i18n="ck_c1">Paramètres Android → Applications → Pdfigo → Effacer les données</span></li>
+          <li><strong data-i18n="ck_c2k">Fichiers PDF</strong> — <span data-i18n="ck_c2">Depuis l'écran Mes Fichiers dans l'application</span></li>
+          <li><strong data-i18n="ck_c3k">Code PIN</strong> — <span data-i18n="ck_c3">Depuis les Paramètres de sécurité dans l'application</span></li>
+          <li><strong data-i18n="ck_c4k">Abonnement</strong> — <span data-i18n="ck_c4">Google Play → Abonnements → Pdfigo → Annuler</span></li>
+          <li><strong data-i18n="ck_c5k">Données RevenueCat</strong> — <span data-i18n="ck_c5">Contactez-nous à devbp2025@gmail.com</span></li>
         </ul>
       </div>
     </div>
 
     <div class="contact-card">
-      <h3>Questions sur nos pratiques ?</h3>
-      <p>Nous sommes transparents sur l'utilisation de vos données.</p>
-      <a href="mailto:devbp2025@gmail.com" class="contact-btn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
-        devbp2025@gmail.com
-      </a>
+      <h3 data-i18n="contact_title2">Questions sur nos pratiques ?</h3>
+      <p data-i18n="contact_sub2">Nous sommes transparents sur l'utilisation de vos données.</p>
+      <a href="mailto:devbp2025@gmail.com" class="contact-btn">✉️ devbp2025@gmail.com</a>
     </div>
-
-  </div><!-- /cookies -->
+  </div>
 
 </main>
 
-<!-- FOOTER -->
 <footer>
-  <p><strong>Pdfigo</strong> · France</p>
-  <p style="margin-top:6px">© 2026 Devbp. Tous droits réservés. · <a href="mailto:devbp2025@gmail.com" style="color:rgba(255,255,255,0.5)">devbp2025@gmail.com</a></p>
+  <p><strong>Pdfigo</strong> · Devbp · La Bouillie, France</p>
+  <p style="margin-top:6px">© 2026 Devbp. <span data-i18n="footer_rights">Tous droits réservés.</span> · <a href="mailto:devbp2025@gmail.com">devbp2025@gmail.com</a></p>
 </footer>
 
 <script>
-  function showTab(id, btn) {
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    btn.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+const T = {
+  fr: {
+    hero_title:"Documents légaux", hero_sub:"Politique de confidentialité · Conditions d'utilisation · Cookies", updated:"Dernière mise à jour : Avril 2026",
+    tab_privacy:"🔒 Confidentialité", tab_terms:"📋 Conditions", tab_cookies:"🍪 Cookies",
+    priv_intro:"Chez Pdfigo, votre vie privée est notre priorité. Pdfigo fonctionne principalement <strong>hors ligne</strong> — vos fichiers restent sur votre appareil.",
+    priv_data_title:"Données collectées", th_type:"Type", th_purpose:"Finalité", th_storage:"Stockage",
+    d1:"Fichiers PDF", d1p:"Traitement local uniquement", d1s:"Sur l'appareil",
+    d2:"Texte extrait (IA)", d2p:"Résumé, traduction, chat", d2s:"Supabase temporaire",
+    d3:"Photos (scanner)", d3p:"Conversion en PDF", d3s:"Sur l'appareil",
+    d4:"Données d'achat", d4p:"Gestion des abonnements", d4s:"Google Play / RevenueCat",
+    d5:"Identifiant anonyme", d5p:"Statistiques d'utilisation", d5s:"RevenueCat",
+    cam_title:"Utilisation de la caméra",
+    cam_desc:"Pdfigo utilise la caméra <strong>uniquement</strong> pour la fonctionnalité de scanner de documents.",
+    cam_c1:"Les photos sont traitées localement sur votre appareil",
+    cam_c2:"Aucune image n'est envoyée à des serveurs tiers",
+    cam_c3:"Aucune image n'est stockée sans votre accord",
+    cam_c4:"Vous pouvez refuser l'accès dans les paramètres Android",
+    ai_title:"Fonctionnalités IA",
+    ai_desc:"Lorsque vous utilisez les fonctionnalités IA, le texte extrait est envoyé de manière sécurisée (HTTPS) à nos serveurs.",
+    ai_note:"⚡ Le texte est transmis à <strong>Google Gemini</strong> ou <strong>Mistral AI</strong> via Supabase. Aucun contenu n'est stocké après traitement.",
+    ai_links:"En utilisant ces fonctionnalités, vous acceptez les politiques de ", and:"et",
+    pay_title:"Abonnements et paiements",
+    pay_desc:"Les paiements sont <strong>entièrement gérés par Google Play</strong>. Pdfigo n'a jamais accès à vos informations bancaires.",
+    pay_rc:"Nous utilisons ", pay_rc2:" pour gérer les statuts d'abonnement. Consultez la ", pay_rc3:"politique de RevenueCat",
+    pay_c1:"Essai gratuit de 14 jours pour les nouveaux utilisateurs",
+    pay_c2:"Renouvellement automatique — annulable à tout moment",
+    pay_c3:"Remboursement selon la politique Google Play",
+    rgpd_title:"Vos droits (RGPD)", rgpd_desc:"Conformément au RGPD, vous disposez des droits suivants :",
+    r1:"Droit d'accès", r1d:"obtenir une copie de vos données",
+    r2:"Droit de rectification", r2d:"corriger des données inexactes",
+    r3:"Droit à l'effacement", r3d:"demander la suppression de vos données",
+    r4:"Droit à la portabilité", r4d:"recevoir vos données dans un format lisible",
+    r5:"Droit d'opposition", r5d:"vous opposer au traitement de vos données",
+    rgpd_contact:"Pour exercer ces droits, contactez-nous à <strong>devbp2025@gmail.com</strong>",
+    sec_title:"Sécurité des données",
+    sec_c1:"Toutes les communications réseau utilisent le protocole HTTPS/TLS",
+    sec_c2:"Les fichiers PDF protégés utilisent le chiffrement AES-256",
+    sec_c3:"Les données sensibles (PIN) sont stockées dans le Android Keystore",
+    sec_c4:"Aucune donnée personnelle identifiable n'est collectée",
+    contact_title:"Une question sur vos données ?", contact_sub:"Notre équipe répond sous 48h ouvrables.",
+    terms_intro:"En téléchargeant et utilisant Pdfigo, vous acceptez les présentes conditions d'utilisation.",
+    t_service_title:"Description du service",
+    t_service_desc:"Pdfigo est une application mobile de gestion de documents PDF proposant des fonctionnalités d'édition, signature, compression, protection, OCR et intelligence artificielle.",
+    t_service_plans:"L'application est disponible en version <strong>gratuite</strong> (fonctionnalités limitées) et <strong>Premium</strong> (accès illimité via abonnement).",
+    t_use_title:"Utilisation acceptable", t_use_desc:"Vous vous engagez à utiliser Pdfigo uniquement pour des usages légaux. Il est strictement interdit de :",
+    t_u1:"Traiter des documents contenant des contenus illégaux",
+    t_u2:"Tenter de contourner les mesures de sécurité",
+    t_u3:"Utiliser l'application à des fins commerciales non autorisées",
+    t_u4:"Violer les droits d'auteur ou la propriété intellectuelle",
+    t_u5:"Utiliser les fonctionnalités IA pour générer des contenus malveillants",
+    t_price_title:"Abonnements et remboursements",
+    th_plan:"Plan", th_price:"Prix", th_trial:"Essai", th_cancel:"Résiliation",
+    plan_m:"Premium Mensuel", month:"mois", plan_y:"Premium Annuel", year:"an",
+    trial_14:"14 jours offerts", anytime:"À tout moment",
+    t_renew:"L'abonnement se renouvelle automatiquement sauf annulation au moins 24h avant.",
+    t_limit_title:"Limitation de responsabilité", t_limit_desc:"Pdfigo est fourni \"tel quel\". Nous déclinons toute responsabilité pour :",
+    t_l1:"La perte ou corruption de fichiers", t_l2:"Les résultats produits par l'IA",
+    t_l3:"L'indisponibilité temporaire du service", t_l4:"Tout dommage indirect",
+    t_modif_title:"Modifications",
+    t_modif_desc:"Ces conditions peuvent être modifiées à tout moment. Les changements importants seront notifiés via l'application.",
+    t_modif_block:"En cas de violation grave, l'accès pourra être bloqué sans préavis.",
+    t_law_title:"Droit applicable",
+    t_law_desc:"Les présentes conditions sont régies par le <strong>droit français</strong>. En cas de litige, les tribunaux français seront compétents.",
+    t_law_contact:"Pour toute réclamation, contactez-nous à <strong>devbp2025@gmail.com</strong>",
+    ck_intro:"Pdfigo est une application mobile Android. Contrairement aux sites web, les applications mobiles n'utilisent <strong>pas de cookies</strong>. Cette page explique les technologies similaires que nous utilisons.",
+    ck_local_title:"Stockage local", ck_tech:"Technologie", ck_data:"Données", ck_dur:"Durée", ck_del:"Suppression",
+    ck_sp:"Préférences, favoris", ck_indef:"Indéfinie", ck_uninstall:"Désinstallation",
+    ck_fss:"Code PIN chiffré", ck_files:"Fichiers locaux", ck_pdf:"Documents PDF",
+    ck_manual:"Jusqu'à suppression manuelle", ck_myfiles:"Via Mes Fichiers",
+    ck_sdk_title:"SDK tiers", ck_service:"Service", ck_purpose:"Finalité", ck_data2:"Données",
+    ck_rc:"Abonnements", ck_rc_d:"ID anonyme", ck_gp:"Distribution", ck_gp_d:"Compte Google",
+    ck_ml:"OCR local", ck_ml_d:"Aucune donnée", ck_sb:"Traitement IA", ck_sb_d:"Texte temporaire",
+    ck_ctrl_title:"Contrôle de vos données",
+    ck_c1k:"Préférences", ck_c1:"Paramètres Android → Applications → Pdfigo → Effacer les données",
+    ck_c2k:"Fichiers PDF", ck_c2:"Depuis l'écran Mes Fichiers dans l'application",
+    ck_c3k:"Code PIN", ck_c3:"Depuis les Paramètres de sécurité dans l'application",
+    ck_c4k:"Abonnement", ck_c4:"Google Play → Abonnements → Pdfigo → Annuler",
+    ck_c5k:"Données RevenueCat", ck_c5:"Contactez-nous à devbp2025@gmail.com",
+    contact_title2:"Questions sur nos pratiques ?", contact_sub2:"Nous sommes transparents sur l'utilisation de vos données.",
+    footer_rights:"Tous droits réservés.",
+  },
+  en: {
+    hero_title:"Legal Documents", hero_sub:"Privacy Policy · Terms of Use · Cookies", updated:"Last updated: April 2026",
+    tab_privacy:"🔒 Privacy", tab_terms:"📋 Terms", tab_cookies:"🍪 Cookies",
+    priv_intro:"At Pdfigo, your privacy is our priority. Pdfigo works primarily <strong>offline</strong> — your files stay on your device.",
+    priv_data_title:"Data Collected", th_type:"Type", th_purpose:"Purpose", th_storage:"Storage",
+    d1:"PDF Files", d1p:"Local processing only", d1s:"On device",
+    d2:"Extracted text (AI)", d2p:"Summary, translation, chat", d2s:"Supabase temporary",
+    d3:"Photos (scanner)", d3p:"PDF conversion", d3s:"On device",
+    d4:"Purchase data", d4p:"Subscription management", d4s:"Google Play / RevenueCat",
+    d5:"Anonymous ID", d5p:"Usage statistics", d5s:"RevenueCat",
+    cam_title:"Camera Usage",
+    cam_desc:"Pdfigo uses the camera <strong>only</strong> for the document scanner feature.",
+    cam_c1:"Photos are processed locally on your device",
+    cam_c2:"No images are sent to third-party servers",
+    cam_c3:"No images are stored without your consent",
+    cam_c4:"You can deny camera access in Android settings",
+    ai_title:"AI Features",
+    ai_desc:"When using AI features, extracted text is securely sent (HTTPS) to our servers.",
+    ai_note:"⚡ Text is transmitted to <strong>Google Gemini</strong> or <strong>Mistral AI</strong> via Supabase. No content is stored after processing.",
+    ai_links:"By using these features, you accept the privacy policies of ", and:"and",
+    pay_title:"Subscriptions & Payments",
+    pay_desc:"Payments are <strong>entirely managed by Google Play</strong>. Pdfigo never accesses your banking information.",
+    pay_rc:"We use ", pay_rc2:" to manage subscription status. See ", pay_rc3:"RevenueCat's privacy policy",
+    pay_c1:"14-day free trial for new users",
+    pay_c2:"Auto-renewal — cancellable at any time",
+    pay_c3:"Refunds subject to Google Play policy",
+    rgpd_title:"Your Rights (GDPR)", rgpd_desc:"Under GDPR, you have the following rights:",
+    r1:"Right of access", r1d:"obtain a copy of your data",
+    r2:"Right to rectification", r2d:"correct inaccurate data",
+    r3:"Right to erasure", r3d:"request deletion of your data",
+    r4:"Right to portability", r4d:"receive your data in a readable format",
+    r5:"Right to object", r5d:"object to the processing of your data",
+    rgpd_contact:"To exercise these rights, contact us at <strong>devbp2025@gmail.com</strong>",
+    sec_title:"Data Security",
+    sec_c1:"All network communications use HTTPS/TLS",
+    sec_c2:"Protected PDFs use AES-256 encryption",
+    sec_c3:"Sensitive data (PIN) stored in Android Keystore",
+    sec_c4:"No personally identifiable data is collected",
+    contact_title:"Questions about your data?", contact_sub:"Our team responds within 48 business hours.",
+    terms_intro:"By downloading and using Pdfigo, you agree to these terms of use.",
+    t_service_title:"Service Description",
+    t_service_desc:"Pdfigo is a mobile PDF management app offering editing, signing, compression, protection, OCR and AI features.",
+    t_service_plans:"The app is available in <strong>free</strong> (limited features) and <strong>Premium</strong> (unlimited access via subscription) versions.",
+    t_use_title:"Acceptable Use", t_use_desc:"You agree to use Pdfigo only for legal purposes. It is strictly prohibited to:",
+    t_u1:"Process documents containing illegal content",
+    t_u2:"Attempt to bypass security measures",
+    t_u3:"Use the app for unauthorized commercial purposes",
+    t_u4:"Violate copyright or intellectual property",
+    t_u5:"Use AI features to generate malicious content",
+    t_price_title:"Subscriptions & Refunds",
+    th_plan:"Plan", th_price:"Price", th_trial:"Trial", th_cancel:"Cancellation",
+    plan_m:"Monthly Premium", month:"month", plan_y:"Yearly Premium", year:"year",
+    trial_14:"14 days free", anytime:"Anytime",
+    t_renew:"Subscription auto-renews unless cancelled at least 24h before renewal date.",
+    t_limit_title:"Limitation of Liability", t_limit_desc:"Pdfigo is provided \"as is\". We disclaim liability for:",
+    t_l1:"Loss or corruption of files", t_l2:"Results produced by AI features",
+    t_l3:"Temporary service unavailability", t_l4:"Any indirect damage",
+    t_modif_title:"Modifications",
+    t_modif_desc:"These terms may be modified at any time. Important changes will be notified via the app.",
+    t_modif_block:"In case of serious violation, access to the app may be blocked without notice.",
+    t_law_title:"Applicable Law",
+    t_law_desc:"These terms are governed by <strong>French law</strong>. French courts shall have jurisdiction.",
+    t_law_contact:"For any complaint, contact us at <strong>devbp2025@gmail.com</strong>",
+    ck_intro:"Pdfigo is an Android mobile app. Unlike websites, mobile apps do <strong>not use cookies</strong>. This page explains similar technologies we use.",
+    ck_local_title:"Local Storage", ck_tech:"Technology", ck_data:"Data", ck_dur:"Duration", ck_del:"Deletion",
+    ck_sp:"Preferences, favorites", ck_indef:"Indefinite", ck_uninstall:"Uninstall",
+    ck_fss:"Encrypted PIN", ck_files:"Local files", ck_pdf:"PDF documents",
+    ck_manual:"Until manual deletion", ck_myfiles:"Via My Files",
+    ck_sdk_title:"Third-party SDKs", ck_service:"Service", ck_purpose:"Purpose", ck_data2:"Data",
+    ck_rc:"Subscriptions", ck_rc_d:"Anonymous ID", ck_gp:"Distribution", ck_gp_d:"Google account",
+    ck_ml:"Local OCR", ck_ml_d:"No data", ck_sb:"AI processing", ck_sb_d:"Temporary text",
+    ck_ctrl_title:"Control Your Data",
+    ck_c1k:"Preferences", ck_c1:"Android Settings → Apps → Pdfigo → Clear data",
+    ck_c2k:"PDF Files", ck_c2:"From the My Files screen in the app",
+    ck_c3k:"PIN Code", ck_c3:"From Security Settings in the app",
+    ck_c4k:"Subscription", ck_c4:"Google Play → Subscriptions → Pdfigo → Cancel",
+    ck_c5k:"RevenueCat data", ck_c5:"Contact us at devbp2025@gmail.com",
+    contact_title2:"Questions about our practices?", contact_sub2:"We are transparent about how we use your data.",
+    footer_rights:"All rights reserved.",
+  },
+  es: {
+    hero_title:"Documentos legales", hero_sub:"Política de privacidad · Términos de uso · Cookies", updated:"Última actualización: Abril 2026",
+    tab_privacy:"🔒 Privacidad", tab_terms:"📋 Términos", tab_cookies:"🍪 Cookies",
+    priv_intro:"En Pdfigo, su privacidad es nuestra prioridad. Pdfigo funciona principalmente <strong>sin conexión</strong> — sus archivos permanecen en su dispositivo.",
+    priv_data_title:"Datos recopilados", th_type:"Tipo", th_purpose:"Finalidad", th_storage:"Almacenamiento",
+    d1:"Archivos PDF", d1p:"Procesamiento local únicamente", d1s:"En el dispositivo",
+    d2:"Texto extraído (IA)", d2p:"Resumen, traducción, chat", d2s:"Supabase temporal",
+    d3:"Fotos (escáner)", d3p:"Conversión a PDF", d3s:"En el dispositivo",
+    d4:"Datos de compra", d4p:"Gestión de suscripciones", d4s:"Google Play / RevenueCat",
+    d5:"ID anónimo", d5p:"Estadísticas de uso", d5s:"RevenueCat",
+    cam_title:"Uso de la cámara",
+    cam_desc:"Pdfigo usa la cámara <strong>únicamente</strong> para la función de escáner de documentos.",
+    cam_c1:"Las fotos se procesan localmente en su dispositivo",
+    cam_c2:"Ninguna imagen se envía a servidores de terceros",
+    cam_c3:"Ninguna imagen se almacena sin su consentimiento",
+    cam_c4:"Puede denegar el acceso a la cámara en Ajustes Android",
+    ai_title:"Funcionalidades de IA",
+    ai_desc:"Al usar las funciones de IA, el texto extraído se envía de forma segura (HTTPS) a nuestros servidores.",
+    ai_note:"⚡ El texto se transmite a <strong>Google Gemini</strong> o <strong>Mistral AI</strong> vía Supabase. Ningún contenido se almacena tras el procesamiento.",
+    ai_links:"Al usar estas funciones, acepta las políticas de ", and:"y",
+    pay_title:"Suscripciones y pagos",
+    pay_desc:"Los pagos son <strong>gestionados íntegramente por Google Play</strong>. Pdfigo nunca accede a su información bancaria.",
+    pay_rc:"Usamos ", pay_rc2:" para gestionar el estado de la suscripción. Consulte la ", pay_rc3:"política de RevenueCat",
+    pay_c1:"Prueba gratuita de 14 días para nuevos usuarios",
+    pay_c2:"Renovación automática — cancelable en cualquier momento",
+    pay_c3:"Reembolsos sujetos a la política de Google Play",
+    rgpd_title:"Sus derechos (RGPD)", rgpd_desc:"Bajo el RGPD, tiene los siguientes derechos:",
+    r1:"Derecho de acceso", r1d:"obtener una copia de sus datos",
+    r2:"Derecho de rectificación", r2d:"corregir datos inexactos",
+    r3:"Derecho de supresión", r3d:"solicitar la eliminación de sus datos",
+    r4:"Derecho a la portabilidad", r4d:"recibir sus datos en formato legible",
+    r5:"Derecho de oposición", r5d:"oponerse al tratamiento de sus datos",
+    rgpd_contact:"Para ejercer estos derechos, contáctenos en <strong>devbp2025@gmail.com</strong>",
+    sec_title:"Seguridad de datos",
+    sec_c1:"Todas las comunicaciones usan HTTPS/TLS",
+    sec_c2:"Los PDF protegidos usan cifrado AES-256",
+    sec_c3:"Datos sensibles (PIN) almacenados en Android Keystore",
+    sec_c4:"No se recopilan datos personales identificables",
+    contact_title:"¿Preguntas sobre sus datos?", contact_sub:"Nuestro equipo responde en 48h hábiles.",
+    terms_intro:"Al descargar y usar Pdfigo, acepta estos términos de uso.",
+    t_service_title:"Descripción del servicio",
+    t_service_desc:"Pdfigo es una app móvil de gestión de PDF con edición, firma, compresión, protección, OCR e IA.",
+    t_service_plans:"La app está disponible en versión <strong>gratuita</strong> (funciones limitadas) y <strong>Premium</strong> (acceso ilimitado).",
+    t_use_title:"Uso aceptable", t_use_desc:"Se compromete a usar Pdfigo solo para fines legales. Está estrictamente prohibido:",
+    t_u1:"Procesar documentos con contenido ilegal",
+    t_u2:"Intentar eludir las medidas de seguridad",
+    t_u3:"Usar la app para fines comerciales no autorizados",
+    t_u4:"Violar derechos de autor o propiedad intelectual",
+    t_u5:"Usar IA para generar contenido malicioso",
+    t_price_title:"Suscripciones y reembolsos",
+    th_plan:"Plan", th_price:"Precio", th_trial:"Prueba", th_cancel:"Cancelación",
+    plan_m:"Premium Mensual", month:"mes", plan_y:"Premium Anual", year:"año",
+    trial_14:"14 días gratis", anytime:"En cualquier momento",
+    t_renew:"La suscripción se renueva automáticamente salvo cancelación 24h antes.",
+    t_limit_title:"Limitación de responsabilidad", t_limit_desc:"Pdfigo se proporciona \"tal cual\". Declinamos responsabilidad por:",
+    t_l1:"Pérdida o corrupción de archivos", t_l2:"Resultados de funciones de IA",
+    t_l3:"Indisponibilidad temporal del servicio", t_l4:"Cualquier daño indirecto",
+    t_modif_title:"Modificaciones",
+    t_modif_desc:"Estos términos pueden modificarse en cualquier momento. Los cambios importantes se notificarán en la app.",
+    t_modif_block:"En caso de violación grave, el acceso podrá ser bloqueado sin previo aviso.",
+    t_law_title:"Ley aplicable",
+    t_law_desc:"Estos términos se rigen por la <strong>ley francesa</strong>. Los tribunales franceses serán competentes.",
+    t_law_contact:"Para cualquier reclamación, contáctenos en <strong>devbp2025@gmail.com</strong>",
+    ck_intro:"Pdfigo es una app Android. A diferencia de los sitios web, las apps móviles <strong>no usan cookies</strong>. Esta página explica tecnologías similares.",
+    ck_local_title:"Almacenamiento local", ck_tech:"Tecnología", ck_data:"Datos", ck_dur:"Duración", ck_del:"Eliminación",
+    ck_sp:"Preferencias, favoritos", ck_indef:"Indefinida", ck_uninstall:"Desinstalación",
+    ck_fss:"PIN cifrado", ck_files:"Archivos locales", ck_pdf:"Documentos PDF",
+    ck_manual:"Hasta eliminación manual", ck_myfiles:"Vía Mis Archivos",
+    ck_sdk_title:"SDKs de terceros", ck_service:"Servicio", ck_purpose:"Finalidad", ck_data2:"Datos",
+    ck_rc:"Suscripciones", ck_rc_d:"ID anónimo", ck_gp:"Distribución", ck_gp_d:"Cuenta Google",
+    ck_ml:"OCR local", ck_ml_d:"Sin datos", ck_sb:"Procesamiento IA", ck_sb_d:"Texto temporal",
+    ck_ctrl_title:"Control de sus datos",
+    ck_c1k:"Preferencias", ck_c1:"Ajustes Android → Aplicaciones → Pdfigo → Borrar datos",
+    ck_c2k:"Archivos PDF", ck_c2:"Desde la pantalla Mis Archivos en la app",
+    ck_c3k:"Código PIN", ck_c3:"Desde Ajustes de seguridad en la app",
+    ck_c4k:"Suscripción", ck_c4:"Google Play → Suscripciones → Pdfigo → Cancelar",
+    ck_c5k:"Datos RevenueCat", ck_c5:"Contáctenos en devbp2025@gmail.com",
+    contact_title2:"¿Preguntas sobre nuestras prácticas?", contact_sub2:"Somos transparentes sobre el uso de sus datos.",
+    footer_rights:"Todos los derechos reservados.",
+  },
+  pt: {
+    hero_title:"Documentos legais", hero_sub:"Política de privacidade · Termos de uso · Cookies", updated:"Última atualização: Abril 2026",
+    tab_privacy:"🔒 Privacidade", tab_terms:"📋 Termos", tab_cookies:"🍪 Cookies",
+    priv_intro:"Na Pdfigo, sua privacidade é nossa prioridade. Pdfigo funciona principalmente <strong>offline</strong> — seus arquivos permanecem no seu dispositivo.",
+    priv_data_title:"Dados coletados", th_type:"Tipo", th_purpose:"Finalidade", th_storage:"Armazenamento",
+    d1:"Arquivos PDF", d1p:"Processamento local apenas", d1s:"No dispositivo",
+    d2:"Texto extraído (IA)", d2p:"Resumo, tradução, chat", d2s:"Supabase temporário",
+    d3:"Fotos (scanner)", d3p:"Conversão para PDF", d3s:"No dispositivo",
+    d4:"Dados de compra", d4p:"Gestão de assinaturas", d4s:"Google Play / RevenueCat",
+    d5:"ID anônimo", d5p:"Estatísticas de uso", d5s:"RevenueCat",
+    cam_title:"Uso da câmera",
+    cam_desc:"Pdfigo usa a câmera <strong>somente</strong> para o recurso de scanner de documentos.",
+    cam_c1:"As fotos são processadas localmente no seu dispositivo",
+    cam_c2:"Nenhuma imagem é enviada a servidores de terceiros",
+    cam_c3:"Nenhuma imagem é armazenada sem seu consentimento",
+    cam_c4:"Você pode negar acesso à câmera nas configurações Android",
+    ai_title:"Funcionalidades de IA",
+    ai_desc:"Ao usar as funções de IA, o texto extraído é enviado com segurança (HTTPS) aos nossos servidores.",
+    ai_note:"⚡ O texto é transmitido ao <strong>Google Gemini</strong> ou <strong>Mistral AI</strong> via Supabase. Nenhum conteúdo é armazenado após o processamento.",
+    ai_links:"Ao usar esses recursos, você aceita as políticas de ", and:"e",
+    pay_title:"Assinaturas e pagamentos",
+    pay_desc:"Os pagamentos são <strong>totalmente gerenciados pelo Google Play</strong>. Pdfigo nunca acessa suas informações bancárias.",
+    pay_rc:"Usamos ", pay_rc2:" para gerenciar o status da assinatura. Consulte a ", pay_rc3:"política do RevenueCat",
+    pay_c1:"Período de teste gratuito de 14 dias para novos usuários",
+    pay_c2:"Renovação automática — cancelável a qualquer momento",
+    pay_c3:"Reembolsos sujeitos à política do Google Play",
+    rgpd_title:"Seus direitos (LGPD/RGPD)", rgpd_desc:"Você tem os seguintes direitos:",
+    r1:"Direito de acesso", r1d:"obter uma cópia dos seus dados",
+    r2:"Direito de retificação", r2d:"corrigir dados imprecisos",
+    r3:"Direito de exclusão", r3d:"solicitar a exclusão dos seus dados",
+    r4:"Direito de portabilidade", r4d:"receber seus dados em formato legível",
+    r5:"Direito de oposição", r5d:"se opor ao tratamento dos seus dados",
+    rgpd_contact:"Para exercer esses direitos, entre em contato: <strong>devbp2025@gmail.com</strong>",
+    sec_title:"Segurança dos dados",
+    sec_c1:"Todas as comunicações usam HTTPS/TLS",
+    sec_c2:"PDFs protegidos usam criptografia AES-256",
+    sec_c3:"Dados sensíveis (PIN) armazenados no Android Keystore",
+    sec_c4:"Nenhum dado pessoal identificável é coletado",
+    contact_title:"Dúvidas sobre seus dados?", contact_sub:"Nossa equipe responde em 48h úteis.",
+    terms_intro:"Ao baixar e usar o Pdfigo, você concorda com estes termos de uso.",
+    t_service_title:"Descrição do serviço",
+    t_service_desc:"Pdfigo é um app móvel de gerenciamento de PDF com edição, assinatura, compressão, proteção, OCR e IA.",
+    t_service_plans:"O app está disponível na versão <strong>gratuita</strong> (recursos limitados) e <strong>Premium</strong> (acesso ilimitado).",
+    t_use_title:"Uso aceitável", t_use_desc:"Você concorda em usar o Pdfigo apenas para fins legais. É estritamente proibido:",
+    t_u1:"Processar documentos com conteúdo ilegal",
+    t_u2:"Tentar contornar medidas de segurança",
+    t_u3:"Usar o app para fins comerciais não autorizados",
+    t_u4:"Violar direitos autorais ou propriedade intelectual",
+    t_u5:"Usar IA para gerar conteúdo malicioso",
+    t_price_title:"Assinaturas e reembolsos",
+    th_plan:"Plano", th_price:"Preço", th_trial:"Teste", th_cancel:"Cancelamento",
+    plan_m:"Premium Mensal", month:"mês", plan_y:"Premium Anual", year:"ano",
+    trial_14:"14 dias grátis", anytime:"A qualquer momento",
+    t_renew:"A assinatura é renovada automaticamente salvo cancelamento 24h antes.",
+    t_limit_title:"Limitação de responsabilidade", t_limit_desc:"Pdfigo é fornecido \"como está\". Declinamos responsabilidade por:",
+    t_l1:"Perda ou corrupção de arquivos", t_l2:"Resultados das funções de IA",
+    t_l3:"Indisponibilidade temporária do serviço", t_l4:"Qualquer dano indireto",
+    t_modif_title:"Modificações",
+    t_modif_desc:"Estes termos podem ser modificados a qualquer momento. Mudanças importantes serão notificadas no app.",
+    t_modif_block:"Em caso de violação grave, o acesso poderá ser bloqueado sem aviso prévio.",
+    t_law_title:"Lei aplicável",
+    t_law_desc:"Estes termos são regidos pela <strong>lei francesa</strong>. Os tribunais franceses serão competentes.",
+    t_law_contact:"Para qualquer reclamação, entre em contato: <strong>devbp2025@gmail.com</strong>",
+    ck_intro:"Pdfigo é um app Android. Ao contrário de sites, apps móveis <strong>não usam cookies</strong>. Esta página explica tecnologias similares.",
+    ck_local_title:"Armazenamento local", ck_tech:"Tecnologia", ck_data:"Dados", ck_dur:"Duração", ck_del:"Exclusão",
+    ck_sp:"Preferências, favoritos", ck_indef:"Indefinida", ck_uninstall:"Desinstalação",
+    ck_fss:"PIN criptografado", ck_files:"Arquivos locais", ck_pdf:"Documentos PDF",
+    ck_manual:"Até exclusão manual", ck_myfiles:"Via Meus Arquivos",
+    ck_sdk_title:"SDKs de terceiros", ck_service:"Serviço", ck_purpose:"Finalidade", ck_data2:"Dados",
+    ck_rc:"Assinaturas", ck_rc_d:"ID anônimo", ck_gp:"Distribuição", ck_gp_d:"Conta Google",
+    ck_ml:"OCR local", ck_ml_d:"Sem dados", ck_sb:"Processamento IA", ck_sb_d:"Texto temporário",
+    ck_ctrl_title:"Controle seus dados",
+    ck_c1k:"Preferências", ck_c1:"Configurações Android → Apps → Pdfigo → Limpar dados",
+    ck_c2k:"Arquivos PDF", ck_c2:"Na tela Meus Arquivos no app",
+    ck_c3k:"Código PIN", ck_c3:"Em Configurações de segurança no app",
+    ck_c4k:"Assinatura", ck_c4:"Google Play → Assinaturas → Pdfigo → Cancelar",
+    ck_c5k:"Dados RevenueCat", ck_c5:"Entre em contato: devbp2025@gmail.com",
+    contact_title2:"Dúvidas sobre nossas práticas?", contact_sub2:"Somos transparentes sobre o uso dos seus dados.",
+    footer_rights:"Todos os direitos reservados.",
+  },
+  ar: {
+    hero_title:"الوثائق القانونية", hero_sub:"سياسة الخصوصية · شروط الاستخدام · ملفات تعريف الارتباط", updated:"آخر تحديث: أبريل 2026",
+    tab_privacy:"🔒 الخصوصية", tab_terms:"📋 الشروط", tab_cookies:"🍪 الكوكيز",
+    priv_intro:"في Pdfigo، خصوصيتك هي أولويتنا. يعمل Pdfigo بشكل رئيسي <strong>دون اتصال</strong> — تبقى ملفاتك على جهازك.",
+    priv_data_title:"البيانات المجمعة", th_type:"النوع", th_purpose:"الغرض", th_storage:"التخزين",
+    d1:"ملفات PDF", d1p:"معالجة محلية فقط", d1s:"على الجهاز",
+    d2:"النص المستخرج (ذكاء اصطناعي)", d2p:"ملخص، ترجمة، دردشة", d2s:"Supabase مؤقت",
+    d3:"الصور (الماسح)", d3p:"التحويل إلى PDF", d3s:"على الجهاز",
+    d4:"بيانات الشراء", d4p:"إدارة الاشتراكات", d4s:"Google Play / RevenueCat",
+    d5:"معرف مجهول", d5p:"إحصاءات الاستخدام", d5s:"RevenueCat",
+    cam_title:"استخدام الكاميرا",
+    cam_desc:"يستخدم Pdfigo الكاميرا <strong>فقط</strong> لميزة مسح المستندات.",
+    cam_c1:"تتم معالجة الصور محلياً على جهازك",
+    cam_c2:"لا يتم إرسال أي صور إلى خوادم خارجية",
+    cam_c3:"لا تُخزن أي صور دون موافقتك",
+    cam_c4:"يمكنك رفض الوصول للكاميرا في إعدادات Android",
+    ai_title:"ميزات الذكاء الاصطناعي",
+    ai_desc:"عند استخدام ميزات الذكاء الاصطناعي، يتم إرسال النص المستخرج بأمان (HTTPS) إلى خوادمنا.",
+    ai_note:"⚡ يُنقل النص إلى <strong>Google Gemini</strong> أو <strong>Mistral AI</strong> عبر Supabase. لا يُخزن أي محتوى بعد المعالجة.",
+    ai_links:"باستخدام هذه الميزات، تقبل سياسات خصوصية ", and:"و",
+    pay_title:"الاشتراكات والمدفوعات",
+    pay_desc:"تُدار المدفوعات <strong>بالكامل من قبل Google Play</strong>. لا يصل Pdfigo إلى معلوماتك المصرفية.",
+    pay_rc:"نستخدم ", pay_rc2:" لإدارة حالة الاشتراك. راجع ", pay_rc3:"سياسة RevenueCat",
+    pay_c1:"فترة تجريبية مجانية لمدة 14 يوماً للمستخدمين الجدد",
+    pay_c2:"تجديد تلقائي — قابل للإلغاء في أي وقت",
+    pay_c3:"المبالغ المستردة وفقاً لسياسة Google Play",
+    rgpd_title:"حقوقك (RGPD)", rgpd_desc:"وفقاً للائحة RGPD، لديك الحقوق التالية:",
+    r1:"حق الوصول", r1d:"الحصول على نسخة من بياناتك",
+    r2:"حق التصحيح", r2d:"تصحيح البيانات غير الدقيقة",
+    r3:"حق المحو", r3d:"طلب حذف بياناتك",
+    r4:"حق نقل البيانات", r4d:"استلام بياناتك بتنسيق قابل للقراءة",
+    r5:"حق الاعتراض", r5d:"الاعتراض على معالجة بياناتك",
+    rgpd_contact:"لممارسة هذه الحقوق، تواصل معنا على <strong>devbp2025@gmail.com</strong>",
+    sec_title:"أمان البيانات",
+    sec_c1:"جميع الاتصالات تستخدم HTTPS/TLS",
+    sec_c2:"ملفات PDF المحمية تستخدم تشفير AES-256",
+    sec_c3:"البيانات الحساسة (PIN) مخزنة في Android Keystore",
+    sec_c4:"لا يتم جمع بيانات شخصية قابلة للتعريف",
+    contact_title:"أسئلة حول بياناتك؟", contact_sub:"يرد فريقنا خلال 48 ساعة عمل.",
+    terms_intro:"بتنزيل واستخدام Pdfigo، فإنك توافق على هذه الشروط.",
+    t_service_title:"وصف الخدمة",
+    t_service_desc:"Pdfigo تطبيق جوال لإدارة ملفات PDF مع ميزات التحرير والتوقيع والضغط والحماية وOCR والذكاء الاصطناعي.",
+    t_service_plans:"التطبيق متاح بنسخة <strong>مجانية</strong> (ميزات محدودة) و<strong>Premium</strong> (وصول غير محدود).",
+    t_use_title:"الاستخدام المقبول", t_use_desc:"تلتزم باستخدام Pdfigo للأغراض القانونية فقط. يُحظر تماماً:",
+    t_u1:"معالجة مستندات تحتوي على محتوى غير قانوني",
+    t_u2:"محاولة تجاوز إجراءات الأمان",
+    t_u3:"استخدام التطبيق لأغراض تجارية غير مصرح بها",
+    t_u4:"انتهاك حقوق النشر أو الملكية الفكرية",
+    t_u5:"استخدام ميزات الذكاء الاصطناعي لإنشاء محتوى ضار",
+    t_price_title:"الاشتراكات والمبالغ المستردة",
+    th_plan:"الخطة", th_price:"السعر", th_trial:"تجريبي", th_cancel:"الإلغاء",
+    plan_m:"Premium شهري", month:"شهر", plan_y:"Premium سنوي", year:"سنة",
+    trial_14:"14 يوماً مجاناً", anytime:"في أي وقت",
+    t_renew:"يتجدد الاشتراك تلقائياً ما لم يتم الإلغاء قبل 24 ساعة.",
+    t_limit_title:"تحديد المسؤولية", t_limit_desc:"يُقدَّم Pdfigo \"كما هو\". نرفض المسؤولية عن:",
+    t_l1:"فقدان أو تلف الملفات", t_l2:"نتائج ميزات الذكاء الاصطناعي",
+    t_l3:"توقف الخدمة المؤقت", t_l4:"أي ضرر غير مباشر",
+    t_modif_title:"التعديلات",
+    t_modif_desc:"يمكن تعديل هذه الشروط في أي وقت. سيتم إخطارك بالتغييرات المهمة عبر التطبيق.",
+    t_modif_block:"في حالة الانتهاك الجسيم، يمكن حظر الوصول دون إشعار مسبق.",
+    t_law_title:"القانون المطبق",
+    t_law_desc:"تخضع هذه الشروط <strong>للقانون الفرنسي</strong>. تختص المحاكم الفرنسية.",
+    t_law_contact:"لأي شكوى، تواصل معنا على <strong>devbp2025@gmail.com</strong>",
+    ck_intro:"Pdfigo تطبيق Android. على عكس المواقع الإلكترونية، لا تستخدم التطبيقات المحمولة <strong>ملفات تعريف الارتباط</strong>. تشرح هذه الصفحة التقنيات المماثلة.",
+    ck_local_title:"التخزين المحلي", ck_tech:"التقنية", ck_data:"البيانات", ck_dur:"المدة", ck_del:"الحذف",
+    ck_sp:"التفضيلات، المفضلة", ck_indef:"غير محددة", ck_uninstall:"إلغاء التثبيت",
+    ck_fss:"PIN مشفر", ck_files:"الملفات المحلية", ck_pdf:"مستندات PDF",
+    ck_manual:"حتى الحذف اليدوي", ck_myfiles:"عبر ملفاتي",
+    ck_sdk_title:"SDKs الخارجية", ck_service:"الخدمة", ck_purpose:"الغرض", ck_data2:"البيانات",
+    ck_rc:"الاشتراكات", ck_rc_d:"معرف مجهول", ck_gp:"التوزيع", ck_gp_d:"حساب Google",
+    ck_ml:"OCR محلي", ck_ml_d:"لا بيانات", ck_sb:"معالجة ذكاء اصطناعي", ck_sb_d:"نص مؤقت",
+    ck_ctrl_title:"التحكم في بياناتك",
+    ck_c1k:"التفضيلات", ck_c1:"إعدادات Android ← التطبيقات ← Pdfigo ← مسح البيانات",
+    ck_c2k:"ملفات PDF", ck_c2:"من شاشة ملفاتي في التطبيق",
+    ck_c3k:"رمز PIN", ck_c3:"من إعدادات الأمان في التطبيق",
+    ck_c4k:"الاشتراك", ck_c4:"Google Play ← الاشتراكات ← Pdfigo ← إلغاء",
+    ck_c5k:"بيانات RevenueCat", ck_c5:"تواصل معنا: devbp2025@gmail.com",
+    contact_title2:"أسئلة حول ممارساتنا؟", contact_sub2:"نحن شفافون بشأن استخدام بياناتك.",
+    footer_rights:"جميع الحقوق محفوظة.",
   }
-</script>
+};
 
+let lang = localStorage.getItem('lang') || 'fr';
+
+function setLang(l) {
+  lang = l;
+  localStorage.setItem('lang', l);
+  document.documentElement.lang = l;
+  document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
+  const t = T[l] || T.fr;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (t[k] !== undefined) el.innerHTML = t[k];
+  });
+  document.querySelector('.lang-select').value = l;
+}
+
+function showTab(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.querySelector('.lang-select').value = lang;
+setLang(lang);
+</script>
 </body>
 </html>
