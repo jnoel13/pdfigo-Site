@@ -241,55 +241,75 @@
 
     <div class="contact-card">
   <h3 data-i18n="rgpd_form_title">Exercer vos droits RGPD</h3>
-  <p data-i18n="rgpd_form_sub">Remplissez ce formulaire, nous répondons sous 48h ouvrables.</p>
+  <p data-i18n="rgpd_form_sub">Remplissez ce formulaire — nous répondons sous 48h ouvrables.</p>
   
-  <div id="form-success" style="display:none; background:rgba(255,255,255,0.2); border-radius:12px; padding:20px; margin-top:16px;">
-    <p style="color:white; font-weight:600; font-size:15px;">✅ <span data-i18n="form_sent">Demande envoyée ! Nous vous répondons sous 48h.</span></p>
-  </div>
+  <button onclick="document.getElementById('rgpd-modal').style.display='flex'"
+    style="display:inline-flex; align-items:center; gap:8px; background:white; color:#2563EB; font-family:'DM Sans',sans-serif; font-weight:700; font-size:15px; padding:14px 28px; border-radius:10px; border:none; cursor:pointer; margin-top:8px; transition:transform 0.2s;"
+    data-i18n="form_open_btn">📋 Faire une demande RGPD</button>
+</div>
 
-  <form id="rgpd-form" action="https://formspree.io/f/xqewgznb" method="POST"
-    style="background:rgba(255,255,255,0.1); border-radius:12px; padding:24px; margin-top:16px; text-align:left;">
+<!-- MODAL -->
+<div id="rgpd-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(4px);">
+  <div style="background:white; border-radius:20px; padding:32px; width:100%; max-width:480px; position:relative; max-height:90vh; overflow-y:auto;">
     
-    <div style="margin-bottom:14px">
-      <label style="display:block; color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:6px" data-i18n="form_name">Nom complet</label>
-      <input type="text" name="name" required
-        style="width:100%; padding:10px 14px; border-radius:8px; border:none; font-family:'DM Sans',sans-serif; font-size:14px;" />
+    <button onclick="document.getElementById('rgpd-modal').style.display='none'"
+      style="position:absolute; top:16px; right:16px; background:#F1F5F9; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center;">✕</button>
+
+    <h3 style="font-family:'Playfair Display',serif; font-size:20px; color:#1E293B; margin-bottom:8px;" data-i18n="rgpd_form_title">Exercer vos droits RGPD</h3>
+    <p style="font-size:13px; color:#64748B; margin-bottom:24px;" data-i18n="rgpd_form_sub">Nous répondons sous 48h ouvrables.</p>
+
+    <div id="form-success" style="display:none; background:#ECFDF5; border-radius:12px; padding:20px; text-align:center;">
+      <p style="color:#10B981; font-weight:600; font-size:15px;">✅ <span data-i18n="form_sent">Demande envoyée ! Nous vous répondons sous 48h.</span></p>
     </div>
 
-    <div style="margin-bottom:14px">
-      <label style="display:block; color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:6px" data-i18n="form_email">Email</label>
-      <input type="email" name="email" required
-        style="width:100%; padding:10px 14px; border-radius:8px; border:none; font-family:'DM Sans',sans-serif; font-size:14px;" />
-    </div>
+    <form id="rgpd-form" action="https://formspree.io/f/xqewgznb" method="POST">
+      
+      <div style="margin-bottom:14px">
+        <label style="display:block; color:#475569; font-size:13px; font-weight:500; margin-bottom:6px" data-i18n="form_name">Nom complet</label>
+        <input type="text" name="name" required
+          style="width:100%; padding:10px 14px; border-radius:8px; border:1px solid #E2E8F0; font-family:'DM Sans',sans-serif; font-size:14px; outline:none;" />
+      </div>
 
-    <div style="margin-bottom:14px">
-      <label style="display:block; color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:6px" data-i18n="form_right">Droit à exercer</label>
-      <select name="right" required
-        style="width:100%; padding:10px 14px; border-radius:8px; border:none; font-family:'DM Sans',sans-serif; font-size:14px;">
-        <option value="acces" data-i18n="r1">Droit d'accès</option>
-        <option value="rectification" data-i18n="r2">Droit de rectification</option>
-        <option value="effacement" data-i18n="r3">Droit à l'effacement</option>
-        <option value="portabilite" data-i18n="r4">Droit à la portabilité</option>
-        <option value="opposition" data-i18n="r5">Droit d'opposition</option>
-      </select>
-    </div>
+      <div style="margin-bottom:14px">
+        <label style="display:block; color:#475569; font-size:13px; font-weight:500; margin-bottom:6px" data-i18n="form_email">Email</label>
+        <input type="email" name="email" required
+          style="width:100%; padding:10px 14px; border-radius:8px; border:1px solid #E2E8F0; font-family:'DM Sans',sans-serif; font-size:14px; outline:none;" />
+      </div>
 
-    <div style="margin-bottom:20px">
-      <label style="display:block; color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:6px" data-i18n="form_message">Message (optionnel)</label>
-      <textarea name="message" rows="3"
-        style="width:100%; padding:10px 14px; border-radius:8px; border:none; font-family:'DM Sans',sans-serif; font-size:14px; resize:vertical;"></textarea>
-    </div>
+      <div style="margin-bottom:14px">
+        <label style="display:block; color:#475569; font-size:13px; font-weight:500; margin-bottom:6px" data-i18n="form_right">Droit à exercer</label>
+        <select name="right" required
+          style="width:100%; padding:10px 14px; border-radius:8px; border:1px solid #E2E8F0; font-family:'DM Sans',sans-serif; font-size:14px; outline:none; background:white;">
+          <option value="acces" data-i18n="r1">Droit d'accès</option>
+          <option value="rectification" data-i18n="r2">Droit de rectification</option>
+          <option value="effacement" data-i18n="r3">Droit à l'effacement</option>
+          <option value="portabilite" data-i18n="r4">Droit à la portabilité</option>
+          <option value="opposition" data-i18n="r5">Droit d'opposition</option>
+        </select>
+      </div>
 
-    <input type="hidden" name="_subject" value="Demande RGPD — Pdfigo" />
-    <input type="hidden" name="_replyto" value="devbp2025@gmail.com" />
+      <div style="margin-bottom:20px">
+        <label style="display:block; color:#475569; font-size:13px; font-weight:500; margin-bottom:6px" data-i18n="form_message">Message (optionnel)</label>
+        <textarea name="message" rows="3"
+          style="width:100%; padding:10px 14px; border-radius:8px; border:1px solid #E2E8F0; font-family:'DM Sans',sans-serif; font-size:14px; resize:vertical; outline:none;"></textarea>
+      </div>
 
-    <button type="submit" id="form-btn"
-      style="width:100%; background:white; color:#2563EB; font-family:'DM Sans',sans-serif; font-weight:700; font-size:15px; padding:14px; border-radius:10px; border:none; cursor:pointer;"
-      data-i18n="form_submit">Envoyer ma demande</button>
-  </form>
+      <input type="hidden" name="_subject" value="Demande RGPD — Pdfigo" />
+
+      <button type="submit" id="form-btn"
+        style="width:100%; background:#2563EB; color:white; font-family:'DM Sans',sans-serif; font-weight:700; font-size:15px; padding:14px; border-radius:10px; border:none; cursor:pointer;"
+        data-i18n="form_submit">Envoyer ma demande</button>
+    </form>
+  </div>
 </div>
 
 <script>
+  // Fermer modal en cliquant dehors
+  document.getElementById('rgpd-modal').addEventListener('click', function(e) {
+    if (e.target === this) this.style.display = 'none';
+  });
+
+  // Soumission AJAX
   document.getElementById('rgpd-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     const btn = document.getElementById('form-btn');
@@ -304,6 +324,14 @@
       if (response.ok) {
         document.getElementById('rgpd-form').style.display = 'none';
         document.getElementById('form-success').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('rgpd-modal').style.display = 'none';
+          document.getElementById('rgpd-form').style.display = 'block';
+          document.getElementById('form-success').style.display = 'none';
+          btn.textContent = document.querySelector('[data-i18n="form_submit"]').textContent;
+          btn.disabled = false;
+          this.reset();
+        }, 3000);
       } else {
         btn.textContent = '❌ Erreur — réessayez';
         btn.disabled = false;
