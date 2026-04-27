@@ -7,29 +7,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --blue: #2563EB;
-      --blue-dark: #1E40AF;
-      --blue-light: #EFF6FF;
-      --green: #10B981;
-      --ink: #1E293B;
-      --muted: #64748B;
-      --border: #E2E8F0;
-      --paper: #F8FAFC;
-      --white: #FFFFFF;
+      --blue: #2563EB; --blue-dark: #1E40AF; --blue-light: #EFF6FF;
+      --green: #10B981; --amber: #D97706; --amber-bg: #FFFBEB;
+      --ink: #1E293B; --muted: #64748B; --border: #E2E8F0; --paper: #F8FAFC; --white: #FFFFFF;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.7; }
-
-    .hero {
-      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
-      padding: 60px 24px 80px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
+    .hero { background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%); padding: 60px 24px 80px; text-align: center; position: relative; overflow: hidden; }
     .hero::before { content:''; position:absolute; top:-60px; right:-60px; width:240px; height:240px; border-radius:50%; background:rgba(255,255,255,0.06); }
     .hero::after { content:''; position:absolute; bottom:-80px; left:-40px; width:300px; height:300px; border-radius:50%; background:rgba(255,255,255,0.04); }
-
     .logo-wrap { display:inline-flex; align-items:center; gap:12px; margin-bottom:28px; }
     .logo-icon { width:52px; height:52px; background:rgba(255,255,255,0.15); border-radius:14px; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.2); overflow:hidden; }
     .logo-icon img { width:52px; height:52px; object-fit:cover; border-radius:14px; }
@@ -38,7 +24,6 @@
     .hero h1 { font-family:'Playfair Display',serif; font-size:clamp(24px,5vw,36px); font-weight:600; color:white; margin-bottom:12px; }
     .hero p { color:rgba(255,255,255,0.75); font-size:15px; font-weight:300; }
     .badge { display:inline-block; margin-top:20px; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.25); border-radius:20px; padding:6px 16px; font-size:12px; color:rgba(255,255,255,0.85); font-weight:500; letter-spacing:0.5px; }
-
     .nav-tabs { background:white; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; box-shadow:0 1px 8px rgba(0,0,0,0.06); }
     .nav-tabs-inner { max-width:860px; margin:0 auto; display:flex; overflow-x:auto; scrollbar-width:none; justify-content:space-between; align-items:center; padding:0 16px; }
     .nav-tabs-inner::-webkit-scrollbar { display:none; }
@@ -46,15 +31,11 @@
     .tab-btn { flex-shrink:0; padding:16px 16px; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500; color:var(--muted); background:none; border:none; border-bottom:2px solid transparent; cursor:pointer; transition:all 0.2s; white-space:nowrap; }
     .tab-btn:hover { color:var(--blue); }
     .tab-btn.active { color:var(--blue); border-bottom-color:var(--blue); }
-
     .lang-select { background:var(--paper); border:1px solid var(--border); border-radius:8px; padding:6px 10px; font-family:'DM Sans',sans-serif; font-size:13px; color:var(--ink); cursor:pointer; outline:none; flex-shrink:0; }
-
     .main { max-width:860px; margin:0 auto; padding:48px 24px 80px; }
     .section { display:none; }
     .section.active { display:block; }
-
     .section-intro { background:var(--blue-light); border-left:4px solid var(--blue); border-radius:0 12px 12px 0; padding:20px 24px; margin-bottom:40px; font-size:14px; color:var(--blue-dark); line-height:1.6; }
-
     .card { background:white; border-radius:16px; border:1px solid var(--border); margin-bottom:20px; overflow:hidden; transition:box-shadow 0.2s; }
     .card:hover { box-shadow:0 4px 20px rgba(37,99,235,0.08); }
     .card-header { display:flex; align-items:center; gap:14px; padding:20px 24px; border-bottom:1px solid var(--border); background:var(--paper); }
@@ -66,37 +47,33 @@
     .card-body p:last-child { margin-bottom:0; }
     .card-body strong { color:var(--ink); font-weight:600; }
     .card-body a { color:var(--blue); }
-
     .check-list { list-style:none; margin:12px 0; }
     .check-list li { display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--muted); padding:6px 0; border-bottom:1px solid var(--border); }
     .check-list li:last-child { border-bottom:none; }
     .check-list li::before { content:''; width:18px; height:18px; border-radius:50%; flex-shrink:0; margin-top:1px; background:#ECFDF5 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2310B981' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/12px no-repeat; }
-
     .data-table { width:100%; border-collapse:collapse; font-size:13px; margin:12px 0; }
     .data-table th { background:var(--paper); color:var(--muted); font-weight:600; text-align:left; padding:10px 14px; border-bottom:2px solid var(--border); font-size:12px; text-transform:uppercase; letter-spacing:0.5px; }
     .data-table td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--ink); vertical-align:top; }
     .data-table tr:last-child td { border-bottom:none; }
     .data-table tr:hover td { background:var(--paper); }
-
     .tag { display:inline-block; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:600; }
     .tag-red { background:#FEF2F2; color:#EF4444; }
     .tag-green { background:#ECFDF5; color:#10B981; }
     .tag-blue { background:var(--blue-light); color:var(--blue); }
-
+    .tag-amber { background:var(--amber-bg); color:var(--amber); }
     .highlight { background:linear-gradient(135deg,var(--blue-light),#EFF6FF); border:1px solid #BFDBFE; border-radius:12px; padding:20px 24px; margin:16px 0; }
     .highlight p { font-size:14px; color:var(--blue-dark); margin:0; }
-
+    /* Section label pour séparer app / site */
+    .pricing-section-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; padding:8px 14px; color:var(--muted); background:var(--paper); border-bottom:1px solid var(--border); }
     .contact-card { background:linear-gradient(135deg,var(--blue),var(--blue-dark)); border-radius:16px; padding:32px; text-align:center; margin-top:40px; }
     .contact-card h3 { font-family:'Playfair Display',serif; font-size:22px; color:white; margin-bottom:8px; }
     .contact-card p { color:rgba(255,255,255,0.75); font-size:14px; margin-bottom:20px; }
     .contact-btn { display:inline-flex; align-items:center; gap:8px; background:white; color:var(--blue); font-family:'DM Sans',sans-serif; font-weight:600; font-size:14px; padding:12px 24px; border-radius:10px; text-decoration:none; transition:transform 0.2s; }
     .contact-btn:hover { transform:translateY(-2px); }
-
     footer { background:var(--ink); padding:32px 24px; text-align:center; }
     footer p { color:rgba(255,255,255,0.4); font-size:13px; }
     footer strong { color:rgba(255,255,255,0.7); }
     footer a { color:rgba(255,255,255,0.5); }
-
     @media (max-width:600px) {
       .hero { padding:40px 20px 60px; }
       .main { padding:32px 16px 60px; }
@@ -110,9 +87,7 @@
 
 <div class="hero">
   <div class="logo-wrap">
-    <div class="logo-icon">
-      <img src="../assets/pdfigo.png" alt="Pdfigo" />
-    </div>
+    <div class="logo-icon"><img src="../assets/pdfigo.png" alt="Pdfigo" /></div>
     <span class="logo-name">Pdf<span>igo</span></span>
   </div>
   <h1 data-i18n="hero_title">Documents légaux</h1>
@@ -155,8 +130,9 @@
             <tr><td><strong data-i18n="d1">Fichiers PDF</strong></td><td data-i18n="d1p">Traitement local uniquement</td><td><span class="tag tag-green" data-i18n="d1s">Sur l'appareil</span></td></tr>
             <tr><td><strong data-i18n="d2">Texte extrait (IA)</strong></td><td data-i18n="d2p">Résumé, traduction, chat</td><td><span class="tag tag-blue" data-i18n="d2s">Supabase temporaire</span></td></tr>
             <tr><td><strong data-i18n="d3">Photos (scanner)</strong></td><td data-i18n="d3p">Conversion en PDF</td><td><span class="tag tag-green" data-i18n="d3s">Sur l'appareil</span></td></tr>
-            <tr><td><strong data-i18n="d4">Données d'achat</strong></td><td data-i18n="d4p">Gestion des abonnements</td><td><span class="tag tag-blue" data-i18n="d4s">Google Play / RevenueCat</span></td></tr>
-            <tr><td><strong data-i18n="d5">Identifiant anonyme</strong></td><td data-i18n="d5p">Statistiques d'utilisation</td><td><span class="tag tag-blue" data-i18n="d5s">RevenueCat</span></td></tr>
+            <tr><td><strong data-i18n="d4">Données d'achat</strong></td><td data-i18n="d4p">Gestion des abonnements</td><td><span class="tag tag-blue" data-i18n="d4s">Google Play / Google Play</span></td></tr>
+            <tr><td><strong data-i18n="d5">Identifiant anonyme</strong></td><td data-i18n="d5p">Statistiques d'utilisation</td><td><span class="tag tag-blue" data-i18n="d5s">Google Play</span></td></tr>
+            <tr><td><strong data-i18n="d6">Crédits site web</strong></td><td data-i18n="d6p">Paiement ponctuel via Stripe</td><td><span class="tag tag-blue" data-i18n="d6s">Stripe / Supabase</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -197,7 +173,7 @@
       </div>
       <div class="card-body">
         <p data-i18n="pay_desc">Les paiements sont <strong>entièrement gérés par Google Play</strong>. Pdfigo n'a jamais accès à vos informations bancaires.</p>
-        <p><span data-i18n="pay_rc">Nous utilisons </span><strong>RevenueCat</strong><span data-i18n="pay_rc2"> pour gérer les statuts d'abonnement. Consultez la </span><a href="https://www.revenuecat.com/privacy" data-i18n="pay_rc3">politique de RevenueCat</a>.</p>
+        <p><span data-i18n="pay_rc">Nous utilisons </span><strong>Google Play</strong><span data-i18n="pay_rc2"> pour gérer les statuts d'abonnement. Consultez la </span><a href="https://www.google-play.com/privacy" data-i18n="pay_rc3">politique de Google Play</a>.</p>
         <ul class="check-list">
           <li data-i18n="pay_c1">Essai gratuit de 14 jours pour les nouveaux utilisateurs</li>
           <li data-i18n="pay_c2">Renouvellement automatique, annulable à tout moment</li>
@@ -240,109 +216,69 @@
     </div>
 
     <div class="contact-card">
-  <h3 data-i18n="rgpd_form_title">Exercer vos droits RGPD</h3>
-  <p data-i18n="rgpd_form_sub">Remplissez ce formulaire — nous répondons sous 48h ouvrables.</p>
-  
-  <button onclick="document.getElementById('rgpd-modal').style.display='flex'"
-    style="display:inline-flex; align-items:center; gap:8px; background:white; color:#2563EB; font-family:'DM Sans',sans-serif; font-weight:700; font-size:15px; padding:14px 28px; border-radius:10px; border:none; cursor:pointer; margin-top:8px; transition:transform 0.2s;"
-    data-i18n="form_open_btn">📋 Faire une demande RGPD</button>
-</div>
-
-<!-- MODAL -->
-<div id="rgpd-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(4px);">
-  <div style="background:white; border-radius:20px; padding:32px; width:100%; max-width:480px; position:relative; max-height:90vh; overflow-y:auto;">
-    
-    <button onclick="document.getElementById('rgpd-modal').style.display='none'"
-      style="position:absolute; top:16px; right:16px; background:#F1F5F9; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center;">✕</button>
-
-    <h3 style="font-family:'Playfair Display',serif; font-size:20px; color:#1E293B; margin-bottom:8px;" data-i18n="rgpd_form_title">Exercer vos droits RGPD</h3>
-    <p style="font-size:13px; color:#64748B; margin-bottom:24px;" data-i18n="rgpd_form_sub">Nous répondons sous 48h ouvrables.</p>
-
-    <div id="form-success" style="display:none; background:#ECFDF5; border-radius:12px; padding:20px; text-align:center;">
-      <p style="color:#10B981; font-weight:600; font-size:15px;">✅ <span data-i18n="form_sent">Demande envoyée ! Nous vous répondons sous 48h.</span></p>
+      <h3 data-i18n="rgpd_form_title">Exercer vos droits RGPD</h3>
+      <p data-i18n="rgpd_form_sub">Remplissez ce formulaire, nous répondons sous 48h ouvrables.</p>
+      <button onclick="document.getElementById('rgpd-modal').style.display='flex'"
+        style="display:inline-flex;align-items:center;gap:8px;background:white;color:#2563EB;font-family:'DM Sans',sans-serif;font-weight:700;font-size:15px;padding:14px 28px;border-radius:10px;border:none;cursor:pointer;margin-top:8px;transition:transform 0.2s;"
+        data-i18n="form_open_btn">📋 Faire une demande RGPD</button>
     </div>
 
-    <form id="rgpd-form" action="https://formspree.io/f/xqewgznb" method="POST">
-      
-      <div style="margin-bottom:14px">
-        <label style="display:block; color:#475569; font-size:13px; font-weight:500; margin-bottom:6px" data-i18n="form_name">Nom complet</label>
-        <input type="text" name="name" required
-          style="width:100%; padding:10px 14px; border-radius:8px; border:1px solid #E2E8F0; font-family:'DM Sans',sans-serif; font-size:14px; outline:none;" />
+    <!-- MODAL RGPD -->
+    <div id="rgpd-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);">
+      <div style="background:white;border-radius:20px;padding:32px;width:100%;max-width:480px;position:relative;max-height:90vh;overflow-y:auto;">
+        <button onclick="document.getElementById('rgpd-modal').style.display='none'"
+          style="position:absolute;top:16px;right:16px;background:#F1F5F9;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;">✕</button>
+        <h3 style="font-family:'Playfair Display',serif;font-size:20px;color:#1E293B;margin-bottom:8px;" data-i18n="rgpd_form_title">Exercer vos droits RGPD</h3>
+        <p style="font-size:13px;color:#64748B;margin-bottom:24px;" data-i18n="rgpd_form_sub">Nous répondons sous 48h ouvrables.</p>
+        <div id="form-success" style="display:none;background:#ECFDF5;border-radius:12px;padding:20px;text-align:center;">
+          <p style="color:#10B981;font-weight:600;font-size:15px;">✅ <span data-i18n="form_sent">Demande envoyée ! Nous vous répondons sous 48h.</span></p>
+        </div>
+        <form id="rgpd-form" action="https://formspree.io/f/xqewgznb" method="POST">
+          <div style="margin-bottom:14px">
+            <label style="display:block;color:#475569;font-size:13px;font-weight:500;margin-bottom:6px" data-i18n="form_name">Nom complet</label>
+            <input type="text" name="name" required style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid #E2E8F0;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;" />
+          </div>
+          <div style="margin-bottom:14px">
+            <label style="display:block;color:#475569;font-size:13px;font-weight:500;margin-bottom:6px" data-i18n="form_email">Email</label>
+            <input type="email" name="email" required style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid #E2E8F0;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;" />
+          </div>
+          <div style="margin-bottom:14px">
+            <label style="display:block;color:#475569;font-size:13px;font-weight:500;margin-bottom:6px" data-i18n="form_right">Droit à exercer</label>
+            <select name="right" required style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid #E2E8F0;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;background:white;">
+              <option value="acces" data-i18n="r1">Droit d'accès</option>
+              <option value="rectification" data-i18n="r2">Droit de rectification</option>
+              <option value="effacement" data-i18n="r3">Droit à l'effacement</option>
+              <option value="portabilite" data-i18n="r4">Droit à la portabilité</option>
+              <option value="opposition" data-i18n="r5">Droit d'opposition</option>
+            </select>
+          </div>
+          <div style="margin-bottom:20px">
+            <label style="display:block;color:#475569;font-size:13px;font-weight:500;margin-bottom:6px" data-i18n="form_message">Message (optionnel)</label>
+            <textarea name="message" rows="3" style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid #E2E8F0;font-family:'DM Sans',sans-serif;font-size:14px;resize:vertical;outline:none;"></textarea>
+          </div>
+          <input type="hidden" name="_subject" value="Demande RGPD, Pdfigo" />
+          <button type="submit" id="form-btn"
+            style="width:100%;background:#2563EB;color:white;font-family:'DM Sans',sans-serif;font-weight:700;font-size:15px;padding:14px;border-radius:10px;border:none;cursor:pointer;"
+            data-i18n="form_submit">Envoyer ma demande</button>
+        </form>
       </div>
-
-      <div style="margin-bottom:14px">
-        <label style="display:block; color:#475569; font-size:13px; font-weight:500; margin-bottom:6px" data-i18n="form_email">Email</label>
-        <input type="email" name="email" required
-          style="width:100%; padding:10px 14px; border-radius:8px; border:1px solid #E2E8F0; font-family:'DM Sans',sans-serif; font-size:14px; outline:none;" />
-      </div>
-
-      <div style="margin-bottom:14px">
-        <label style="display:block; color:#475569; font-size:13px; font-weight:500; margin-bottom:6px" data-i18n="form_right">Droit à exercer</label>
-        <select name="right" required
-          style="width:100%; padding:10px 14px; border-radius:8px; border:1px solid #E2E8F0; font-family:'DM Sans',sans-serif; font-size:14px; outline:none; background:white;">
-          <option value="acces" data-i18n="r1">Droit d'accès</option>
-          <option value="rectification" data-i18n="r2">Droit de rectification</option>
-          <option value="effacement" data-i18n="r3">Droit à l'effacement</option>
-          <option value="portabilite" data-i18n="r4">Droit à la portabilité</option>
-          <option value="opposition" data-i18n="r5">Droit d'opposition</option>
-        </select>
-      </div>
-
-      <div style="margin-bottom:20px">
-        <label style="display:block; color:#475569; font-size:13px; font-weight:500; margin-bottom:6px" data-i18n="form_message">Message (optionnel)</label>
-        <textarea name="message" rows="3"
-          style="width:100%; padding:10px 14px; border-radius:8px; border:1px solid #E2E8F0; font-family:'DM Sans',sans-serif; font-size:14px; resize:vertical; outline:none;"></textarea>
-      </div>
-
-      <input type="hidden" name="_subject" value="Demande RGPD — Pdfigo" />
-      <input type="hidden" name="_language" value="fr" />
-
-      <button type="submit" id="form-btn"
-        style="width:100%; background:#2563EB; color:white; font-family:'DM Sans',sans-serif; font-weight:700; font-size:15px; padding:14px; border-radius:10px; border:none; cursor:pointer;"
-        data-i18n="form_submit">Envoyer ma demande</button>
-    </form>
-  </div>
-</div>
-
-<script>
-  // Fermer modal en cliquant dehors
-  document.getElementById('rgpd-modal').addEventListener('click', function(e) {
-    if (e.target === this) this.style.display = 'none';
-  });
-
-  // Soumission AJAX
-  document.getElementById('rgpd-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const btn = document.getElementById('form-btn');
-    btn.textContent = '⏳ Envoi...';
-    btn.disabled = true;
-    try {
-      const response = await fetch('https://formspree.io/f/xqewgznb', {
-        method: 'POST',
-        body: new FormData(this),
-        headers: { 'Accept': 'application/json' }
+    </div>
+    <script>
+      document.getElementById('rgpd-modal').addEventListener('click', function(e) { if(e.target===this) this.style.display='none'; });
+      document.getElementById('rgpd-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('form-btn');
+        btn.textContent = '⏳ Envoi...'; btn.disabled = true;
+        try {
+          const r = await fetch('https://formspree.io/f/xqewgznb', { method:'POST', body:new FormData(this), headers:{'Accept':'application/json'} });
+          if(r.ok) {
+            document.getElementById('rgpd-form').style.display='none';
+            document.getElementById('form-success').style.display='block';
+            setTimeout(() => { document.getElementById('rgpd-modal').style.display='none'; document.getElementById('rgpd-form').style.display='block'; document.getElementById('form-success').style.display='none'; btn.textContent=document.querySelector('[data-i18n="form_submit"]').textContent; btn.disabled=false; this.reset(); }, 3000);
+          } else { btn.textContent='❌ Erreur, réessayez'; btn.disabled=false; }
+        } catch { btn.textContent='❌ Erreur, réessayez'; btn.disabled=false; }
       });
-      if (response.ok) {
-        document.getElementById('rgpd-form').style.display = 'none';
-        document.getElementById('form-success').style.display = 'block';
-        setTimeout(() => {
-          document.getElementById('rgpd-modal').style.display = 'none';
-          document.getElementById('rgpd-form').style.display = 'block';
-          document.getElementById('form-success').style.display = 'none';
-          btn.textContent = document.querySelector('[data-i18n="form_submit"]').textContent;
-          btn.disabled = false;
-          this.reset();
-        }, 3000);
-      } else {
-        btn.textContent = '❌ Erreur — réessayez';
-        btn.disabled = false;
-      }
-    } catch {
-      btn.textContent = '❌ Erreur — réessayez';
-      btn.disabled = false;
-    }
-  });
-</script>
+    </script>
   </div>
 
   <!-- TERMS -->
@@ -356,7 +292,8 @@
       </div>
       <div class="card-body">
         <p data-i18n="t_service_desc">Pdfigo est une application mobile de gestion de documents PDF proposant des fonctionnalités d'édition, signature, compression, protection, OCR et intelligence artificielle.</p>
-        <p data-i18n="t_service_plans">L'application est disponible en version <strong>gratuite</strong> (fonctionnalités limitées) et <strong>Premium</strong> (accès illimité via abonnement).</p>
+        <p data-i18n="t_service_web">Le site web pdfigo.com propose les mêmes outils directement en ligne, accessibles via un système de crédits à l'usage, sans abonnement.</p>
+        <p data-i18n="t_service_plans">L'application mobile est disponible en version <strong>gratuite</strong> (fonctionnalités limitées) et <strong>Premium</strong> (accès illimité via abonnement Google Play).</p>
       </div>
     </div>
 
@@ -377,20 +314,71 @@
       </div>
     </div>
 
+    <!-- TARIFS, carte remplacée -->
     <div class="card">
       <div class="card-header">
         <div class="card-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <div class="card-title" data-i18n="t_price_title">Abonnements et remboursements</div>
+        <div class="card-title" data-i18n="t_price_title">Tarifs et remboursements</div>
       </div>
       <div class="card-body">
+
+        <!-- APP MOBILE -->
+        <div class="pricing-section-label" data-i18n="price_label_app">📱 Application mobile (Google Play)</div>
         <table class="data-table">
           <thead><tr><th data-i18n="th_plan">Plan</th><th data-i18n="th_price">Prix</th><th data-i18n="th_trial">Essai</th><th data-i18n="th_cancel">Résiliation</th></tr></thead>
           <tbody>
-            <tr><td><strong data-i18n="plan_m">Premium Mensuel</strong></td><td>3,99€ / <span data-i18n="month">mois</span></td><td><span class="tag tag-green" data-i18n="trial_14">14 jours offerts</span></td><td data-i18n="anytime">À tout moment</td></tr>
-            <tr><td><strong data-i18n="plan_y">Premium Annuel</strong></td><td>28,99€ / <span data-i18n="year">an</span></td><td><span class="tag tag-green" data-i18n="trial_14">14 jours offerts</span></td><td data-i18n="anytime">À tout moment</td></tr>
+            <tr>
+              <td><strong data-i18n="plan_free_app">Gratuit</strong></td>
+              <td>0€</td>
+              <td><span class="tag tag-green" data-i18n="free_tag">Inclus</span></td>
+              <td data-i18n="not_applicable">—</td>
+            </tr>
+            <tr>
+              <td><strong data-i18n="plan_m">Premium Mensuel</strong></td>
+              <td>3,99€ / <span data-i18n="month">mois</span></td>
+              <td><span class="tag tag-green" data-i18n="trial_14">14 jours offerts</span></td>
+              <td data-i18n="anytime">À tout moment</td>
+            </tr>
+            <tr>
+              <td><strong data-i18n="plan_y">Premium Annuel</strong></td>
+              <td>28,99€ / <span data-i18n="year">an</span></td>
+              <td><span class="tag tag-green" data-i18n="trial_14">14 jours offerts</span></td>
+              <td data-i18n="anytime">À tout moment</td>
+            </tr>
           </tbody>
         </table>
-        <div class="highlight" style="margin-top:16px"><p data-i18n="t_renew">L'abonnement se renouvelle automatiquement sauf annulation au moins 24h avant la date de renouvellement.</p></div>
+
+        <!-- SITE WEB -->
+        <div class="pricing-section-label" style="margin-top:12px" data-i18n="price_label_web">🌐 Site web pdfigo.com, Crédits à l'usage</div>
+        <table class="data-table">
+          <thead><tr><th data-i18n="th_pack">Pack</th><th data-i18n="th_credits">Crédits</th><th data-i18n="th_price">Prix</th><th data-i18n="th_validity">Validité</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Starter</strong></td>
+              <td>50 <span data-i18n="credits">crédits</span></td>
+              <td>1,99€</td>
+              <td data-i18n="validity_1y">1 an</td>
+            </tr>
+            <tr>
+              <td><strong>Standard</strong></td>
+              <td>200 <span data-i18n="credits">crédits</span></td>
+              <td>5,99€</td>
+              <td data-i18n="validity_1y">1 an</td>
+            </tr>
+            <tr>
+              <td><strong>Pro</strong></td>
+              <td>500 <span data-i18n="credits">crédits</span></td>
+              <td>9,99€</td>
+              <td data-i18n="validity_1y">1 an</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="highlight" style="margin-top:16px">
+          <p data-i18n="t_credits_rule">1 crédit = 30 secondes de traitement. Les outils IA consomment 3 crédits / 30s. Les crédits sont valables 1 an et ne se renouvellent pas automatiquement. Les paiements web sont gérés par <strong>Stripe</strong>.</p>
+        </div>
+        <div class="highlight" style="margin-top:8px">
+          <p data-i18n="t_renew">L'abonnement mobile se renouvelle automatiquement sauf annulation au moins 24h avant la date de renouvellement.</p>
+        </div>
       </div>
     </div>
 
@@ -463,10 +451,11 @@
         <table class="data-table">
           <thead><tr><th data-i18n="ck_service">Service</th><th data-i18n="ck_purpose">Finalité</th><th data-i18n="ck_data2">Données</th><th>Opt-out</th></tr></thead>
           <tbody>
-            <tr><td><strong>RevenueCat</strong></td><td data-i18n="ck_rc">Abonnements</td><td data-i18n="ck_rc_d">ID anonyme</td><td><span class="tag tag-red">Non</span></td></tr>
+            <tr><td><strong>Google Play</strong></td><td data-i18n="ck_rc">Abonnements app</td><td data-i18n="ck_rc_d">ID anonyme</td><td><span class="tag tag-red">Non</span></td></tr>
             <tr><td><strong>Google Play</strong></td><td data-i18n="ck_gp">Distribution</td><td data-i18n="ck_gp_d">Compte Google</td><td><span class="tag tag-red">Non</span></td></tr>
             <tr><td><strong>Google MLKit</strong></td><td data-i18n="ck_ml">OCR local</td><td data-i18n="ck_ml_d">Aucune donnée</td><td><span class="tag tag-green">N/A</span></td></tr>
             <tr><td><strong>Supabase</strong></td><td data-i18n="ck_sb">Traitement IA</td><td data-i18n="ck_sb_d">Texte temporaire</td><td><span class="tag tag-blue">Opt-in</span></td></tr>
+            <tr><td><strong>Stripe</strong></td><td data-i18n="ck_stripe">Paiements site web</td><td data-i18n="ck_stripe_d">Données de paiement</td><td><span class="tag tag-red">Non</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -483,7 +472,8 @@
           <li><strong data-i18n="ck_c2k">Fichiers PDF</strong> : <span data-i18n="ck_c2">Depuis l'écran Mes Fichiers dans l'application</span></li>
           <li><strong data-i18n="ck_c3k">Code PIN</strong> : <span data-i18n="ck_c3">Depuis les Paramètres de sécurité dans l'application</span></li>
           <li><strong data-i18n="ck_c4k">Abonnement</strong> : <span data-i18n="ck_c4">Google Play → Abonnements → Pdfigo → Annuler</span></li>
-          <li><strong data-i18n="ck_c5k">Données RevenueCat</strong> : <span data-i18n="ck_c5">Contactez-nous à devbp2025@gmail.com</span></li>
+          <li><strong data-i18n="ck_c5k">Données Google Play</strong> : <span data-i18n="ck_c5">Contactez-nous à devbp2025@gmail.com</span></li>
+          <li><strong data-i18n="ck_c6k">Crédits site web</strong> : <span data-i18n="ck_c6">Les crédits non utilisés expirent après 1 an, aucun remboursement automatique</span></li>
         </ul>
       </div>
     </div>
@@ -512,8 +502,9 @@ const T = {
     d1:"Fichiers PDF", d1p:"Traitement local uniquement", d1s:"Sur l'appareil",
     d2:"Texte extrait (IA)", d2p:"Résumé, traduction, chat", d2s:"Supabase temporaire",
     d3:"Photos (scanner)", d3p:"Conversion en PDF", d3s:"Sur l'appareil",
-    d4:"Données d'achat", d4p:"Gestion des abonnements", d4s:"Google Play / RevenueCat",
-    d5:"Identifiant anonyme", d5p:"Statistiques d'utilisation", d5s:"RevenueCat",
+    d4:"Données d'achat", d4p:"Gestion des abonnements", d4s:"Google Play / Google Play",
+    d5:"Identifiant anonyme", d5p:"Statistiques d'utilisation", d5s:"Google Play",
+    d6:"Crédits site web", d6p:"Paiement ponctuel via Stripe", d6s:"Stripe / Supabase",
     cam_title:"Utilisation de la caméra",
     cam_desc:"Pdfigo utilise la caméra <strong>uniquement</strong> pour la fonctionnalité de scanner de documents.",
     cam_c1:"Les photos sont traitées localement sur votre appareil",
@@ -526,7 +517,7 @@ const T = {
     ai_links:"En utilisant ces fonctionnalités, vous acceptez les politiques de ", and:"et",
     pay_title:"Abonnements et paiements",
     pay_desc:"Les paiements sont <strong>entièrement gérés par Google Play</strong>. Pdfigo n'a jamais accès à vos informations bancaires.",
-    pay_rc:"Nous utilisons ", pay_rc2:" pour gérer les statuts d'abonnement. Consultez la ", pay_rc3:"politique de RevenueCat",
+    pay_rc:"Nous utilisons ", pay_rc2:" pour gérer les statuts d'abonnement. Consultez la ", pay_rc3:"politique de Google Play",
     pay_c1:"Essai gratuit de 14 jours pour les nouveaux utilisateurs",
     pay_c2:"Renouvellement automatique, annulable à tout moment",
     pay_c3:"Remboursement selon la politique Google Play",
@@ -542,22 +533,28 @@ const T = {
     sec_c2:"Les fichiers PDF protégés utilisent le chiffrement AES-256",
     sec_c3:"Les données sensibles (PIN) sont stockées dans le Android Keystore",
     sec_c4:"Aucune donnée personnelle identifiable n'est collectée",
-    contact_title:"Une question sur vos données ?", contact_sub:"Notre équipe répond sous 48h ouvrables.",
     terms_intro:"En téléchargeant et utilisant Pdfigo, vous acceptez les présentes conditions d'utilisation.",
     t_service_title:"Description du service",
     t_service_desc:"Pdfigo est une application mobile de gestion de documents PDF proposant des fonctionnalités d'édition, signature, compression, protection, OCR et intelligence artificielle.",
-    t_service_plans:"L'application est disponible en version <strong>gratuite</strong> (fonctionnalités limitées) et <strong>Premium</strong> (accès illimité via abonnement).",
+    t_service_web:"Le site web pdfigo.com propose les mêmes outils directement en ligne, accessibles via un système de crédits à l'usage, sans abonnement.",
+    t_service_plans:"L'application mobile est disponible en version <strong>gratuite</strong> (fonctionnalités limitées) et <strong>Premium</strong> (accès illimité via abonnement Google Play).",
     t_use_title:"Utilisation acceptable", t_use_desc:"Vous vous engagez à utiliser Pdfigo uniquement pour des usages légaux. Il est strictement interdit de :",
     t_u1:"Traiter des documents contenant des contenus illégaux",
     t_u2:"Tenter de contourner les mesures de sécurité",
     t_u3:"Utiliser l'application à des fins commerciales non autorisées",
     t_u4:"Violer les droits d'auteur ou la propriété intellectuelle",
     t_u5:"Utiliser les fonctionnalités IA pour générer des contenus malveillants",
-    t_price_title:"Abonnements et remboursements",
+    t_price_title:"Tarifs et remboursements",
+    price_label_app:"📱 Application mobile (Google Play)",
+    price_label_web:"🌐 Site web pdfigo.com, Crédits à l'usage",
     th_plan:"Plan", th_price:"Prix", th_trial:"Essai", th_cancel:"Résiliation",
+    th_pack:"Pack", th_credits:"Crédits", th_validity:"Validité",
+    plan_free_app:"Gratuit", free_tag:"Inclus", not_applicable:"—",
     plan_m:"Premium Mensuel", month:"mois", plan_y:"Premium Annuel", year:"an",
     trial_14:"14 jours offerts", anytime:"À tout moment",
-    t_renew:"L'abonnement se renouvelle automatiquement sauf annulation au moins 24h avant.",
+    credits:"crédits", validity_1y:"1 an",
+    t_credits_rule:"1 crédit = 30 secondes de traitement. Les outils IA consomment 3 crédits / 30s. Les crédits sont valables 1 an et ne se renouvellent pas automatiquement. Les paiements web sont gérés par <strong>Stripe</strong>.",
+    t_renew:"L'abonnement mobile se renouvelle automatiquement sauf annulation au moins 24h avant la date de renouvellement.",
     t_limit_title:"Limitation de responsabilité", t_limit_desc:"Pdfigo est fourni \"tel quel\". Nous déclinons toute responsabilité pour :",
     t_l1:"La perte ou corruption de fichiers", t_l2:"Les résultats produits par l'IA",
     t_l3:"L'indisponibilité temporaire du service", t_l4:"Tout dommage indirect",
@@ -573,23 +570,22 @@ const T = {
     ck_fss:"Code PIN chiffré", ck_files:"Fichiers locaux", ck_pdf:"Documents PDF",
     ck_manual:"Jusqu'à suppression manuelle", ck_myfiles:"Via Mes Fichiers",
     ck_sdk_title:"SDK tiers", ck_service:"Service", ck_purpose:"Finalité", ck_data2:"Données",
-    ck_rc:"Abonnements", ck_rc_d:"ID anonyme", ck_gp:"Distribution", ck_gp_d:"Compte Google",
+    ck_rc:"Abonnements app", ck_rc_d:"ID anonyme", ck_gp:"Distribution", ck_gp_d:"Compte Google",
     ck_ml:"OCR local", ck_ml_d:"Aucune donnée", ck_sb:"Traitement IA", ck_sb_d:"Texte temporaire",
+    ck_stripe:"Paiements site web", ck_stripe_d:"Données de paiement",
     ck_ctrl_title:"Contrôle de vos données",
     ck_c1k:"Préférences", ck_c1:"Paramètres Android → Applications → Pdfigo → Effacer les données",
     ck_c2k:"Fichiers PDF", ck_c2:"Depuis l'écran Mes Fichiers dans l'application",
     ck_c3k:"Code PIN", ck_c3:"Depuis les Paramètres de sécurité dans l'application",
     ck_c4k:"Abonnement", ck_c4:"Google Play → Abonnements → Pdfigo → Annuler",
-    ck_c5k:"Données RevenueCat", ck_c5:"Contactez-nous à devbp2025@gmail.com",
+    ck_c5k:"Données Google Play", ck_c5:"Contactez-nous à devbp2025@gmail.com",
+    ck_c6k:"Crédits site web", ck_c6:"Les crédits non utilisés expirent après 1 an, aucun remboursement automatique",
     contact_title2:"Questions sur nos pratiques ?", contact_sub2:"Nous sommes transparents sur l'utilisation de vos données.",
     footer_rights:"Tous droits réservés.",
-    rgpd_form_title:"Exercer vos droits RGPD", 
-    rgpd_form_sub:"Remplissez ce formulaire, nous répondons sous 48h.", 
-    form_name:"Nom complet", 
-    form_email:"Email", 
-    form_right:"Droit à exercer", 
-    form_message:"Message (optionnel)", 
-    form_submit:"Envoyer ma demande", 
+    rgpd_form_title:"Exercer vos droits RGPD", rgpd_form_sub:"Remplissez ce formulaire, nous répondons sous 48h.",
+    form_open_btn:"📋 Faire une demande RGPD",
+    form_name:"Nom complet", form_email:"Email", form_right:"Droit à exercer",
+    form_message:"Message (optionnel)", form_submit:"Envoyer ma demande",
     form_sent:"Demande envoyée ! Nous vous répondons sous 48h.",
   },
   en: {
@@ -600,60 +596,53 @@ const T = {
     d1:"PDF Files", d1p:"Local processing only", d1s:"On device",
     d2:"Extracted text (AI)", d2p:"Summary, translation, chat", d2s:"Supabase temporary",
     d3:"Photos (scanner)", d3p:"PDF conversion", d3s:"On device",
-    d4:"Purchase data", d4p:"Subscription management", d4s:"Google Play / RevenueCat",
-    d5:"Anonymous ID", d5p:"Usage statistics", d5s:"RevenueCat",
-    cam_title:"Camera Usage",
-    cam_desc:"Pdfigo uses the camera <strong>only</strong> for the document scanner feature.",
-    cam_c1:"Photos are processed locally on your device",
-    cam_c2:"No images are sent to third-party servers",
-    cam_c3:"No images are stored without your consent",
-    cam_c4:"You can deny camera access in Android settings",
-    ai_title:"AI Features",
-    ai_desc:"When using AI features, extracted text is securely sent (HTTPS) to our servers.",
+    d4:"Purchase data", d4p:"Subscription management", d4s:"Google Play / Google Play",
+    d5:"Anonymous ID", d5p:"Usage statistics", d5s:"Google Play",
+    d6:"Web credits", d6p:"One-time payment via Stripe", d6s:"Stripe / Supabase",
+    cam_title:"Camera Usage", cam_desc:"Pdfigo uses the camera <strong>only</strong> for the document scanner feature.",
+    cam_c1:"Photos are processed locally on your device", cam_c2:"No images are sent to third-party servers",
+    cam_c3:"No images are stored without your consent", cam_c4:"You can deny camera access in Android settings",
+    ai_title:"AI Features", ai_desc:"When using AI features, extracted text is securely sent (HTTPS) to our servers.",
     ai_note:"⚡ Text is transmitted to <strong>Google Gemini</strong> or <strong>Mistral AI</strong> via Supabase. No content is stored after processing.",
     ai_links:"By using these features, you accept the privacy policies of ", and:"and",
     pay_title:"Subscriptions & Payments",
     pay_desc:"Payments are <strong>entirely managed by Google Play</strong>. Pdfigo never accesses your banking information.",
-    pay_rc:"We use ", pay_rc2:" to manage subscription status. See ", pay_rc3:"RevenueCat's privacy policy",
-    pay_c1:"14-day free trial for new users",
-    pay_c2:"Auto-renewal, cancellable at any time",
-    pay_c3:"Refunds subject to Google Play policy",
+    pay_rc:"We use ", pay_rc2:" to manage subscription status. See ", pay_rc3:"Google Play's privacy policy",
+    pay_c1:"14-day free trial for new users", pay_c2:"Auto-renewal, cancellable at any time", pay_c3:"Refunds subject to Google Play policy",
     rgpd_title:"Your Rights (GDPR)", rgpd_desc:"Under GDPR, you have the following rights:",
-    r1:"Right of access", r1d:"obtain a copy of your data",
-    r2:"Right to rectification", r2d:"correct inaccurate data",
-    r3:"Right to erasure", r3d:"request deletion of your data",
-    r4:"Right to portability", r4d:"receive your data in a readable format",
+    r1:"Right of access", r1d:"obtain a copy of your data", r2:"Right to rectification", r2d:"correct inaccurate data",
+    r3:"Right to erasure", r3d:"request deletion of your data", r4:"Right to portability", r4d:"receive your data in a readable format",
     r5:"Right to object", r5d:"object to the processing of your data",
     rgpd_contact:"To exercise these rights, contact us at <strong>devbp2025@gmail.com</strong>",
-    sec_title:"Data Security",
-    sec_c1:"All network communications use HTTPS/TLS",
-    sec_c2:"Protected PDFs use AES-256 encryption",
-    sec_c3:"Sensitive data (PIN) stored in Android Keystore",
+    sec_title:"Data Security", sec_c1:"All network communications use HTTPS/TLS",
+    sec_c2:"Protected PDFs use AES-256 encryption", sec_c3:"Sensitive data (PIN) stored in Android Keystore",
     sec_c4:"No personally identifiable data is collected",
-    contact_title:"Questions about your data?", contact_sub:"Our team responds within 48 business hours.",
     terms_intro:"By downloading and using Pdfigo, you agree to these terms of use.",
     t_service_title:"Service Description",
     t_service_desc:"Pdfigo is a mobile PDF management app offering editing, signing, compression, protection, OCR and AI features.",
-    t_service_plans:"The app is available in <strong>free</strong> (limited features) and <strong>Premium</strong> (unlimited access via subscription) versions.",
+    t_service_web:"The website pdfigo.com offers the same tools directly online, accessible via a pay-as-you-go credit system, with no subscription.",
+    t_service_plans:"The mobile app is available in <strong>free</strong> (limited features) and <strong>Premium</strong> (unlimited access via Google Play subscription) versions.",
     t_use_title:"Acceptable Use", t_use_desc:"You agree to use Pdfigo only for legal purposes. It is strictly prohibited to:",
-    t_u1:"Process documents containing illegal content",
-    t_u2:"Attempt to bypass security measures",
-    t_u3:"Use the app for unauthorized commercial purposes",
-    t_u4:"Violate copyright or intellectual property",
+    t_u1:"Process documents containing illegal content", t_u2:"Attempt to bypass security measures",
+    t_u3:"Use the app for unauthorized commercial purposes", t_u4:"Violate copyright or intellectual property",
     t_u5:"Use AI features to generate malicious content",
-    t_price_title:"Subscriptions & Refunds",
+    t_price_title:"Pricing & Refunds",
+    price_label_app:"📱 Mobile App (Google Play)",
+    price_label_web:"🌐 Website pdfigo.com, Pay-as-you-go credits",
     th_plan:"Plan", th_price:"Price", th_trial:"Trial", th_cancel:"Cancellation",
+    th_pack:"Pack", th_credits:"Credits", th_validity:"Validity",
+    plan_free_app:"Free", free_tag:"Included", not_applicable:"—",
     plan_m:"Monthly Premium", month:"month", plan_y:"Yearly Premium", year:"year",
     trial_14:"14 days free", anytime:"Anytime",
-    t_renew:"Subscription auto-renews unless cancelled at least 24h before renewal date.",
+    credits:"credits", validity_1y:"1 year",
+    t_credits_rule:"1 credit = 30 seconds of processing. AI tools use 3 credits / 30s. Credits are valid for 1 year and do not auto-renew. Web payments are managed by <strong>Stripe</strong>.",
+    t_renew:"Mobile subscription auto-renews unless cancelled at least 24h before renewal date.",
     t_limit_title:"Limitation of Liability", t_limit_desc:"Pdfigo is provided \"as is\". We disclaim liability for:",
     t_l1:"Loss or corruption of files", t_l2:"Results produced by AI features",
     t_l3:"Temporary service unavailability", t_l4:"Any indirect damage",
-    t_modif_title:"Modifications",
-    t_modif_desc:"These terms may be modified at any time. Important changes will be notified via the app.",
+    t_modif_title:"Modifications", t_modif_desc:"These terms may be modified at any time. Important changes will be notified via the app.",
     t_modif_block:"In case of serious violation, access to the app may be blocked without notice.",
-    t_law_title:"Applicable Law",
-    t_law_desc:"These terms are governed by <strong>French law</strong>. French courts shall have jurisdiction.",
+    t_law_title:"Applicable Law", t_law_desc:"These terms are governed by <strong>French law</strong>. French courts shall have jurisdiction.",
     t_law_contact:"For any complaint, contact us at <strong>devbp2025@gmail.com</strong>",
     ck_intro:"Pdfigo is an Android mobile app. Unlike websites, mobile apps do <strong>not use cookies</strong>. This page explains similar technologies we use.",
     ck_local_title:"Local Storage", ck_tech:"Technology", ck_data:"Data", ck_dur:"Duration", ck_del:"Deletion",
@@ -661,23 +650,22 @@ const T = {
     ck_fss:"Encrypted PIN", ck_files:"Local files", ck_pdf:"PDF documents",
     ck_manual:"Until manual deletion", ck_myfiles:"Via My Files",
     ck_sdk_title:"Third-party SDKs", ck_service:"Service", ck_purpose:"Purpose", ck_data2:"Data",
-    ck_rc:"Subscriptions", ck_rc_d:"Anonymous ID", ck_gp:"Distribution", ck_gp_d:"Google account",
+    ck_rc:"App subscriptions", ck_rc_d:"Anonymous ID", ck_gp:"Distribution", ck_gp_d:"Google account",
     ck_ml:"Local OCR", ck_ml_d:"No data", ck_sb:"AI processing", ck_sb_d:"Temporary text",
+    ck_stripe:"Web payments", ck_stripe_d:"Payment data",
     ck_ctrl_title:"Control Your Data",
     ck_c1k:"Preferences", ck_c1:"Android Settings → Apps → Pdfigo → Clear data",
     ck_c2k:"PDF Files", ck_c2:"From the My Files screen in the app",
     ck_c3k:"PIN Code", ck_c3:"From Security Settings in the app",
     ck_c4k:"Subscription", ck_c4:"Google Play → Subscriptions → Pdfigo → Cancel",
-    ck_c5k:"RevenueCat data", ck_c5:"Contact us at devbp2025@gmail.com",
+    ck_c5k:"Google Play data", ck_c5:"Contact us at devbp2025@gmail.com",
+    ck_c6k:"Web credits", ck_c6:"Unused credits expire after 1 year, no automatic refund",
     contact_title2:"Questions about our practices?", contact_sub2:"We are transparent about how we use your data.",
     footer_rights:"All rights reserved.",
-    rgpd_form_title:"Exercise your GDPR rights", 
-    rgpd_form_sub:"Fill in this form, we respond within 48h.", 
-    form_name:"Full name", 
-    form_email:"Email", 
-    form_right:"Right to exercise", 
-    form_message:"Message (optional)", 
-    form_submit:"Send my request", 
+    rgpd_form_title:"Exercise your GDPR rights", rgpd_form_sub:"Fill in this form, we respond within 48h.",
+    form_open_btn:"📋 Submit a GDPR request",
+    form_name:"Full name", form_email:"Email", form_right:"Right to exercise",
+    form_message:"Message (optional)", form_submit:"Send my request",
     form_sent:"Request sent! We'll respond within 48h.",
   },
   es: {
@@ -688,84 +676,76 @@ const T = {
     d1:"Archivos PDF", d1p:"Procesamiento local únicamente", d1s:"En el dispositivo",
     d2:"Texto extraído (IA)", d2p:"Resumen, traducción, chat", d2s:"Supabase temporal",
     d3:"Fotos (escáner)", d3p:"Conversión a PDF", d3s:"En el dispositivo",
-    d4:"Datos de compra", d4p:"Gestión de suscripciones", d4s:"Google Play / RevenueCat",
-    d5:"ID anónimo", d5p:"Estadísticas de uso", d5s:"RevenueCat",
-    cam_title:"Uso de la cámara",
-    cam_desc:"Pdfigo usa la cámara <strong>únicamente</strong> para la función de escáner de documentos.",
-    cam_c1:"Las fotos se procesan localmente en su dispositivo",
-    cam_c2:"Ninguna imagen se envía a servidores de terceros",
-    cam_c3:"Ninguna imagen se almacena sin su consentimiento",
-    cam_c4:"Puede denegar el acceso a la cámara en Ajustes Android",
-    ai_title:"Funcionalidades de IA",
-    ai_desc:"Al usar las funciones de IA, el texto extraído se envía de forma segura (HTTPS) a nuestros servidores.",
+    d4:"Datos de compra", d4p:"Gestión de suscripciones", d4s:"Google Play / Google Play",
+    d5:"ID anónimo", d5p:"Estadísticas de uso", d5s:"Google Play",
+    d6:"Créditos web", d6p:"Pago puntual vía Stripe", d6s:"Stripe / Supabase",
+    cam_title:"Uso de la cámara", cam_desc:"Pdfigo usa la cámara <strong>únicamente</strong> para la función de escáner.",
+    cam_c1:"Las fotos se procesan localmente", cam_c2:"Ninguna imagen se envía a terceros",
+    cam_c3:"Ninguna imagen se almacena sin consentimiento", cam_c4:"Puede denegar el acceso en Ajustes Android",
+    ai_title:"Funcionalidades de IA", ai_desc:"Al usar las funciones de IA, el texto se envía de forma segura (HTTPS) a nuestros servidores.",
     ai_note:"⚡ El texto se transmite a <strong>Google Gemini</strong> o <strong>Mistral AI</strong> vía Supabase. Ningún contenido se almacena tras el procesamiento.",
     ai_links:"Al usar estas funciones, acepta las políticas de ", and:"y",
     pay_title:"Suscripciones y pagos",
     pay_desc:"Los pagos son <strong>gestionados íntegramente por Google Play</strong>. Pdfigo nunca accede a su información bancaria.",
-    pay_rc:"Usamos ", pay_rc2:" para gestionar el estado de la suscripción. Consulte la ", pay_rc3:"política de RevenueCat",
-    pay_c1:"Prueba gratuita de 14 días para nuevos usuarios",
-    pay_c2:"Renovación automática, cancelable en cualquier momento",
-    pay_c3:"Reembolsos sujetos a la política de Google Play",
+    pay_rc:"Usamos ", pay_rc2:" para gestionar el estado de la suscripción. Consulte la ", pay_rc3:"política de Google Play",
+    pay_c1:"Prueba gratuita de 14 días", pay_c2:"Renovación automática, cancelable en cualquier momento", pay_c3:"Reembolsos sujetos a la política de Google Play",
     rgpd_title:"Sus derechos (RGPD)", rgpd_desc:"Bajo el RGPD, tiene los siguientes derechos:",
-    r1:"Derecho de acceso", r1d:"obtener una copia de sus datos",
-    r2:"Derecho de rectificación", r2d:"corregir datos inexactos",
-    r3:"Derecho de supresión", r3d:"solicitar la eliminación de sus datos",
-    r4:"Derecho a la portabilidad", r4d:"recibir sus datos en formato legible",
+    r1:"Derecho de acceso", r1d:"obtener una copia de sus datos", r2:"Derecho de rectificación", r2d:"corregir datos inexactos",
+    r3:"Derecho de supresión", r3d:"solicitar la eliminación de sus datos", r4:"Derecho a la portabilidad", r4d:"recibir sus datos en formato legible",
     r5:"Derecho de oposición", r5d:"oponerse al tratamiento de sus datos",
     rgpd_contact:"Para ejercer estos derechos, contáctenos en <strong>devbp2025@gmail.com</strong>",
-    sec_title:"Seguridad de datos",
-    sec_c1:"Todas las comunicaciones usan HTTPS/TLS",
-    sec_c2:"Los PDF protegidos usan cifrado AES-256",
-    sec_c3:"Datos sensibles (PIN) almacenados en Android Keystore",
+    sec_title:"Seguridad de datos", sec_c1:"Todas las comunicaciones usan HTTPS/TLS",
+    sec_c2:"Los PDF protegidos usan cifrado AES-256", sec_c3:"Datos sensibles (PIN) en Android Keystore",
     sec_c4:"No se recopilan datos personales identificables",
-    contact_title:"¿Preguntas sobre sus datos?", contact_sub:"Nuestro equipo responde en 48h hábiles.",
-    terms_intro:"Al descargar y usar Pdfigo, acepta estos términos de uso.",
+    terms_intro:"Al descargar y usar Pdfigo, acepta estos términos.",
     t_service_title:"Descripción del servicio",
     t_service_desc:"Pdfigo es una app móvil de gestión de PDF con edición, firma, compresión, protección, OCR e IA.",
-    t_service_plans:"La app está disponible en versión <strong>gratuita</strong> (funciones limitadas) y <strong>Premium</strong> (acceso ilimitado).",
+    t_service_web:"El sitio web pdfigo.com ofrece las mismas herramientas en línea, accesibles mediante un sistema de créditos de pago por uso, sin suscripción.",
+    t_service_plans:"La app móvil está disponible en versión <strong>gratuita</strong> (funciones limitadas) y <strong>Premium</strong> (acceso ilimitado vía Google Play).",
     t_use_title:"Uso aceptable", t_use_desc:"Se compromete a usar Pdfigo solo para fines legales. Está estrictamente prohibido:",
-    t_u1:"Procesar documentos con contenido ilegal",
-    t_u2:"Intentar eludir las medidas de seguridad",
-    t_u3:"Usar la app para fines comerciales no autorizados",
-    t_u4:"Violar derechos de autor o propiedad intelectual",
+    t_u1:"Procesar documentos con contenido ilegal", t_u2:"Intentar eludir las medidas de seguridad",
+    t_u3:"Usar la app para fines comerciales no autorizados", t_u4:"Violar derechos de autor",
     t_u5:"Usar IA para generar contenido malicioso",
-    t_price_title:"Suscripciones y reembolsos",
+    t_price_title:"Tarifas y reembolsos",
+    price_label_app:"📱 App móvil (Google Play)",
+    price_label_web:"🌐 Sitio web pdfigo.com, Créditos por uso",
     th_plan:"Plan", th_price:"Precio", th_trial:"Prueba", th_cancel:"Cancelación",
+    th_pack:"Pack", th_credits:"Créditos", th_validity:"Validez",
+    plan_free_app:"Gratis", free_tag:"Incluido", not_applicable:"—",
     plan_m:"Premium Mensual", month:"mes", plan_y:"Premium Anual", year:"año",
     trial_14:"14 días gratis", anytime:"En cualquier momento",
-    t_renew:"La suscripción se renueva automáticamente salvo cancelación 24h antes.",
+    credits:"créditos", validity_1y:"1 año",
+    t_credits_rule:"1 crédito = 30 segundos de procesamiento. Las herramientas IA consumen 3 créditos / 30s. Los créditos son válidos 1 año y no se renuevan automáticamente. Los pagos web son gestionados por <strong>Stripe</strong>.",
+    t_renew:"La suscripción móvil se renueva automáticamente salvo cancelación 24h antes.",
     t_limit_title:"Limitación de responsabilidad", t_limit_desc:"Pdfigo se proporciona \"tal cual\". Declinamos responsabilidad por:",
     t_l1:"Pérdida o corrupción de archivos", t_l2:"Resultados de funciones de IA",
     t_l3:"Indisponibilidad temporal del servicio", t_l4:"Cualquier daño indirecto",
-    t_modif_title:"Modificaciones",
-    t_modif_desc:"Estos términos pueden modificarse en cualquier momento. Los cambios importantes se notificarán en la app.",
-    t_modif_block:"En caso de violación grave, el acceso podrá ser bloqueado sin previo aviso.",
-    t_law_title:"Ley aplicable",
-    t_law_desc:"Estos términos se rigen por la <strong>ley francesa</strong>. Los tribunales franceses serán competentes.",
+    t_modif_title:"Modificaciones", t_modif_desc:"Estos términos pueden modificarse. Los cambios importantes se notificarán en la app.",
+    t_modif_block:"En caso de violación grave, el acceso podrá bloquearse sin previo aviso.",
+    t_law_title:"Ley aplicable", t_law_desc:"Estos términos se rigen por la <strong>ley francesa</strong>. Los tribunales franceses serán competentes.",
     t_law_contact:"Para cualquier reclamación, contáctenos en <strong>devbp2025@gmail.com</strong>",
-    ck_intro:"Pdfigo es una app Android. A diferencia de los sitios web, las apps móviles <strong>no usan cookies</strong>. Esta página explica tecnologías similares.",
+    ck_intro:"Pdfigo es una app Android. Las apps móviles <strong>no usan cookies</strong>. Esta página explica tecnologías similares.",
     ck_local_title:"Almacenamiento local", ck_tech:"Tecnología", ck_data:"Datos", ck_dur:"Duración", ck_del:"Eliminación",
     ck_sp:"Preferencias, favoritos", ck_indef:"Indefinida", ck_uninstall:"Desinstalación",
     ck_fss:"PIN cifrado", ck_files:"Archivos locales", ck_pdf:"Documentos PDF",
     ck_manual:"Hasta eliminación manual", ck_myfiles:"Vía Mis Archivos",
     ck_sdk_title:"SDKs de terceros", ck_service:"Servicio", ck_purpose:"Finalidad", ck_data2:"Datos",
-    ck_rc:"Suscripciones", ck_rc_d:"ID anónimo", ck_gp:"Distribución", ck_gp_d:"Cuenta Google",
+    ck_rc:"Suscripciones app", ck_rc_d:"ID anónimo", ck_gp:"Distribución", ck_gp_d:"Cuenta Google",
     ck_ml:"OCR local", ck_ml_d:"Sin datos", ck_sb:"Procesamiento IA", ck_sb_d:"Texto temporal",
+    ck_stripe:"Pagos web", ck_stripe_d:"Datos de pago",
     ck_ctrl_title:"Control de sus datos",
-    ck_c1k:"Preferencias", ck_c1:"Ajustes Android → Aplicaciones → Pdfigo → Borrar datos",
-    ck_c2k:"Archivos PDF", ck_c2:"Desde la pantalla Mis Archivos en la app",
+    ck_c1k:"Preferencias", ck_c1:"Ajustes Android → Apps → Pdfigo → Borrar datos",
+    ck_c2k:"Archivos PDF", ck_c2:"Desde Mis Archivos en la app",
     ck_c3k:"Código PIN", ck_c3:"Desde Ajustes de seguridad en la app",
     ck_c4k:"Suscripción", ck_c4:"Google Play → Suscripciones → Pdfigo → Cancelar",
-    ck_c5k:"Datos RevenueCat", ck_c5:"Contáctenos en devbp2025@gmail.com",
+    ck_c5k:"Datos Google Play", ck_c5:"Contáctenos en devbp2025@gmail.com",
+    ck_c6k:"Créditos web", ck_c6:"Los créditos no usados expiran tras 1 año, sin reembolso automático",
     contact_title2:"¿Preguntas sobre nuestras prácticas?", contact_sub2:"Somos transparentes sobre el uso de sus datos.",
     footer_rights:"Todos los derechos reservados.",
-    rgpd_form_title:"Ejercer sus derechos RGPD", 
-    rgpd_form_sub:"Complete este formulario, respondemos en 48h.", 
-    form_name:"Nombre completo", 
-    form_email:"Correo", 
-    form_right:"Derecho a ejercer", 
-    form_message:"Mensaje (opcional)", 
-    form_submit:"Enviar solicitud", 
+    rgpd_form_title:"Ejercer sus derechos RGPD", rgpd_form_sub:"Complete este formulario, respondemos en 48h.",
+    form_open_btn:"📋 Enviar solicitud RGPD",
+    form_name:"Nombre completo", form_email:"Correo", form_right:"Derecho a ejercer",
+    form_message:"Mensaje (opcional)", form_submit:"Enviar solicitud",
     form_sent:"¡Solicitud enviada! Respondemos en 48h.",
   },
   pt: {
@@ -776,84 +756,76 @@ const T = {
     d1:"Arquivos PDF", d1p:"Processamento local apenas", d1s:"No dispositivo",
     d2:"Texto extraído (IA)", d2p:"Resumo, tradução, chat", d2s:"Supabase temporário",
     d3:"Fotos (scanner)", d3p:"Conversão para PDF", d3s:"No dispositivo",
-    d4:"Dados de compra", d4p:"Gestão de assinaturas", d4s:"Google Play / RevenueCat",
-    d5:"ID anônimo", d5p:"Estatísticas de uso", d5s:"RevenueCat",
-    cam_title:"Uso da câmera",
-    cam_desc:"Pdfigo usa a câmera <strong>somente</strong> para o recurso de scanner de documentos.",
-    cam_c1:"As fotos são processadas localmente no seu dispositivo",
-    cam_c2:"Nenhuma imagem é enviada a servidores de terceiros",
-    cam_c3:"Nenhuma imagem é armazenada sem seu consentimento",
-    cam_c4:"Você pode negar acesso à câmera nas configurações Android",
-    ai_title:"Funcionalidades de IA",
-    ai_desc:"Ao usar as funções de IA, o texto extraído é enviado com segurança (HTTPS) aos nossos servidores.",
+    d4:"Dados de compra", d4p:"Gestão de assinaturas", d4s:"Google Play / Google Play",
+    d5:"ID anônimo", d5p:"Estatísticas de uso", d5s:"Google Play",
+    d6:"Créditos web", d6p:"Pagamento pontual via Stripe", d6s:"Stripe / Supabase",
+    cam_title:"Uso da câmera", cam_desc:"Pdfigo usa a câmera <strong>somente</strong> para o scanner de documentos.",
+    cam_c1:"Fotos processadas localmente", cam_c2:"Nenhuma imagem enviada a terceiros",
+    cam_c3:"Nenhuma imagem armazenada sem consentimento", cam_c4:"Pode negar acesso nas configurações Android",
+    ai_title:"Funcionalidades de IA", ai_desc:"Ao usar as funções de IA, o texto é enviado com segurança (HTTPS) aos nossos servidores.",
     ai_note:"⚡ O texto é transmitido ao <strong>Google Gemini</strong> ou <strong>Mistral AI</strong> via Supabase. Nenhum conteúdo é armazenado após o processamento.",
     ai_links:"Ao usar esses recursos, você aceita as políticas de ", and:"e",
     pay_title:"Assinaturas e pagamentos",
     pay_desc:"Os pagamentos são <strong>totalmente gerenciados pelo Google Play</strong>. Pdfigo nunca acessa suas informações bancárias.",
-    pay_rc:"Usamos ", pay_rc2:" para gerenciar o status da assinatura. Consulte a ", pay_rc3:"política do RevenueCat",
-    pay_c1:"Período de teste gratuito de 14 dias para novos usuários",
-    pay_c2:"Renovação automática, cancelável a qualquer momento",
-    pay_c3:"Reembolsos sujeitos à política do Google Play",
+    pay_rc:"Usamos ", pay_rc2:" para gerenciar a assinatura. Consulte a ", pay_rc3:"política do Google Play",
+    pay_c1:"Período de teste gratuito de 14 dias", pay_c2:"Renovação automática, cancelável a qualquer momento", pay_c3:"Reembolsos sujeitos à política do Google Play",
     rgpd_title:"Seus direitos (LGPD/RGPD)", rgpd_desc:"Você tem os seguintes direitos:",
-    r1:"Direito de acesso", r1d:"obter uma cópia dos seus dados",
-    r2:"Direito de retificação", r2d:"corrigir dados imprecisos",
-    r3:"Direito de exclusão", r3d:"solicitar a exclusão dos seus dados",
-    r4:"Direito de portabilidade", r4d:"receber seus dados em formato legível",
+    r1:"Direito de acesso", r1d:"obter uma cópia dos seus dados", r2:"Direito de retificação", r2d:"corrigir dados imprecisos",
+    r3:"Direito de exclusão", r3d:"solicitar a exclusão dos seus dados", r4:"Direito de portabilidade", r4d:"receber seus dados em formato legível",
     r5:"Direito de oposição", r5d:"se opor ao tratamento dos seus dados",
     rgpd_contact:"Para exercer esses direitos, entre em contato: <strong>devbp2025@gmail.com</strong>",
-    sec_title:"Segurança dos dados",
-    sec_c1:"Todas as comunicações usam HTTPS/TLS",
-    sec_c2:"PDFs protegidos usam criptografia AES-256",
-    sec_c3:"Dados sensíveis (PIN) armazenados no Android Keystore",
+    sec_title:"Segurança dos dados", sec_c1:"Todas as comunicações usam HTTPS/TLS",
+    sec_c2:"PDFs protegidos usam criptografia AES-256", sec_c3:"Dados sensíveis (PIN) no Android Keystore",
     sec_c4:"Nenhum dado pessoal identificável é coletado",
-    contact_title:"Dúvidas sobre seus dados?", contact_sub:"Nossa equipe responde em 48h úteis.",
-    terms_intro:"Ao baixar e usar o Pdfigo, você concorda com estes termos de uso.",
+    terms_intro:"Ao baixar e usar o Pdfigo, você concorda com estes termos.",
     t_service_title:"Descrição do serviço",
     t_service_desc:"Pdfigo é um app móvel de gerenciamento de PDF com edição, assinatura, compressão, proteção, OCR e IA.",
-    t_service_plans:"O app está disponível na versão <strong>gratuita</strong> (recursos limitados) e <strong>Premium</strong> (acesso ilimitado).",
+    t_service_web:"O site pdfigo.com oferece as mesmas ferramentas online, acessíveis por um sistema de créditos por uso, sem assinatura.",
+    t_service_plans:"O app móvel está disponível em versão <strong>gratuita</strong> (recursos limitados) e <strong>Premium</strong> (acesso ilimitado via Google Play).",
     t_use_title:"Uso aceitável", t_use_desc:"Você concorda em usar o Pdfigo apenas para fins legais. É estritamente proibido:",
-    t_u1:"Processar documentos com conteúdo ilegal",
-    t_u2:"Tentar contornar medidas de segurança",
-    t_u3:"Usar o app para fins comerciais não autorizados",
-    t_u4:"Violar direitos autorais ou propriedade intelectual",
+    t_u1:"Processar documentos com conteúdo ilegal", t_u2:"Tentar contornar medidas de segurança",
+    t_u3:"Usar o app para fins comerciais não autorizados", t_u4:"Violar direitos autorais",
     t_u5:"Usar IA para gerar conteúdo malicioso",
-    t_price_title:"Assinaturas e reembolsos",
+    t_price_title:"Tarifas e reembolsos",
+    price_label_app:"📱 App móvel (Google Play)",
+    price_label_web:"🌐 Site pdfigo.com, Créditos por uso",
     th_plan:"Plano", th_price:"Preço", th_trial:"Teste", th_cancel:"Cancelamento",
+    th_pack:"Pack", th_credits:"Créditos", th_validity:"Validade",
+    plan_free_app:"Grátis", free_tag:"Incluído", not_applicable:"—",
     plan_m:"Premium Mensal", month:"mês", plan_y:"Premium Anual", year:"ano",
     trial_14:"14 dias grátis", anytime:"A qualquer momento",
-    t_renew:"A assinatura é renovada automaticamente salvo cancelamento 24h antes.",
+    credits:"créditos", validity_1y:"1 ano",
+    t_credits_rule:"1 crédito = 30 segundos de processamento. Ferramentas IA consomem 3 créditos / 30s. Os créditos são válidos por 1 ano e não se renovam automaticamente. Os pagamentos web são gerenciados pela <strong>Stripe</strong>.",
+    t_renew:"A assinatura móvel é renovada automaticamente salvo cancelamento 24h antes.",
     t_limit_title:"Limitação de responsabilidade", t_limit_desc:"Pdfigo é fornecido \"como está\". Declinamos responsabilidade por:",
     t_l1:"Perda ou corrupção de arquivos", t_l2:"Resultados das funções de IA",
     t_l3:"Indisponibilidade temporária do serviço", t_l4:"Qualquer dano indireto",
-    t_modif_title:"Modificações",
-    t_modif_desc:"Estes termos podem ser modificados a qualquer momento. Mudanças importantes serão notificadas no app.",
+    t_modif_title:"Modificações", t_modif_desc:"Estes termos podem ser modificados. Mudanças importantes serão notificadas no app.",
     t_modif_block:"Em caso de violação grave, o acesso poderá ser bloqueado sem aviso prévio.",
-    t_law_title:"Lei aplicável",
-    t_law_desc:"Estes termos são regidos pela <strong>lei francesa</strong>. Os tribunais franceses serão competentes.",
+    t_law_title:"Lei aplicável", t_law_desc:"Estes termos são regidos pela <strong>lei francesa</strong>.",
     t_law_contact:"Para qualquer reclamação, entre em contato: <strong>devbp2025@gmail.com</strong>",
-    ck_intro:"Pdfigo é um app Android. Ao contrário de sites, apps móveis <strong>não usam cookies</strong>. Esta página explica tecnologias similares.",
+    ck_intro:"Pdfigo é um app Android. Apps móveis <strong>não usam cookies</strong>. Esta página explica tecnologias similares.",
     ck_local_title:"Armazenamento local", ck_tech:"Tecnologia", ck_data:"Dados", ck_dur:"Duração", ck_del:"Exclusão",
     ck_sp:"Preferências, favoritos", ck_indef:"Indefinida", ck_uninstall:"Desinstalação",
     ck_fss:"PIN criptografado", ck_files:"Arquivos locais", ck_pdf:"Documentos PDF",
     ck_manual:"Até exclusão manual", ck_myfiles:"Via Meus Arquivos",
     ck_sdk_title:"SDKs de terceiros", ck_service:"Serviço", ck_purpose:"Finalidade", ck_data2:"Dados",
-    ck_rc:"Assinaturas", ck_rc_d:"ID anônimo", ck_gp:"Distribuição", ck_gp_d:"Conta Google",
+    ck_rc:"Assinaturas app", ck_rc_d:"ID anônimo", ck_gp:"Distribuição", ck_gp_d:"Conta Google",
     ck_ml:"OCR local", ck_ml_d:"Sem dados", ck_sb:"Processamento IA", ck_sb_d:"Texto temporário",
+    ck_stripe:"Pagamentos web", ck_stripe_d:"Dados de pagamento",
     ck_ctrl_title:"Controle seus dados",
     ck_c1k:"Preferências", ck_c1:"Configurações Android → Apps → Pdfigo → Limpar dados",
     ck_c2k:"Arquivos PDF", ck_c2:"Na tela Meus Arquivos no app",
     ck_c3k:"Código PIN", ck_c3:"Em Configurações de segurança no app",
     ck_c4k:"Assinatura", ck_c4:"Google Play → Assinaturas → Pdfigo → Cancelar",
-    ck_c5k:"Dados RevenueCat", ck_c5:"Entre em contato: devbp2025@gmail.com",
+    ck_c5k:"Dados Google Play", ck_c5:"Entre em contato: devbp2025@gmail.com",
+    ck_c6k:"Créditos web", ck_c6:"Créditos não usados expiram após 1 ano, sem reembolso automático",
     contact_title2:"Dúvidas sobre nossas práticas?", contact_sub2:"Somos transparentes sobre o uso dos seus dados.",
     footer_rights:"Todos os direitos reservados.",
-    rgpd_form_title:"Exercer seus direitos RGPD", 
-    rgpd_form_sub:"Preencha este formulário, respondemos em 48h.", 
-    form_name:"Nome completo", 
-    form_email:"Email", 
-    form_right:"Direito a exercer", 
-    form_message:"Mensagem (opcional)", 
-    form_submit:"Enviar solicitação", 
+    rgpd_form_title:"Exercer seus direitos RGPD", rgpd_form_sub:"Preencha este formulário, respondemos em 48h.",
+    form_open_btn:"📋 Enviar solicitação RGPD",
+    form_name:"Nome completo", form_email:"Email", form_right:"Direito a exercer",
+    form_message:"Mensagem (opcional)", form_submit:"Enviar solicitação",
     form_sent:"Solicitação enviada! Respondemos em 48h.",
   },
   ar: {
@@ -864,93 +836,83 @@ const T = {
     d1:"ملفات PDF", d1p:"معالجة محلية فقط", d1s:"على الجهاز",
     d2:"النص المستخرج (ذكاء اصطناعي)", d2p:"ملخص، ترجمة، دردشة", d2s:"Supabase مؤقت",
     d3:"الصور (الماسح)", d3p:"التحويل إلى PDF", d3s:"على الجهاز",
-    d4:"بيانات الشراء", d4p:"إدارة الاشتراكات", d4s:"Google Play / RevenueCat",
-    d5:"معرف مجهول", d5p:"إحصاءات الاستخدام", d5s:"RevenueCat",
-    cam_title:"استخدام الكاميرا",
-    cam_desc:"يستخدم Pdfigo الكاميرا <strong>فقط</strong> لميزة مسح المستندات.",
-    cam_c1:"تتم معالجة الصور محلياً على جهازك",
-    cam_c2:"لا يتم إرسال أي صور إلى خوادم خارجية",
-    cam_c3:"لا تُخزن أي صور دون موافقتك",
-    cam_c4:"يمكنك رفض الوصول للكاميرا في إعدادات Android",
-    ai_title:"ميزات الذكاء الاصطناعي",
-    ai_desc:"عند استخدام ميزات الذكاء الاصطناعي، يتم إرسال النص المستخرج بأمان (HTTPS) إلى خوادمنا.",
+    d4:"بيانات الشراء", d4p:"إدارة الاشتراكات", d4s:"Google Play / Google Play",
+    d5:"معرف مجهول", d5p:"إحصاءات الاستخدام", d5s:"Google Play",
+    d6:"أرصدة الموقع", d6p:"دفعة واحدة عبر Stripe", d6s:"Stripe / Supabase",
+    cam_title:"استخدام الكاميرا", cam_desc:"يستخدم Pdfigo الكاميرا <strong>فقط</strong> لميزة مسح المستندات.",
+    cam_c1:"تتم معالجة الصور محلياً على جهازك", cam_c2:"لا يتم إرسال أي صور إلى خوادم خارجية",
+    cam_c3:"لا تُخزن أي صور دون موافقتك", cam_c4:"يمكنك رفض الوصول في إعدادات Android",
+    ai_title:"ميزات الذكاء الاصطناعي", ai_desc:"عند استخدام ميزات الذكاء الاصطناعي، يتم إرسال النص بأمان (HTTPS) إلى خوادمنا.",
     ai_note:"⚡ يُنقل النص إلى <strong>Google Gemini</strong> أو <strong>Mistral AI</strong> عبر Supabase. لا يُخزن أي محتوى بعد المعالجة.",
     ai_links:"باستخدام هذه الميزات، تقبل سياسات خصوصية ", and:"و",
     pay_title:"الاشتراكات والمدفوعات",
     pay_desc:"تُدار المدفوعات <strong>بالكامل من قبل Google Play</strong>. لا يصل Pdfigo إلى معلوماتك المصرفية.",
-    pay_rc:"نستخدم ", pay_rc2:" لإدارة حالة الاشتراك. راجع ", pay_rc3:"سياسة RevenueCat",
-    pay_c1:"فترة تجريبية مجانية لمدة 14 يوماً للمستخدمين الجدد",
-    pay_c2:"تجديد تلقائي  قابل للإلغاء في أي وقت",
-    pay_c3:"المبالغ المستردة وفقاً لسياسة Google Play",
+    pay_rc:"نستخدم ", pay_rc2:" لإدارة حالة الاشتراك. راجع ", pay_rc3:"سياسة Google Play",
+    pay_c1:"فترة تجريبية مجانية 14 يوماً", pay_c2:"تجديد تلقائي قابل للإلغاء في أي وقت", pay_c3:"المبالغ المستردة وفقاً لسياسة Google Play",
     rgpd_title:"حقوقك (RGPD)", rgpd_desc:"وفقاً للائحة RGPD، لديك الحقوق التالية:",
-    r1:"حق الوصول", r1d:"الحصول على نسخة من بياناتك",
-    r2:"حق التصحيح", r2d:"تصحيح البيانات غير الدقيقة",
-    r3:"حق المحو", r3d:"طلب حذف بياناتك",
-    r4:"حق نقل البيانات", r4d:"استلام بياناتك بتنسيق قابل للقراءة",
+    r1:"حق الوصول", r1d:"الحصول على نسخة من بياناتك", r2:"حق التصحيح", r2d:"تصحيح البيانات غير الدقيقة",
+    r3:"حق المحو", r3d:"طلب حذف بياناتك", r4:"حق نقل البيانات", r4d:"استلام بياناتك بتنسيق قابل للقراءة",
     r5:"حق الاعتراض", r5d:"الاعتراض على معالجة بياناتك",
     rgpd_contact:"لممارسة هذه الحقوق، تواصل معنا على <strong>devbp2025@gmail.com</strong>",
-    sec_title:"أمان البيانات",
-    sec_c1:"جميع الاتصالات تستخدم HTTPS/TLS",
-    sec_c2:"ملفات PDF المحمية تستخدم تشفير AES-256",
-    sec_c3:"البيانات الحساسة (PIN) مخزنة في Android Keystore",
+    sec_title:"أمان البيانات", sec_c1:"جميع الاتصالات تستخدم HTTPS/TLS",
+    sec_c2:"ملفات PDF المحمية تستخدم تشفير AES-256", sec_c3:"البيانات الحساسة (PIN) في Android Keystore",
     sec_c4:"لا يتم جمع بيانات شخصية قابلة للتعريف",
-    contact_title:"أسئلة حول بياناتك؟", contact_sub:"يرد فريقنا خلال 48 ساعة عمل.",
     terms_intro:"بتنزيل واستخدام Pdfigo، فإنك توافق على هذه الشروط.",
     t_service_title:"وصف الخدمة",
-    t_service_desc:"Pdfigo تطبيق جوال لإدارة ملفات PDF مع ميزات التحرير والتوقيع والضغط والحماية وOCR والذكاء الاصطناعي.",
-    t_service_plans:"التطبيق متاح بنسخة <strong>مجانية</strong> (ميزات محدودة) و<strong>Premium</strong> (وصول غير محدود).",
+    t_service_desc:"Pdfigo تطبيق جوال لإدارة ملفات PDF مع التحرير والتوقيع والضغط والحماية وOCR والذكاء الاصطناعي.",
+    t_service_web:"يقدم موقع pdfigo.com نفس الأدوات مباشرة عبر الإنترنت، عبر نظام أرصدة للدفع حسب الاستخدام، بدون اشتراك.",
+    t_service_plans:"التطبيق متاح بنسخة <strong>مجانية</strong> (ميزات محدودة) و<strong>Premium</strong> (وصول غير محدود عبر Google Play).",
     t_use_title:"الاستخدام المقبول", t_use_desc:"تلتزم باستخدام Pdfigo للأغراض القانونية فقط. يُحظر تماماً:",
-    t_u1:"معالجة مستندات تحتوي على محتوى غير قانوني",
-    t_u2:"محاولة تجاوز إجراءات الأمان",
-    t_u3:"استخدام التطبيق لأغراض تجارية غير مصرح بها",
-    t_u4:"انتهاك حقوق النشر أو الملكية الفكرية",
-    t_u5:"استخدام ميزات الذكاء الاصطناعي لإنشاء محتوى ضار",
-    t_price_title:"الاشتراكات والمبالغ المستردة",
+    t_u1:"معالجة مستندات تحتوي على محتوى غير قانوني", t_u2:"محاولة تجاوز إجراءات الأمان",
+    t_u3:"استخدام التطبيق لأغراض تجارية غير مصرح بها", t_u4:"انتهاك حقوق النشر",
+    t_u5:"استخدام الذكاء الاصطناعي لإنشاء محتوى ضار",
+    t_price_title:"التسعير والمبالغ المستردة",
+    price_label_app:"📱 التطبيق المحمول (Google Play)",
+    price_label_web:"🌐 موقع pdfigo.com, أرصدة حسب الاستخدام",
     th_plan:"الخطة", th_price:"السعر", th_trial:"تجريبي", th_cancel:"الإلغاء",
+    th_pack:"الحزمة", th_credits:"الأرصدة", th_validity:"الصلاحية",
+    plan_free_app:"مجاني", free_tag:"مضمّن", not_applicable:"—",
     plan_m:"Premium شهري", month:"شهر", plan_y:"Premium سنوي", year:"سنة",
     trial_14:"14 يوماً مجاناً", anytime:"في أي وقت",
-    t_renew:"يتجدد الاشتراك تلقائياً ما لم يتم الإلغاء قبل 24 ساعة.",
+    credits:"رصيد", validity_1y:"سنة واحدة",
+    t_credits_rule:"رصيد واحد = 30 ثانية معالجة. أدوات الذكاء الاصطناعي تستهلك 3 أرصدة / 30 ثانية. الأرصدة صالحة لمدة سنة ولا تتجدد تلقائياً. مدفوعات الموقع مُدارة بواسطة <strong>Stripe</strong>.",
+    t_renew:"يتجدد اشتراك التطبيق تلقائياً ما لم يتم الإلغاء قبل 24 ساعة.",
     t_limit_title:"تحديد المسؤولية", t_limit_desc:"يُقدَّم Pdfigo \"كما هو\". نرفض المسؤولية عن:",
     t_l1:"فقدان أو تلف الملفات", t_l2:"نتائج ميزات الذكاء الاصطناعي",
     t_l3:"توقف الخدمة المؤقت", t_l4:"أي ضرر غير مباشر",
-    t_modif_title:"التعديلات",
-    t_modif_desc:"يمكن تعديل هذه الشروط في أي وقت. سيتم إخطارك بالتغييرات المهمة عبر التطبيق.",
+    t_modif_title:"التعديلات", t_modif_desc:"يمكن تعديل هذه الشروط. سيتم إخطارك بالتغييرات المهمة عبر التطبيق.",
     t_modif_block:"في حالة الانتهاك الجسيم، يمكن حظر الوصول دون إشعار مسبق.",
-    t_law_title:"القانون المطبق",
-    t_law_desc:"تخضع هذه الشروط <strong>للقانون الفرنسي</strong>. تختص المحاكم الفرنسية.",
+    t_law_title:"القانون المطبق", t_law_desc:"تخضع هذه الشروط <strong>للقانون الفرنسي</strong>.",
     t_law_contact:"لأي شكوى، تواصل معنا على <strong>devbp2025@gmail.com</strong>",
-    ck_intro:"Pdfigo تطبيق Android. على عكس المواقع الإلكترونية، لا تستخدم التطبيقات المحمولة <strong>ملفات تعريف الارتباط</strong>. تشرح هذه الصفحة التقنيات المماثلة.",
+    ck_intro:"Pdfigo تطبيق Android. التطبيقات المحمولة <strong>لا تستخدم ملفات تعريف الارتباط</strong>. تشرح هذه الصفحة التقنيات المماثلة.",
     ck_local_title:"التخزين المحلي", ck_tech:"التقنية", ck_data:"البيانات", ck_dur:"المدة", ck_del:"الحذف",
     ck_sp:"التفضيلات، المفضلة", ck_indef:"غير محددة", ck_uninstall:"إلغاء التثبيت",
     ck_fss:"PIN مشفر", ck_files:"الملفات المحلية", ck_pdf:"مستندات PDF",
     ck_manual:"حتى الحذف اليدوي", ck_myfiles:"عبر ملفاتي",
     ck_sdk_title:"SDKs الخارجية", ck_service:"الخدمة", ck_purpose:"الغرض", ck_data2:"البيانات",
-    ck_rc:"الاشتراكات", ck_rc_d:"معرف مجهول", ck_gp:"التوزيع", ck_gp_d:"حساب Google",
+    ck_rc:"اشتراكات التطبيق", ck_rc_d:"معرف مجهول", ck_gp:"التوزيع", ck_gp_d:"حساب Google",
     ck_ml:"OCR محلي", ck_ml_d:"لا بيانات", ck_sb:"معالجة ذكاء اصطناعي", ck_sb_d:"نص مؤقت",
+    ck_stripe:"مدفوعات الموقع", ck_stripe_d:"بيانات الدفع",
     ck_ctrl_title:"التحكم في بياناتك",
     ck_c1k:"التفضيلات", ck_c1:"إعدادات Android ← التطبيقات ← Pdfigo ← مسح البيانات",
     ck_c2k:"ملفات PDF", ck_c2:"من شاشة ملفاتي في التطبيق",
     ck_c3k:"رمز PIN", ck_c3:"من إعدادات الأمان في التطبيق",
     ck_c4k:"الاشتراك", ck_c4:"Google Play ← الاشتراكات ← Pdfigo ← إلغاء",
-    ck_c5k:"بيانات RevenueCat", ck_c5:"تواصل معنا: devbp2025@gmail.com",
+    ck_c5k:"بيانات Google Play", ck_c5:"تواصل معنا: devbp2025@gmail.com",
+    ck_c6k:"أرصدة الموقع", ck_c6:"الأرصدة غير المستخدمة تنتهي بعد سنة, لا استرداد تلقائي",
     contact_title2:"أسئلة حول ممارساتنا؟", contact_sub2:"نحن شفافون بشأن استخدام بياناتك.",
     footer_rights:"جميع الحقوق محفوظة.",
-    rgpd_form_title:"ممارسة حقوقك RGPD", 
-    rgpd_form_sub:"املأ هذا النموذج  نرد خلال 48 ساعة.", 
-    form_name:"الاسم الكامل", 
-    form_email:"البريد الإلكتروني", 
-    form_right:"الحق المطلوب", 
-    form_message:"رسالة (اختياري)", 
-    form_submit:"إرسال طلبي", 
+    rgpd_form_title:"ممارسة حقوقك RGPD", rgpd_form_sub:"املأ هذا النموذج، نرد خلال 48 ساعة.",
+    form_open_btn:"📋 تقديم طلب RGPD",
+    form_name:"الاسم الكامل", form_email:"البريد الإلكتروني", form_right:"الحق المطلوب",
+    form_message:"رسالة (اختياري)", form_submit:"إرسال طلبي",
     form_sent:"تم إرسال الطلب! سنرد خلال 48 ساعة.",
   }
 };
 
 let lang = localStorage.getItem('lang') || 'fr';
-
 function setLang(l) {
-  lang = l;
-  localStorage.setItem('lang', l);
+  lang = l; localStorage.setItem('lang', l);
   document.documentElement.lang = l;
   document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
   const t = T[l] || T.fr;
@@ -960,7 +922,6 @@ function setLang(l) {
   });
   document.querySelector('.lang-select').value = l;
 }
-
 function showTab(id, btn) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -968,7 +929,6 @@ function showTab(id, btn) {
   btn.classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
 document.querySelector('.lang-select').value = lang;
 setLang(lang);
 </script>
