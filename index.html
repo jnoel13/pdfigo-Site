@@ -424,6 +424,8 @@
     [data-theme="dark"] .token-pack { background: rgba(255,255,255,0.07); }
     .token-pack-label { font-size: 13px; font-weight: 600; color: var(--ink); }
     .token-pack-price { font-size: 13px; font-weight: 700; color: var(--amber); }
+    .pricing-btn.btn-starter { background: #1E293B; }
+    [data-theme="dark"] .pricing-btn.btn-starter { background: #475569; }
     .pricing-btn.tokens-btn { background: var(--amber); }
 
     /* ── CREDITS EXPLAINER ── */
@@ -561,7 +563,7 @@
         <option value="ar">🇸🇦 AR</option>
       </select>
       <button class="theme-btn" onclick="toggleTheme()" id="theme-btn">🌙</button>
-      <a href="#pricing" class="cta-nav" data-i18n="nav_cta">Essai gratuit</a>
+      <a href="#pricing" class="cta-nav" data-i18n="nav_cta">Acheter des crédits</a>
     </div>
   </div>
 </nav>
@@ -576,7 +578,7 @@
       <span>✨</span> <span data-i18n="hero_badge">Intelligence Artificielle intégrée</span>
     </div>
     <h1 data-i18n="hero_title">L'assistant PDF qui <span>comprend</span> vos documents</h1>
-    <p data-i18n="hero_sub">Résumez, signez, scannez, protégez et chattez avec vos PDF. Tout-en-un, sur Android.</p>
+    <p data-i18n="hero_sub">Résumez, signez, scannez, protégez et chattez avec vos PDF. Tout-en-un, sur Android et le web.</p>
     <div class="hero-btns">
       <a href="#" class="btn-primary">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -1041,7 +1043,7 @@
             <span data-i18n="ps4">Sans abonnement</span>
           </div>
         </div>
-        <a href="#" class="pricing-btn" style="background:var(--ink)" data-i18n="buy_credits">Acheter</a>
+        <a href="#" class="pricing-btn btn-starter" data-i18n="buy_credits">Acheter</a>
       </div>
 
       <!-- STANDARD -->
@@ -1169,10 +1171,10 @@
   // ── TRANSLATIONS ──
   const translations = {
     fr: {
-      nav_features: 'Fonctionnalités', nav_tools: 'Outils', nav_pricing: 'Tarifs', nav_cta: 'Essai gratuit',
+      nav_features: 'Fonctionnalités', nav_tools: 'Outils', nav_pricing: 'Tarifs', nav_cta: 'Acheter des crédits',
       hero_badge: 'Intelligence Artificielle intégrée',
       hero_title: "L'assistant PDF qui <span>comprend</span> vos documents",
-      hero_sub: 'Résumez, signez, scannez, protégez et chattez avec vos PDF. Tout-en-un, sur Android.',
+      hero_sub: 'Résumez, signez, scannez, protégez et chattez avec vos PDF. Tout-en-un, sur Android et le web.',
       hero_cta1: 'Télécharger sur Google Play', hero_cta2: 'Découvrir les outils',
       stat1: 'Outils inclus', stat2: 'Langues supportées', stat3: 'Publicité', stat4: 'Local sur l\'appareil',
       feat_tag: 'Fonctionnalités', feat_title: 'Tout ce dont vous avez besoin',
@@ -1248,10 +1250,10 @@
       footer_rights: 'Tous droits réservés.', footer_made: 'Fait avec ❤️ en France',
     },
     en: {
-      nav_features: 'Features', nav_tools: 'Tools', nav_pricing: 'Pricing', nav_cta: 'Free trial',
+      nav_features: 'Features', nav_tools: 'Tools', nav_pricing: 'Pricing', nav_cta: 'Buy credits',
       hero_badge: 'Built-in Artificial Intelligence',
       hero_title: "The PDF assistant that <span>understands</span> your documents",
-      hero_sub: 'Summarize, sign, scan, protect and chat with your PDFs. All-in-one, on Android.',
+      hero_sub: 'Summarize, sign, scan, protect and chat with your PDFs. All-in-one, on Android and the web.',
       hero_cta1: 'Download on Google Play', hero_cta2: 'Explore tools',
       stat1: 'Included tools', stat2: 'Languages supported', stat3: 'Ads', stat4: 'Local on device',
       feat_tag: 'Features', feat_title: 'Everything you need',
@@ -1327,10 +1329,10 @@
       footer_rights: 'All rights reserved.', footer_made: 'Made with ❤️ in France',
     },
     es: {
-      nav_features: 'Funciones', nav_tools: 'Herramientas', nav_pricing: 'Precios', nav_cta: 'Prueba gratis',
+      nav_features: 'Funciones', nav_tools: 'Herramientas', nav_pricing: 'Precios', nav_cta: 'Comprar créditos',
       hero_badge: 'Inteligencia Artificial integrada',
       hero_title: "El asistente PDF que <span>comprende</span> tus documentos",
-      hero_sub: 'Resume, firma, escanea, protege y chatea con tus PDFs. Todo en uno, en Android.',
+      hero_sub: 'Resume, firma, escanea, protege y chatea con tus PDFs. Todo en uno, en Android y la web.',
       hero_cta1: 'Descargar en Google Play', hero_cta2: 'Explorar herramientas',
       stat1: 'Herramientas incluidas', stat2: 'Idiomas soportados', stat3: 'Publicidad', stat4: 'Local en dispositivo',
       feat_tag: 'Funciones', feat_title: 'Todo lo que necesitas',
@@ -1406,10 +1408,10 @@
       footer_rights: 'Todos los derechos reservados.', footer_made: 'Hecho con ❤️ en Francia',
     },
     pt: {
-      nav_features: 'Recursos', nav_tools: 'Ferramentas', nav_pricing: 'Preços', nav_cta: 'Teste grátis',
+      nav_features: 'Recursos', nav_tools: 'Ferramentas', nav_pricing: 'Preços', nav_cta: 'Comprar créditos',
       hero_badge: 'Inteligência Artificial integrada',
       hero_title: "O assistente PDF que <span>compreende</span> seus documentos",
-      hero_sub: 'Resuma, assine, digitalize, proteja e converse com seus PDFs. Tudo-em-um, no Android.',
+      hero_sub: 'Resuma, assine, digitalize, proteja e converse com seus PDFs. Tudo-em-um, no Android e na web.',
       hero_cta1: 'Baixar no Google Play', hero_cta2: 'Explorar ferramentas',
       stat1: 'Ferramentas incluídas', stat2: 'Idiomas suportados', stat3: 'Publicidade', stat4: 'Local no dispositivo',
       feat_tag: 'Recursos', feat_title: 'Tudo que você precisa',
@@ -1485,10 +1487,10 @@
       footer_rights: 'Todos os direitos reservados.', footer_made: 'Feito com ❤️ na França',
     },
     ar: {
-      nav_features: 'الميزات', nav_tools: 'الأدوات', nav_pricing: 'الأسعار', nav_cta: 'تجربة مجانية',
+      nav_features: 'الميزات', nav_tools: 'الأدوات', nav_pricing: 'الأسعار', nav_cta: 'شراء أرصدة',
       hero_badge: 'ذكاء اصطناعي مدمج',
       hero_title: "مساعد PDF الذي <span>يفهم</span> مستنداتك",
-      hero_sub: 'لخّص، وقّع، امسح، احمِ وتحدث مع ملفات PDF. كل شيء في واحد، على Android.',
+      hero_sub: 'لخّص، وقّع، امسح، احمِ وتحدث مع ملفات PDF. كل شيء في واحد، على Android والويب.',
       hero_cta1: 'تحميل من Google Play', hero_cta2: 'استكشف الأدوات',
       stat1: 'أداة مضمنة', stat2: 'لغة مدعومة', stat3: 'إعلانات', stat4: 'محلي على الجهاز',
       feat_tag: 'الميزات', feat_title: 'كل ما تحتاجه',
